@@ -8,18 +8,14 @@ public enum ExclamationType {
 public class Exclamation : MonoBehaviour {
     public ExclamationType type;
 
-    private SpriteRenderer sprite;
-
     void Start() {
-        sprite = GetComponent<SpriteRenderer>();
         if (type == ExclamationType.Suspicious)
-            sprite.color = Color.yellow;
+            GetComponent<SpriteRenderer>().color = Color.yellow;
         else if (type == ExclamationType.Alerted)
-            sprite.color = Color.red;
+            GetComponent<SpriteRenderer>().color = Color.red;
     }
 
-    void Update() {
-        if (sprite.color.a <= 0)
-            Destroy(gameObject);
+    public void Over() {
+        Destroy(gameObject);
     }
 }
