@@ -19,13 +19,7 @@ public class Exclamation : MonoBehaviour {
     }
 
     void Update() {
-        if (sprite.color.a <= 0) {
+        if (sprite.color.a <= 0)
             Destroy(gameObject);
-            return;
-        }
-        transform.position = new Vector2(transform.position.x,
-            transform.position.y + Time.deltaTime / 2);
-        sprite.color = new Color(sprite.color.r, sprite.color.g, sprite.color.b,
-            sprite.color.a - Time.deltaTime);
     }
 }

@@ -27,7 +27,7 @@ public class Enemy : MonoBehaviour {
             if (rock.state != RockState.Ended)
                 return;
             Exclamation ex = ((GameObject)Instantiate(exclamationPrefab,
-                new Vector2(transform.position.x, transform.position.y + 1),
+                new Vector2(transform.position.x, transform.position.y),
                 Quaternion.identity)).GetComponent<Exclamation>();
             ex.transform.SetParent(gameObject.transform);
             ex.type = ExclamationType.Suspicious;
