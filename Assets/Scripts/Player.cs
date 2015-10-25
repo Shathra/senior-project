@@ -4,11 +4,23 @@ using System.Collections;
 public class Player : MonoBehaviour {
     public GameObject rockPrefab;
 
+    private Animator anim;
+
+    void Start() {
+        anim = GetComponent<Animator>();
+    }
+
     void Update() {
-        if (Input.GetKey(KeyCode.A))
-            transform.Translate(Vector3.left * Time.deltaTime * 5);
-        else if (Input.GetKey(KeyCode.D))
-            transform.Translate(Vector3.right * Time.deltaTime * 5);
+        bool crouching = anim.GetBool("Crouching");
+
+        if (Input.GetKey(KeyCode.A)) {
+            transform.position += Vector3.left * Time.deltaTime * 5;
+        } else if (Input.GetKey(KeyCode.D)) {
+            transform.position += Vector3.right * Time.deltaTime * 5;
+        }
+
+        if (Input.GetKeyDown(KeyCode.C))
+            anim.SetBool("Crouching", !crouching);
 
         if (Input.GetKeyDown(KeyCode.Mouse0)) {
             Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
