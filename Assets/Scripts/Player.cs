@@ -11,16 +11,22 @@ public class Player : MonoBehaviour {
     }
 
     void Update() {
-        bool crouching = anim.GetBool("Crouching");
+        float crouching = anim.GetFloat("Crouching");
 
+        float speed = 5 - crouching * 2.5f;
         if (Input.GetKey(KeyCode.A)) {
-            transform.position += Vector3.left * Time.deltaTime * 5;
+            transform.position += Vector3.left * Time.deltaTime * speed;
+            transform.eulerAngles = new Vector3(transform.rotation.eulerAngles.x, 270, transform.rotation.eulerAngles.z);
+            anim.SetFloat("Movement", 1);
         } else if (Input.GetKey(KeyCode.D)) {
-            transform.position += Vector3.right * Time.deltaTime * 5;
-        }
+            transform.position += Vector3.right * Time.deltaTime * speed;
+            transform.eulerAngles = new Vector3(transform.rotation.eulerAngles.x, 90, transform.rotation.eulerAngles.z);
+            anim.SetFloat("Movement", 1);
+        } else
+            anim.SetFloat("Movement", 0);
 
         if (Input.GetKeyDown(KeyCode.C))
-            anim.SetBool("Crouching", !crouching);
+            anim.SetFloat("Crouching", Mathf.Abs(crouching - 1));
 
         if (Input.GetKeyDown(KeyCode.Mouse0)) {
             Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
