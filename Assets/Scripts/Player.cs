@@ -43,7 +43,7 @@ public class Player : MonoBehaviour {
         }
 
         if (Input.GetKeyDown(KeyCode.Space) && ground)
-            body.velocity += new Vector2(0, 8 - crouching * 1);
+            body.velocity += new Vector2(0, 7 - crouching * 1);
         if (!ground && !Input.GetKey(KeyCode.Space) && body.velocity.y > 0)
             body.velocity = new Vector2(body.velocity.x, 0);
 
