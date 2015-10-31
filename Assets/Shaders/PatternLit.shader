@@ -1,10 +1,12 @@
-﻿Shader "Pattern" {
+﻿//Under Construction
+Shader "PatternLit" {
 	Properties {
 		_MainTex ("Texture", 2D) = "white" {}
 		_TexScale ("Texture Scale", Float) = 1.0
 	}
 	SubShader {
 		Pass {
+			Tags {"LightMode" = "ForwardBase"}
             CGPROGRAM
             #pragma vertex vert
             #pragma fragment frag
@@ -42,6 +44,7 @@
 				float4 col = tex2D (_MainTex, float2(x, y)).rgba;
 				return col;
             }
+
             ENDCG
         }
 	} 

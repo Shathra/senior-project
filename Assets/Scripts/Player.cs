@@ -14,6 +14,24 @@ public class Player : MonoBehaviour {
         body = GetComponent<Rigidbody2D>();
     }
 
+    public Vector2 topPoint {
+        get {
+            return new Vector2(hitbox.bounds.max.x - hitbox.size.x / 2, hitbox.bounds.max.y);
+        }
+    }
+
+    public Vector2 midPoint {
+        get {
+            return new Vector2(hitbox.bounds.min.x + hitbox.size.x / 2, hitbox.bounds.min.y + hitbox.size.y / 2);
+        }
+    }
+
+    public Vector2 bottomPoint {
+        get {
+            return new Vector2(hitbox.bounds.min.x + hitbox.size.x / 2, hitbox.bounds.min.y);
+        }
+    }
+
     void Update() {
         float crouching = anim.GetFloat("Crouching");
         bool ground = false;
