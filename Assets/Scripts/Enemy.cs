@@ -14,9 +14,11 @@ public class Enemy : MonoBehaviour {
 
     void Update() {
 		Action action = actionQueue.Peek();
-		action.Execute(this);
-		if (action.done)
-			actionQueue.Remove();
+		if (action != null) {
+			action.Execute(this);
+			if (action.done)
+				actionQueue.Remove();
+		}
     }
 
     public void Approach(Vector2 target) {
