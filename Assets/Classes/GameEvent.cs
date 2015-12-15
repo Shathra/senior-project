@@ -1,0 +1,1 @@
+﻿using UnityEngine;using System.Collections;public enum GameEventType {	EnemySpotted, UnknownObjectSpotted, NoiseHeard}public class GameEvent {	public Vector2 location { get; set; }	public GameEventType type { get; set; }	public GameEvent(Vector2 location, GameEventType type) {		this.location = location;		this.type = type;	}}
