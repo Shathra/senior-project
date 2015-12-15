@@ -4,14 +4,14 @@ using System.Collections.Generic;
 
 public class ActionQueue {
 
-    private List<Action> heap;
+    protected List<Action> heap;
 
     public ActionQueue()
     {
         this.heap = new List<Action>();
     }
 
-    public bool empty()
+    public bool Empty()
     {
         return heap.Count == 0;
     }
