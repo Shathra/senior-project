@@ -73,7 +73,7 @@ public class Player : MonoBehaviour {
             Vector2 direction = mousePos -
                 new Vector2(transform.position.x, transform.position.y);
             Rigidbody2D rock = ((GameObject)Instantiate(rockPrefab, 
-                transform.position, Quaternion.identity)).GetComponent<Rigidbody2D>();
+                midPoint, Quaternion.identity)).GetComponent<Rigidbody2D>();
             rock.AddForce(direction.normalized * 40);
         }
     }

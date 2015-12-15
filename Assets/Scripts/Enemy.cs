@@ -13,7 +13,7 @@ public class Enemy : MonoBehaviour {
     }
 
     public void Spot(GameObject obj) {
-        Player player = obj.GetComponent<Player>();
+        Player player = obj.GetComponentInParent<Player>();
         if (player != null) {
             Exclamation ex = ((GameObject)Instantiate(exclamationPrefab,
                 new Vector2(transform.position.x, transform.position.y + 1),

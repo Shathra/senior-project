@@ -25,7 +25,7 @@ public class Rock : MonoBehaviour {
     void OnTriggerEnter2D(Collider2D col) {
         if (col.isTrigger)
             return;
-        if (col.GetComponent<Player>() != null)
+        if (col.GetComponentInParent<Player>() != null)
             return;
         if (state == RockState.Ended) {
             Enemy enemy = col.gameObject.GetComponent<Enemy>();
