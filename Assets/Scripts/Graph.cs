@@ -32,9 +32,16 @@ public class Graph : MonoBehaviour
         // undirected if ladder or projection is small height
     }
 
-        
+
+    /// <summary>
+    /// TODO-Selçuk:Not finished
+    /// </summary>
+    /// <param name="source"></param>
+    /// <param name="target"></param>
+    /// <returns></returns>
     public List<Node> ShortestPath( Node source, Node target)
     {
+        //TODO-Selcuk: It is not correct, I'll fix it asap.
         List<int> prev = new List<int>();
         List<float> distance = new List<float>();
         List<float> distanceTraversed = new List<float>();

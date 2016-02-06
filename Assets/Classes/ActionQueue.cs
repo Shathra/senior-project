@@ -2,20 +2,34 @@
 using System.Collections;
 using System.Collections.Generic;
 
+/// <summary>
+/// It is action list which every enemy AI units have. It stores actions in a priority queue manner.
+/// </summary>
 public class ActionQueue {
 
     protected List<Action> heap;
 
+    /// <summary>
+    /// Blank constructor, initializes member variables.
+    /// </summary>
     public ActionQueue()
     {
         this.heap = new List<Action>();
     }
 
+    /// <summary>
+    /// Returns if action queue is empty
+    /// </summary>
+    /// <returns>True if empty, false otherwise</returns>
     public bool Empty()
     {
         return heap.Count == 0;
     }
 
+    /// <summary>
+    /// Obvious, adds an action.
+    /// </summary>
+    /// <param name="action"></param>
 	public void Insert( Action action)
     {
         heap.Add(action);
@@ -40,6 +54,10 @@ public class ActionQueue {
         }
     }
 
+    /// <summary>
+    /// Returns action which has highest priority
+    /// </summary>
+    /// <returns>Action with the highest priority, null if ActionQueue empty.</returns>
     public Action Peek()
     {
         if( heap.Count != 0)
@@ -51,6 +69,10 @@ public class ActionQueue {
         return null;
     }
 
+    /// <summary>
+    /// Removes and returns highest priority action in the queue.
+    /// </summary>
+    /// <returns>Returns null if ActionQueue is empty</returns>
     public Action Remove()
     {
         if( heap.Count != 0)

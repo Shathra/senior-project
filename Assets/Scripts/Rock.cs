@@ -30,7 +30,7 @@ public class Rock : MonoBehaviour {
         if (state == RockState.Ended) {
             Enemy enemy = col.gameObject.GetComponent<Enemy>();
             if (enemy != null)
-                enemy.Spot(gameObject);
+                ((ISpotable) enemy).Spot(gameObject);
         } else if (state == RockState.Flying) {
             state = RockState.Collided;
             size.radius = 1;

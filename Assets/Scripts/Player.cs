@@ -69,7 +69,7 @@ public class Player : MonoBehaviour {
             anim.SetFloat("Crouching", Mathf.Abs(crouching - 1));
 
         if (Input.GetKeyDown(KeyCode.Mouse0)) {
-            Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector2 mousePos = UnityEngine.Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector2 direction = mousePos -
                 new Vector2(transform.position.x, transform.position.y);
             Rigidbody2D rock = ((GameObject)Instantiate(rockPrefab, 

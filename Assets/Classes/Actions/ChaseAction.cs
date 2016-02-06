@@ -9,6 +9,8 @@ public class ChaseAction : Action {
 	}
 
 	public override void Execute(Enemy enemy) {
-		enemy.Approach(player.midPoint);
+
+        IApproachable movingObj = (IApproachable)enemy;
+		movingObj.Approach(player.midPoint);
 	}
 }

@@ -9,6 +9,6 @@ public class Vision : MonoBehaviour {
 	}
 
     void OnTriggerEnter2D(Collider2D col) {
-        enemy.Spot(col.gameObject);
+        ((ISpotable) enemy).Spot(col.gameObject);
     }
 }

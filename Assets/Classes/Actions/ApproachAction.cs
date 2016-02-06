@@ -9,7 +9,8 @@ public class ApproachAction : Action {
     }
 
     public override void Execute(Enemy enemy) {
-        enemy.Approach(target);
+        IApproachable movingObj = (IApproachable)enemy;
+        movingObj.Approach(target);
 		if(Vector2.Distance(enemy.transform.position, new Vector2(target.x, enemy.transform.position.y)) < 0.01f) {
 			done = true;
 		}
