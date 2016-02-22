@@ -66,7 +66,7 @@ public class Graph : MonoBehaviour
             for( int i = 0; i < closest.edges.Length; i++)
             {
                 int neighborIndex = nodes.IndexOf(closest.edges[i]);
-                float neighborDistance = 0;
+                float neighborDistance = closest.weights[i];                // Imza:Firat (Bug cikarsa diye) 
                 float alt = distance[closestIndex] + neighborDistance;
                 if( alt < distance[neighborIndex])
                 {
