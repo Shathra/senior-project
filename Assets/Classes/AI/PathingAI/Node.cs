@@ -3,8 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class Node : MonoBehaviour {
-    public int[] properties;
-    public Node[] edges;
+    public int[]    properties; //Just in case we add other properties than vector3 distance
+    public Node[]   edges;
+    public float[]  weights;  //edges and weights must be equal in size
     // Use this for initialization
     void Start () {
 	
