@@ -20,4 +20,9 @@ public class Node : MonoBehaviour {
     {
 
     }
+
+    public override string ToString() {
+
+        return "Node " + transform.position;
+    }
 }

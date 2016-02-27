@@ -2,10 +2,20 @@
 using System.Collections;
 
 public class Guardian : Enemy, ISpotable, IApproachable {
+
+    protected float moveSpeed;
+    protected float turnRate;
+
     public GameObject exclamationPrefab;
 
+    public new void Start() {
+ 
+        base.Start();
+        this.moveSpeed = MLLevelStats.GuardianSpeed;
+    }
+
     public void Approach(Vector2 target) {
-        float moveSpeed = 1;
+
         transform.position = Vector2.MoveTowards(transform.position, new Vector2(target.x, transform.position.y), Time.deltaTime * moveSpeed);
     }
 
@@ -17,7 +27,7 @@ public class Guardian : Enemy, ISpotable, IApproachable {
                 Quaternion.identity)).GetComponent<Exclamation>();
             ex.transform.SetParent(gameObject.transform);
             ex.type = ExclamationType.Alerted;
-			actionQueue.Insert(reactionAI.React(new GameEvent(player.midPoint, GameEventType.EnemySpotted)));
+            actionQueue.Insert(EventManager.Spot(new SpotEvent(this, player.midPoint)));
             return;
         }
         Rock rock = obj.GetComponent<Rock>();
