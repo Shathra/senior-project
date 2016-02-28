@@ -77,10 +77,6 @@ public class Player : MonoBehaviour {
 			body.velocity += new Vector2(0, 7 - crouching * 1);
 		if (!ground && !Input.GetKey(KeyCode.Space) && body.velocity.y > 0)
 			body.velocity = new Vector2(body.velocity.x, 0);
-		if (Input.GetKeyDown(KeyCode.Space) && onLadder) {
-			body.velocity += new Vector2(0, 8);
-			onLadder = false;
-		}
 
 		if (Input.GetKeyDown(KeyCode.C))
 			anim.SetFloat("Crouching", Mathf.Abs(crouching - 1));

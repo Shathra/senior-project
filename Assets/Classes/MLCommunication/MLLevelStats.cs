@@ -13,7 +13,7 @@ public enum LevelStat {
 /// </summary>
 public class MLLevelStats {
 
-    public static float GuardianSpeed = 1.0f;
+    public static float GuardianSpeed = 2.0f;
     public static float GuardianTurnRate = 1.0f;
 
     private Dictionary<LevelStat, float> stats;

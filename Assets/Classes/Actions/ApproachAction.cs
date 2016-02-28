@@ -23,7 +23,8 @@ public class ApproachAction : Action {
         movingObj.Approach(nextNode);
 		if(Vector2.Distance(enemy.transform.position, nextNode) < 0.1f) {
 
-            path.RemoveAt(0);
+			AIController.GetPath(enemy.transform.position, target);
+			path.RemoveAt(0);
 		}
     }
 }

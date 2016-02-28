@@ -13,7 +13,7 @@ public class Enemy : MonoBehaviour {
         actionQueue = new ActionQueue();
     }
 
-    public void Update()
+    public virtual void Update()
     {
         Action action = actionQueue.Peek();
         if (action != null)
