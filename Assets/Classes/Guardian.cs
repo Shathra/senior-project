@@ -9,6 +9,16 @@ public class Guardian : Enemy, ISpotable, IApproachable {
 	private BoxCollider2D hitbox;
 	private Rigidbody2D body;
 	private bool _onLadder;
+	private bool _direction;
+	public bool direction {
+		get {
+			return _direction;
+		}
+		set {
+			_direction = value;
+			transform.localScale = new Vector3((direction ? 1 : -1) * Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+		}
+	}
 	public bool onLadder {
 		get {
 			return _onLadder;
@@ -46,6 +56,10 @@ public class Guardian : Enemy, ISpotable, IApproachable {
 			onLadder = false;
 		}
 		transform.position = Vector2.MoveTowards(transform.position, new Vector2(target.x, onLadder ? target.y : transform.position.y), Time.deltaTime * moveSpeed);
+		if (target.x - transform.position.x > 0)
+			direction = true;
+		else if (target.x - transform.position.x < 0)
+			direction = false;
 	}
 
 	public void Spot(GameObject obj) {
