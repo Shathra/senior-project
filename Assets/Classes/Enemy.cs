@@ -8,7 +8,7 @@ public class Enemy : MonoBehaviour {
 
     public ActionQueue actionQueue { get; set; }
 
-    public void Start()
+    public void Awake()
     {
         actionQueue = new ActionQueue();
     }

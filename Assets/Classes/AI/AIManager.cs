@@ -8,13 +8,15 @@ public class AIManager : MonoBehaviour{
 
     protected Graph levelGraph;
     protected List<Enemy> enemies;
+    protected Player player;
 
-    public void Start() {
+    public void Awake() {
 
         AIController.Init(this);
         levelGraph = new Graph();
         enemies = new List<Enemy>();
 
+        player = GameObject.Find("Player").GetComponent<Player>();
         contructGraph();
         setEnemies();
 
@@ -26,6 +28,16 @@ public class AIManager : MonoBehaviour{
         if( path != null)
             foreach (Node node in path)
                 Debug.Log(node);*/
+    }
+
+    internal Player GetPlayer() {
+        throw new NotImplementedException();
+    }
+
+    public void Start() {
+
+        enemies[0].actionQueue.Insert(new PatrolAction(enemies[0].transform.position, new Vector2(-2.8f, -1)));
+        //enemies[0].actionQueue.Insert(new ApproachAction(enemies[0].transform.position, new Vector2(-2.8f, -1)));
     }
 
     void OnDrawGizmos()

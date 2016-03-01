@@ -6,12 +6,18 @@ public class ApproachAction : Action {
     private Vector2 target;
     private List<Node> path;
 
-    public ApproachAction(Vector2 source, Vector2 target) {
+    public ApproachAction(Vector2 source, Vector2 target) : base(){
+        this.target = target;
+        path = AIController.GetPath(source, target);
+    }
+
+    public ApproachAction(Vector2 source, Vector2 target, int priority) : base(priority){
         this.target = target;
         path = AIController.GetPath(source, target);
     }
 
     public override void Execute(Enemy enemy) {
+
         IApproachable movingObj = (IApproachable)enemy;
         
         if( path.Count == 0) {

@@ -31,8 +31,17 @@ public class EventManager {
 
     public static Action Spot( SpotEvent gameEvent) {
 
-        Vector2 pos = gameEvent.Source.transform.position;
-        ApproachAction actionToReturn = new ApproachAction( pos, gameEvent.Location);
+        Action actionToReturn = null;
+        if (gameEvent.GetType() == typeof(Guardian)) {
+            Vector2 pos = gameEvent.Source.transform.position;
+            actionToReturn = new ApproachAction(pos, gameEvent.Location);
+        }
+
+        else if (gameEvent.GetType() == typeof(Turret)) {
+
+            actionToReturn = new FireAction(AIController.GetPlayer());
+        }
+
         return actionToReturn;
     }
 }

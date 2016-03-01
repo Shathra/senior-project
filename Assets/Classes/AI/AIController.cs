@@ -13,8 +13,18 @@ public class AIController {
         manager = initManager;
     }
 
+    public static Node GetNearestNode(Vector2 pos) {
+
+        return manager.GetNearestNode(pos);
+    }
+
     public static List<Node> GetPath( Vector2 source, Vector2 target) {
 
         return manager.GetPath(source, target);
+    }
+
+    public static Player GetPlayer() {
+
+        return manager.GetPlayer();
     }
 }

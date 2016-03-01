@@ -39,9 +39,9 @@ public class Guardian : Enemy, ISpotable, IApproachable {
 
 	public GameObject exclamationPrefab;
 
-	public new void Start() {
+	public new void Awake() {
 
-		base.Start();
+		base.Awake();
 		this.moveSpeed = MLLevelStats.GuardianSpeed;
 		hitbox = GetComponent<BoxCollider2D>();
 		body = GetComponent<Rigidbody2D>();
@@ -88,6 +88,6 @@ public class Guardian : Enemy, ISpotable, IApproachable {
 
 	public override void Update() {
 		base.Update();
-		actionQueue.Insert(EventManager.Spot(new SpotEvent(this, new Vector2(-4.85f, 4.87f))));
+		//actionQueue.Insert(EventManager.Spot(new SpotEvent(this, new Vector2(-4.85f, 4.87f))));
 	}
 }

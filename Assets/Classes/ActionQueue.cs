@@ -43,7 +43,7 @@ public class ActionQueue {
             {
                 Action temp = heap[index];
                 heap[index] = heap[parentIndex];
-                heap[parentIndex] = heap[index];
+                heap[parentIndex] = temp;
                 index = parentIndex;
             }
 
@@ -52,6 +52,11 @@ public class ActionQueue {
                 ordered = true;
             }
         }
+
+        /*Debug.Log("Action is added" + action);
+        Debug.Log("heap[0]" + heap[0]);
+        if( heap.Count > 1)
+            Debug.Log("heap[1]" + heap[1]);*/
     }
 
     /// <summary>
