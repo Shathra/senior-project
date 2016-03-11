@@ -7,7 +7,7 @@ using System.Collections;
 public class Enemy : MonoBehaviour {
 
     public ActionQueue actionQueue { get; set; }
-
+	
     public void Awake()
     {
         actionQueue = new ActionQueue();
