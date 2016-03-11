@@ -8,7 +8,7 @@ public class Enemy : MonoBehaviour {
 
     public ActionQueue actionQueue { get; set; }
 
-    public void Start()
+    public virtual void Start()
     {
         actionQueue = new ActionQueue();
     }
