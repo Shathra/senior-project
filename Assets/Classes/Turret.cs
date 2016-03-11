@@ -12,7 +12,7 @@ public class Turret : Enemy {
 	private bool direction;
 	private GameObject tracingObject;
 
-	public override void Start() {
+	void Start() {
 		line = GetComponent<LineRenderer>();
 		direction = false;
 		tracingObject = null;
@@ -34,7 +34,6 @@ public class Turret : Enemy {
 			Vector2 vec = Vector3.Normalize(tracingObject.GetComponent<Player>().midPoint - (Vector2)transform.parent.position);
 			float angle = Mathf.Rad2Deg * Mathf.Asin(vec.x);
 			transform.localEulerAngles = new Vector3(0, 0, Mathf.MoveTowards(0, angle, rotationAmount));
-			Debug.Log(angle);
 		}
 		Vector3 origin = transform.parent.position + transform.rotation * Vector3.up * 0.25f;
 		line.SetPosition(0, origin);
