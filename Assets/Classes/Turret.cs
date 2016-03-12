@@ -5,8 +5,15 @@ using System.Collections;
 /// Immobile unit which fires whenever it sees a player
 /// </summary>
 public class Turret : Enemy {
-	private float rotationAmount = 85;
-	private float range = 100;
+	public GameObject bulletPrefab;
+
+	private const float ROTATION_AMOUNT = 85;
+	private const float RANGE = 100;
+	private const float FIRE_RATE = 0.3f;
+	private const float DELAY = 0.5f;
+
+	private float shoot;
+	private float remainingDelay;
 
 	private LineRenderer line;
 	private bool direction;
@@ -16,33 +23,49 @@ public class Turret : Enemy {
 		line = GetComponent<LineRenderer>();
 		direction = false;
 		tracingObject = null;
+		shoot = 0;
+		remainingDelay = DELAY;
 	}
 
 	public override void Update() {
 
 	}
 
+	public Vector2 tip {
+		get {
+			return transform.parent.position + transform.rotation * Vector3.up * 0.25f;
+		}
+	}
+
 	void FixedUpdate() {
 		if (tracingObject == null) {
 			transform.eulerAngles = new Vector3(0, 0,
-			Mathf.MoveTowards(transform.eulerAngles.z, direction ? 180 - rotationAmount : 180 + rotationAmount, Time.fixedDeltaTime * 40));
-			if (Mathf.Abs(transform.eulerAngles.z - (180 - rotationAmount)) < 1)
+			Mathf.MoveTowards(transform.eulerAngles.z, direction ? 180 - ROTATION_AMOUNT : 180 + ROTATION_AMOUNT, Time.fixedDeltaTime * 40));
+			if (Mathf.Abs(transform.eulerAngles.z - (180 - ROTATION_AMOUNT)) < 1)
 				direction = false;
-			else if (Mathf.Abs(transform.eulerAngles.z - (180 + rotationAmount)) < 1)
+			else if (Mathf.Abs(transform.eulerAngles.z - (180 + ROTATION_AMOUNT)) < 1)
 				direction = true;
+			remainingDelay = DELAY;
 		} else {
 			Vector2 vec = Vector3.Normalize(tracingObject.GetComponent<Player>().midPoint - (Vector2)transform.parent.position);
 			float angle = Mathf.Rad2Deg * Mathf.Asin(vec.x);
-			transform.localEulerAngles = new Vector3(0, 0, Mathf.MoveTowards(0, angle, rotationAmount));
+			transform.localEulerAngles = new Vector3(0, 0, Mathf.MoveTowards(0, angle, ROTATION_AMOUNT));
+			if (shoot <= 0 && remainingDelay <= 0) {
+				Rigidbody2D bullet = ((GameObject)Instantiate(bulletPrefab, tip, Quaternion.identity)).GetComponent<Rigidbody2D>();
+				bullet.velocity = transform.rotation * Vector3.up * 20;
+				shoot = FIRE_RATE;
+			} else {
+				shoot -= Time.deltaTime;
+				remainingDelay -= Time.deltaTime;
+			}
 		}
-		Vector3 origin = transform.parent.position + transform.rotation * Vector3.up * 0.25f;
-		line.SetPosition(0, origin);
-		line.SetPosition(1, transform.parent.position + transform.rotation * Vector3.up * range);
-		RaycastHit2D obs = Physics2D.Raycast(origin, transform.rotation * Vector3.up, range, LayerMask.GetMask("Obstacle"));
+		line.SetPosition(0, tip);
+		line.SetPosition(1, transform.parent.position + transform.rotation * Vector3.up * RANGE);
+		RaycastHit2D obs = Physics2D.Raycast(tip, transform.rotation * Vector3.up, RANGE, LayerMask.GetMask("Obstacle"));
 		if (obs.collider != null)
 			line.SetPosition(1, obs.point);
-		RaycastHit2D hit = Physics2D.Raycast(origin, transform.rotation * Vector3.up,
-			obs.collider != null ? Vector3.Distance(origin, obs.point) : range, LayerMask.GetMask("Player"));
+		RaycastHit2D hit = Physics2D.Raycast(tip, transform.rotation * Vector3.up,
+			obs.collider != null ? Vector3.Distance(tip, obs.point) : RANGE, LayerMask.GetMask("Player"));
 		tracingObject = hit.collider != null ? hit.collider.gameObject : null;
 		Color color = tracingObject ? Color.red : Color.green;
 		line.SetColors(color, new Color(color.r, color.g, color.b, 0.5f));

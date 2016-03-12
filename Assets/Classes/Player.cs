@@ -50,13 +50,10 @@ public class Player : MonoBehaviour {
 		bool ground = false;
 		Vector2 hitboxBottom = new Vector2(hitbox.bounds.min.x, hitbox.bounds.min.y);
 		RaycastHit2D[] result = new RaycastHit2D[1];
-		if (Physics2D.LinecastNonAlloc(hitboxBottom, hitboxBottom - Vector2.up * 0.02f, result, LayerMask.GetMask("Obstacle")) > 0)
+		float side = (hitbox.bounds.max.x - hitbox.bounds.min.x);
+		Debug.Log(side);
+		if (Physics2D.BoxCast(bottomPoint, new Vector2(side, 0.01f), 0, -Vector2.up, 0.01f, LayerMask.GetMask("Obstacle")))
 			ground = true;
-		else {
-			hitboxBottom += Vector2.right * hitbox.size.x;
-			if (Physics2D.LinecastNonAlloc(hitboxBottom, hitboxBottom - Vector2.up * 0.02f, result, LayerMask.GetMask("Obstacle")) > 0)
-				ground = true;
-		}
 		anim.SetBool("Ground", ground);
 
 		if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D)) {
@@ -78,11 +75,16 @@ public class Player : MonoBehaviour {
 		if (!ground && !Input.GetKey(KeyCode.Space) && body.velocity.y > 0)
 			body.velocity = new Vector2(body.velocity.x, 0);
 
-		if (Input.GetKeyDown(KeyCode.C))
-			anim.SetFloat("Crouching", Mathf.Abs(crouching - 1));
 		float height = 1.25f;
 		float crouchHeight = 0.8f;
 		float crouchSpeed = 2.5f;
+		if (Input.GetKeyDown(KeyCode.C)) {
+			if (anim.GetFloat("Crouching") > 0) {
+				if (!Physics2D.BoxCast(topPoint, new Vector2(side, 0.01f), 0, Vector2.up, height - crouchHeight, LayerMask.GetMask("Obstacle")))
+					anim.SetFloat("Crouching", 0);
+			} else
+				anim.SetFloat("Crouching", 1);
+		}
 		if (anim.GetFloat("Crouching") > 0) {
 			hitbox.offset = Vector2.MoveTowards(hitbox.offset, new Vector2(0, crouchHeight / 2), Time.deltaTime * crouchSpeed);
 			hitbox.size = Vector2.MoveTowards(hitbox.size, new Vector2(hitbox.size.x, crouchHeight), Time.deltaTime * crouchSpeed);
@@ -103,7 +105,7 @@ public class Player : MonoBehaviour {
 				onLadder = true;
 				if (!Physics2D.Raycast(topPoint, -Vector2.up, 0.01f, LayerMask.GetMask("Ladder")))
 					transform.position = prev;
-            }
+			}
 		}
 
 		if (Input.GetKeyDown(KeyCode.F))
