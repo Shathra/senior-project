@@ -66,7 +66,10 @@ public class Guardian : Enemy, ISpotable, IApproachable {
 		Player player = obj.GetComponentInParent<Player>();
 		if (player != null) {
             //todofirat Alert
-			Exclamation ex = ((GameObject)Instantiate(exclamationPrefab,
+            state.SetState(Status.Alert);
+            
+            //
+            Exclamation ex = ((GameObject)Instantiate(exclamationPrefab,
 				new Vector2(transform.position.x, transform.position.y + 1),
 				Quaternion.identity)).GetComponent<Exclamation>();
 			ex.transform.SetParent(gameObject.transform);
@@ -77,6 +80,14 @@ public class Guardian : Enemy, ISpotable, IApproachable {
 		Rock rock = obj.GetComponent<Rock>();
 		if (rock != null) {
             //todofirat Suspicious
+            state.SetState(Status.Suspicious);
+            //Do shortest path
+
+            Node nearestNode = AIController.GetNearestNode(rock.transform.position);
+            actionQueue.Insert(new ApproachAction(transform.position, nearestNode.transform.position, -1)); 
+
+            //
+
 			if (rock.state != RockState.Ended)
 				return;
 			Exclamation ex = ((GameObject)Instantiate(exclamationPrefab,

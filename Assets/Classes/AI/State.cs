@@ -7,9 +7,9 @@ public enum Status
 {
     Idle = 1,       // Player has not been seen once
     HasSeen = 2,    // Player has been seen at least once but evaded enemies
-    Caution = 3,    // Enemy is suspicious of a noise
+    Suspicious = 3,    // Enemy is suspicious of a noise
     Searching = 4,  // Player has been seen but whereabouts are lost, enemies search whole local area
-    Hostile = 5     // Player is seen and all enemies are alert
+    Alert = 5     // Player is seen and all enemies are alert
 }
 
 /// <summary>
@@ -24,7 +24,7 @@ public class State {
     {
         return stt;
     }
-    public void SetStates(Status s)
+    public void SetState(Status s)
     {
         stt = s;
     }
