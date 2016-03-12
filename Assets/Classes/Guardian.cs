@@ -81,13 +81,10 @@ public class Guardian : Enemy, ISpotable, IApproachable {
 		if (rock != null) {
             //todofirat Suspicious
             state.SetState(Status.Suspicious);
-            //Do shortest path
-
+            //Approach the noise
             Node nearestNode = AIController.GetNearestNode(rock.transform.position);
             actionQueue.Insert(new ApproachAction(transform.position, nearestNode.transform.position, -1)); 
-
             //
-
 			if (rock.state != RockState.Ended)
 				return;
 			Exclamation ex = ((GameObject)Instantiate(exclamationPrefab,
