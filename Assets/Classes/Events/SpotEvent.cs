@@ -11,6 +11,7 @@ public class SpotEvent : GameEvent {
     public SpotEvent( Enemy source, Vector2 location) : base( source, GameEventType.EnemySpotted) {
 
         this.Location = location;
+        
     }
 }
 
