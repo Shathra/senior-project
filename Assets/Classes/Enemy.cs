@@ -7,10 +7,12 @@ using System.Collections;
 public class Enemy : MonoBehaviour {
 
     public ActionQueue actionQueue { get; set; }
+    public State state;
 
     public void Awake()
     {
         actionQueue = new ActionQueue();
+        state = new State();
     }
 
     public virtual void Update()
@@ -22,5 +24,26 @@ public class Enemy : MonoBehaviour {
             if (action.done)
                 actionQueue.Remove();
         }
+
+    }
+    void Idle()
+    {
+
+    }
+    void Searching()
+    {
+
+    }
+    void Caution()
+    {
+
+    }
+    void Cautious()
+    {
+
+    }
+    void Hostile()
+    {
+
     }
 }

@@ -65,6 +65,7 @@ public class Guardian : Enemy, ISpotable, IApproachable {
 	public void Spot(GameObject obj) {
 		Player player = obj.GetComponentInParent<Player>();
 		if (player != null) {
+            //todofirat Alert
 			Exclamation ex = ((GameObject)Instantiate(exclamationPrefab,
 				new Vector2(transform.position.x, transform.position.y + 1),
 				Quaternion.identity)).GetComponent<Exclamation>();
@@ -75,6 +76,7 @@ public class Guardian : Enemy, ISpotable, IApproachable {
 		}
 		Rock rock = obj.GetComponent<Rock>();
 		if (rock != null) {
+            //todofirat Suspicious
 			if (rock.state != RockState.Ended)
 				return;
 			Exclamation ex = ((GameObject)Instantiate(exclamationPrefab,
