@@ -8,7 +8,7 @@ public class Enemy : MonoBehaviour {
 
     public ActionQueue actionQueue { get; set; }
     public State state;
-
+    
     public void Awake()
     {
         actionQueue = new ActionQueue();
