@@ -18,6 +18,7 @@ public class ApproachAction : Action {
 
     public override void Execute(Enemy enemy) {
 
+        //Debug.Log("Executing approach action");
         IApproachable movingObj = (IApproachable)enemy;
         
         if( path.Count == 0) {
@@ -27,9 +28,10 @@ public class ApproachAction : Action {
 
         Vector2 nextNode = path[0].transform.position;
         movingObj.Approach(nextNode);
-		if(Vector2.Distance(enemy.transform.position, nextNode) < 0.1f) {
+		if(Vector2.Distance(enemy.transform.position, nextNode) < 0.2f) {
 
-			AIController.GetPath(enemy.transform.position, target);
+            //REMOVE NOTE: It conflicts with other part of code, i removed it. We might think something else if when it is needed.
+			//AIController.GetPath(enemy.transform.position, target);
 			path.RemoveAt(0);
 		}
     }
