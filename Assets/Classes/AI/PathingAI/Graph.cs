@@ -45,67 +45,85 @@ public class Graph
     /// <param name="target"></param>
     /// <returns></returns>
     public List<Node> ShortestPath( Node source, Node target) {
-        List<int> prev = new List<int>();
-        List<float> distance = new List<float>();
 
         List<Node> remaining = new List<Node>();
 
-        for( int i = 0; i < nodes.Count; i++) {
-
-            distance.Add(float.MaxValue);
-            remaining.Add(nodes[i]);
-            prev.Add(-1);
+        if (source == target)
+        {
+            remaining.Add(source);
+            return remaining;
         }
+        else
+        {
+            List<int> prev = new List<int>();
+            List<float> distance = new List<float>();
 
-        int current = nodes.IndexOf(source);
-        distance[current] = 0;
-        remaining[current] = null;
+            for (int i = 0; i < nodes.Count; i++)
+            {
 
-        for( int i = 1; i < nodes.Count; i++) {
-
-            for (int j = 0; j < nodes[current].edges.Length; j++) {
-
-                int toIndex = nodes.IndexOf(nodes[current].edges[j]);
-                if (distance[current] + nodes[current].weights[j] < distance[toIndex]) {
-
-                    distance[toIndex] = distance[current] + nodes[current].weights[j];
-                    prev[toIndex] = current;
-                }
+                distance.Add(float.MaxValue);
+                remaining.Add(nodes[i]);
+                prev.Add(-1);
             }
 
-            float min = float.MaxValue;
-            int next = -1;
-            for( int j = 0; j < remaining.Count; j++) {
+            int current = nodes.IndexOf(source);
+            distance[current] = 0;
+            remaining[current] = null;
 
-                if( remaining[j] != null) {
+            for (int i = 1; i < nodes.Count; i++)
+            {
 
-                    if( distance[j] < min) {
+                for (int j = 0; j < nodes[current].edges.Length; j++)
+                {
 
-                        min = distance[j];
-                        next = j;
+                    int toIndex = nodes.IndexOf(nodes[current].edges[j]);
+                    if (distance[current] + nodes[current].weights[j] < distance[toIndex])
+                    {
+
+                        distance[toIndex] = distance[current] + nodes[current].weights[j];
+                        prev[toIndex] = current;
                     }
                 }
+
+                float min = float.MaxValue;
+                int next = -1;
+                for (int j = 0; j < remaining.Count; j++)
+                {
+
+                    if (remaining[j] != null)
+                    {
+
+                        if (distance[j] < min)
+                        {
+
+                            min = distance[j];
+                            next = j;
+                        }
+                    }
+                }
+
+                if (next != -1)
+                {
+
+                    current = next;
+                    remaining[next] = null;
+                }
             }
 
-            if( next != -1) {
-
-                current = next;
-                remaining[next] = null;
+            List<Node> path = new List<Node>();
+            int currentIndex = nodes.IndexOf(target);
+            int sourceIndex = nodes.IndexOf(source);
+            path.Add(target);
+            while (currentIndex != sourceIndex)
+            {
+                path.Add(nodes[prev[currentIndex]]);    //Problem prev[i] gives -1
+                currentIndex = prev[currentIndex];
             }
+
+            path.Reverse();
+            return path;
+
         }
-
-        List<Node> path = new List<Node>();
-        int currentIndex = nodes.IndexOf(target);
-        int sourceIndex = nodes.IndexOf(source);
-        path.Add(target);
-        while( currentIndex != sourceIndex) {
-
-            path.Add(nodes[prev[currentIndex]]);
-            currentIndex = prev[currentIndex];
-        }
-
-        path.Reverse();
-        return path;
     }
 
     public Node GetNearestNode(Vector2 pos) {

@@ -32,14 +32,18 @@ public class EventManager {
     public static Action Spot( SpotEvent gameEvent) {
 
         Action actionToReturn = null;
-        if (gameEvent.GetType() == typeof(Guardian)) {
+        if (gameEvent.Source.GetType() == typeof(Guardian)) {
             Vector2 pos = gameEvent.Source.transform.position;
             actionToReturn = new ApproachAction(pos, gameEvent.Location);
         }
 
-        else if (gameEvent.GetType() == typeof(Turret)) {
+        else if (gameEvent.Source.GetType() == typeof(Turret)) {
 
             actionToReturn = new FireAction(AIController.GetPlayer());
+        }
+        else
+        {
+            Debug.Log("Null in Spot");
         }
 
         return actionToReturn;

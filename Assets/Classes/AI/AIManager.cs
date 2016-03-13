@@ -72,7 +72,6 @@ public class AIManager : MonoBehaviour{
             if (!Config.DebugMode)
                 child.GetComponent<MeshRenderer>().enabled = false;
         }
-
         levelGraph.CreateGraph();
     }
 

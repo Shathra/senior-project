@@ -10,7 +10,14 @@ public class Guardian : Enemy, ISpotable, IApproachable {
 	private Rigidbody2D body;
 	private bool _onLadder;
 	private bool _direction;
-	public bool direction {
+
+    public int patrolType;
+    public Vector2 patrolCoordinate;
+    public float turnAroundTime;
+
+    private bool searchIsFinished;
+
+    public bool direction {
 		get {
 			return _direction;
 		}
@@ -40,14 +47,16 @@ public class Guardian : Enemy, ISpotable, IApproachable {
 	public GameObject exclamationPrefab;
 
 	public new void Awake() {
-
 		base.Awake();
 		this.moveSpeed = MLLevelStats.GuardianSpeed;
 		hitbox = GetComponent<BoxCollider2D>();
 		body = GetComponent<Rigidbody2D>();
 		onLadder = false;
 	}
-
+    public void Start()
+    {
+        Idle(patrolType);
+    }
 	public void Approach(Vector2 target) {
 
 		if (!onLadder && Physics2D.Raycast(topPoint, -Vector2.up, 0.01f, LayerMask.GetMask("Ladder"))) {
@@ -63,28 +72,27 @@ public class Guardian : Enemy, ISpotable, IApproachable {
 	}
 
 	public void Spot(GameObject obj) {
-		Player player = obj.GetComponentInParent<Player>();
+
+        Player player = obj.GetComponentInParent<Player>();
 		if (player != null) {
             //todofirat Alert
             state.SetState(Status.Alert);
-            
             //
             Exclamation ex = ((GameObject)Instantiate(exclamationPrefab,
 				new Vector2(transform.position.x, transform.position.y + 1),
 				Quaternion.identity)).GetComponent<Exclamation>();
 			ex.transform.SetParent(gameObject.transform);
 			ex.type = ExclamationType.Alerted;
+            
 			actionQueue.Insert(EventManager.Spot(new SpotEvent(this, player.midPoint)));
 			return;
 		}
+
 		Rock rock = obj.GetComponent<Rock>();
 		if (rock != null) {
             //todofirat Suspicious
             state.SetState(Status.Suspicious);
-            //Approach the noise
-            Node nearestNode = AIController.GetNearestNode(rock.transform.position);
-            actionQueue.Insert(new ApproachAction(transform.position, nearestNode.transform.position, -1)); 
-            //
+            
 			if (rock.state != RockState.Ended)
 				return;
 			Exclamation ex = ((GameObject)Instantiate(exclamationPrefab,
@@ -92,7 +100,12 @@ public class Guardian : Enemy, ISpotable, IApproachable {
 				Quaternion.identity)).GetComponent<Exclamation>();
 			ex.transform.SetParent(gameObject.transform);
 			ex.type = ExclamationType.Suspicious;
-			return;
+            Suspicous();
+            //Approach the noise
+            Node nearestNode = AIController.GetNearestNode(rock.transform.position);
+            actionQueue.Insert(new ApproachAction(transform.position, nearestNode.transform.position, -1));
+            //
+            return;
 		}
 	}
 
@@ -100,4 +113,40 @@ public class Guardian : Enemy, ISpotable, IApproachable {
 		base.Update();
 		//actionQueue.Insert(EventManager.Spot(new SpotEvent(this, new Vector2(-4.85f, 4.87f))));
 	}
+
+    void Idle(int patrolType)
+    {
+        if (patrolType == 2)
+        {
+            actionQueue.Insert(new PatrolAction(transform.position, patrolCoordinate));     //walking patrol
+        }
+        else if (patrolType == 1)
+        {
+            actionQueue.Insert(new TurnAroundAction(turnAroundTime));                       //rotation patrol
+        }
+        else
+        {
+            //No rotation or no walking but may add some functions
+        }
+    }
+    void Searching()
+    {
+
+        if (searchIsFinished)
+        {
+            state.SetState(Status.HasSeen);
+        }          ///selam
+    }   
+    void HasSeen()
+    {
+        //later
+    }
+    void Suspicous()
+    {
+        //later
+    }
+    void Alert()
+    {
+        //sooner
+    }
 }
