@@ -7,10 +7,15 @@ public class ChaseAction : Action {
 	public ChaseAction(Player player) {
 		this.player = player;
 	}
+    public ChaseAction()
+    {
+        this.player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+    }
 
 	public override void Execute(Enemy enemy) {
 
         IApproachable movingObj = (IApproachable)enemy;
+        Debug.Log("asdfasd"+this.player + " asd" + enemy);
 		movingObj.Approach(player.midPoint);
 	}
 }

@@ -33,8 +33,8 @@ public class EventManager {
 
         Action actionToReturn = null;
         if (gameEvent.Source.GetType() == typeof(Guardian)) {
-            Vector2 pos = gameEvent.Source.transform.position;
-            actionToReturn = new ApproachAction(pos, gameEvent.Location);
+            //Vector2 pos = gameEvent.Source.transform.position;
+            actionToReturn = new ChaseAction();
         }
 
         else if (gameEvent.Source.GetType() == typeof(Turret)) {

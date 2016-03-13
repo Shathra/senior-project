@@ -16,7 +16,7 @@ public class AIManager : MonoBehaviour{
         levelGraph = new Graph();
         enemies = new List<Enemy>();
 
-        player = GameObject.Find("Player").GetComponent<Player>();
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         contructGraph();
         setEnemies();
 

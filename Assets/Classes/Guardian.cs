@@ -52,7 +52,8 @@ public class Guardian : Enemy, ISpotable, IApproachable {
 		hitbox = GetComponent<BoxCollider2D>();
 		body = GetComponent<Rigidbody2D>();
 		onLadder = false;
-	}
+        gameObject.layer = 11;                          //11 is Guardian Layer
+    }
     public void Start()
     {
         Idle(patrolType);
