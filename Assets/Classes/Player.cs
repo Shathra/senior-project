@@ -51,7 +51,7 @@ public class Player : MonoBehaviour {
 		Vector2 hitboxBottom = new Vector2(hitbox.bounds.min.x, hitbox.bounds.min.y);
 		RaycastHit2D[] result = new RaycastHit2D[1];
 		float side = (hitbox.bounds.max.x - hitbox.bounds.min.x);
-		Debug.Log(side);
+		//Debug.Log(side);
 		if (Physics2D.BoxCast(bottomPoint, new Vector2(side, 0.01f), 0, -Vector2.up, 0.01f, LayerMask.GetMask("Obstacle")))
 			ground = true;
 		anim.SetBool("Ground", ground);
@@ -62,7 +62,7 @@ public class Player : MonoBehaviour {
 				direction = false;
 			float speed = (5 - crouching * 2.5f) * (direction ? 1 : -1) * (onLadder ? 0.5f : 1.0f);
 			transform.localScale = new Vector3((direction ? 1 : -1) * Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
-			//transform.position += speed * Vector3.right;
+			transform.position += speed * Vector3.right;
 			body.velocity = new Vector2(speed, body.velocity.y);
 			anim.SetFloat("Movement", 1);
 		} else {
