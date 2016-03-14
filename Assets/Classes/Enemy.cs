@@ -8,9 +8,7 @@ public class Enemy : MonoBehaviour {
 
     public ActionQueue actionQueue { get; set; }
     public State state;
-
-    private bool searchIsFinished;
-
+    
     public void Awake()
     {
         actionQueue = new ActionQueue();
@@ -27,28 +25,5 @@ public class Enemy : MonoBehaviour {
                 actionQueue.Remove();
         }
     }
-    void Idle()
-    {
 
-    }
-    void Searching()
-    {
-        
-        if (searchIsFinished)
-        {
-            state.SetState(Status.HasSeen);
-        }
-    }
-    void HasSeen()
-    {
-
-    }
-    void Suspicous()
-    {
-
-    }
-    void Alert()
-    {
-
-    }
 }

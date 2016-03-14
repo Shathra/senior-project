@@ -12,7 +12,7 @@ class PatrolAction : Action {
     protected Node point1;
     protected Node point2;
     protected bool toPoint1;
-
+    
     public PatrolAction(Node point1, Node point2) {
 
         this.point1 = point1;
@@ -33,7 +33,7 @@ class PatrolAction : Action {
 
         //Debug.Log("Executing Patrol Action");
         IApproachable movingObj = (IApproachable)enemy;
-        if( toPoint1)
+        if( toPoint1 )
             enemy.actionQueue.Insert( new ApproachAction( enemy.transform.position, point1.transform.position, -1));
         else
             enemy.actionQueue.Insert(new ApproachAction(enemy.transform.position, point2.transform.position, -1));

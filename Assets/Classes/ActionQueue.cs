@@ -36,27 +36,28 @@ public class ActionQueue {
 
         int index = heap.Count - 1;
         bool ordered = false;
-        while( index != 0 && !ordered)
+        while ( index != 0 && !ordered)
         {
-            int parentIndex = (index + 1) / 2 - 1;
-            if( heap[index].priority <= heap[parentIndex].priority)
+            int parentIndex = (index + 1) / 2 - 1;  
+            //Debug.Log(parentIndex+"----"+index+"-----"+heap.Count);
+            if ( heap[index].priority <= heap[parentIndex].priority)
             {
+                //Debug.Log(parentIndex + "----" + index + "-----" + heap.Count);
                 Action temp = heap[index];
                 heap[index] = heap[parentIndex];
                 heap[parentIndex] = temp;
                 index = parentIndex;
             }
-
             else
             {
                 ordered = true;
             }
         }
 
-        /*Debug.Log("Action is added" + action);
+        Debug.Log("Action is added" + action);
         Debug.Log("heap[0]" + heap[0]);
         if( heap.Count > 1)
-            Debug.Log("heap[1]" + heap[1]);*/
+            Debug.Log("heap[1]" + heap[1]);
     }
 
     /// <summary>

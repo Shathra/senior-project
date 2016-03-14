@@ -62,7 +62,7 @@ public class Player : MonoBehaviour {
 				direction = false;
 			float speed = (5 - crouching * 2.5f) * (direction ? 1 : -1) * (onLadder ? 0.5f : 1.0f);
 			transform.localScale = new Vector3((direction ? 1 : -1) * Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
-			transform.position += speed * Vector3.right;
+			//transform.position += speed * Vector3.right;
 			body.velocity = new Vector2(speed, body.velocity.y);
 			anim.SetFloat("Movement", 1);
 		} else {
