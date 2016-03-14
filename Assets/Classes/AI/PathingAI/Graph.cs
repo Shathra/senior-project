@@ -53,20 +53,109 @@ public class Graph
         List<Node> visited = new List<Node>();
         List<Node> unvisited = new List<Node>();
         List<Node> nodes = graph.nodes;
-        int no_nodes = nodes.Count;
-        int no_guardians = searchers.Count;
-        int[] node_marks = new int[no_nodes];
-        int[] guardian_marks = new int[no_guardians];
-        float[] guardian_times = new float[no_guardians];
+        int noNodes = nodes.Count;
+        int noGuardians = searchers.Count;
+        int[] nodeMarks = new int[noNodes];
+        int[] guardianMarks = new int[noGuardians];
+        float[] guardianTimes = new float[noGuardians];
+        List<Node> guardianCurrentNodes = new List<Node>();
+
+        float[,] distance = graph.CalculateShortestDistanceOfEachPair();
+        float[,] distance_searcher = new float[noGuardians, noNodes];
+        for( int i = 0; i < searchers.Count; i++) {
+
+            int index = graph.nodes.IndexOf(searchers[i]);
+            for (int j = 0; j < noNodes; j++)
+                distance_searcher[i, j] = distance[index, j];
+        }
 
         List<List<Node>> result = new List<List<Node>>();
 
-        for( int i = 0; i < no_guardians; i++) {
+        for( int i = 0; i < noNodes; i++) {
+
+            unvisited.Add(graph.nodes[i]);
+            nodeMarks[i] = 0;
+        }
+
+        for( int i = 0; i < noGuardians; i++) {
+
+            guardianMarks[i] = 0;
+            guardianTimes[i] = 0;
+            guardianCurrentNodes.Add(searchers[i]);
+            result[i] = new List<Node>();
+        }
+
+        for( int i = 0; i < noGuardians; i++) {
 
             //Find fartest unvisited node to guardians
+            if (unvisited.Count == 0)
+                break;
+
+            Node farNode = unvisited[0];
+            int index = graph.nodes.IndexOf(farNode);
+            IntFloatPair guardianDistancePair = Utils.MinColumn(distance_searcher, index);
+            for ( int j = 1; j < unvisited.Count; j++) {
+
+                Node current_node = unvisited[j];
+                index = graph.nodes.IndexOf(current_node);
+
+                IntFloatPair currentPair = Utils.MinColumn(distance_searcher, index);
+                if( currentPair.Value >guardianDistancePair.Value) {
+
+                    farNode = current_node;
+                    guardianDistancePair = currentPair;
+                }
+            }
+
+            //Fartest node found, send closest guardian
+            List<Node> path = null;
+            path = graph.ShortestPath(searchers[guardianDistancePair.Index], farNode);
+            result[guardianDistancePair.Index] = path;
+            for (int j = 0; j < noNodes; j++)
+                distance_searcher[guardianDistancePair.Index, j] = Single.PositiveInfinity;
+            for( int j = 0; j < path.Count; j++) {
+
+                if( unvisited.Contains( path[j])) {
+
+                    unvisited.Remove(path[j]);
+                    visited.Add(path[j]);
+                }
+            }
+            guardianTimes[guardianDistancePair.Index] = guardianDistancePair.Value;
+            guardianCurrentNodes[guardianDistancePair.Index] = farNode;
         }
 
         //While there is a unvisited node in the graph
+        while( unvisited.Count != 0) {
+
+            //Find guy who finish its job earliest and assign this node to him
+            int freeGuard = 0;
+            float freeTime = guardianTimes[0];
+            for ( int i = 1; i < noGuardians; i++) {
+
+                if( freeTime > guardianTimes[i]) {
+
+                    freeGuard = i;
+                    freeTime = guardianTimes[i];
+                }
+            }
+
+            //Free guy found, assign this node to him.
+            float guardianToNodeDistance = distance[graph.nodes.IndexOf(guardianCurrentNodes[freeGuard]), graph.nodes.IndexOf( unvisited[0])];
+            List<Node> path = graph.ShortestPath(guardianCurrentNodes[freeGuard], unvisited[0]);
+            path.RemoveAt(0);
+            result[freeGuard].AddRange(path);
+            for (int j = 0; j < path.Count; j++) {
+
+                if (unvisited.Contains(path[j])) {
+
+                    unvisited.Remove(path[j]);
+                    visited.Add(path[j]);
+                }
+            }
+            guardianTimes[freeGuard] += guardianToNodeDistance;
+            guardianCurrentNodes[freeGuard] = unvisited[0];
+        }
 
         return result;
     }
