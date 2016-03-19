@@ -10,10 +10,10 @@ using UnityEngine;
 /// </summary>
 class Initializer : MonoBehaviour {
 
-    public void Start() {
+    public void Awake() {
 
         GameController.Init();
         MLLogger.Init();
-
+        MLLevelStats.Init();
     }
 }

@@ -46,16 +46,13 @@ public class Guardian : Enemy, ISpotable, IApproachable {
 
 	public GameObject exclamationPrefab;
 
-	public new void Awake() {
-		base.Awake();
-		this.moveSpeed = MLLevelStats.GetStat(LevelStat.GuardianSpeed);
-		hitbox = GetComponent<BoxCollider2D>();
-		body = GetComponent<Rigidbody2D>();
-		onLadder = false;
-        gameObject.layer = 11;                          //11 is Guardian Layer
-    }
     public void Start()
     {
+        this.moveSpeed = MLLevelStats.GetStat(LevelStat.GuardianSpeed);
+        hitbox = GetComponent<BoxCollider2D>();
+        body = GetComponent<Rigidbody2D>();
+        onLadder = false;
+        gameObject.layer = 11;                          //11 is Guardian Layer
         Idle(patrolType);
     }
 	public void Approach(Vector2 target) {

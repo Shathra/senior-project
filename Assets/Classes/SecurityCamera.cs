@@ -10,7 +10,7 @@ public class SecurityCamera : Enemy {
 
 	public float visionAngle { get; set; }
 
-	private SecurityCameraVision vision;
+	//private SecurityCameraVision vision;
 	private MeshFilter visionMesh;
 	private PolygonCollider2D visionCollider;
 
@@ -19,9 +19,9 @@ public class SecurityCamera : Enemy {
 	void Start() {
 		direction = false;
 		visionAngle = 30;
-		vision = GetComponentInChildren<SecurityCameraVision>();
-		visionMesh = vision.gameObject.GetComponent<MeshFilter>();
-		visionCollider = vision.gameObject.GetComponent<PolygonCollider2D>();
+		//vision = GetComponentInChildren<SecurityCameraVision>();
+		//visionMesh = vision.gameObject.GetComponent<MeshFilter>();
+		//visionCollider = vision.gameObject.GetComponent<PolygonCollider2D>();
 		GenerateVision();
 	}
 

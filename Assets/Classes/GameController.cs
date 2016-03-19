@@ -19,7 +19,8 @@ class GameController {
     public static void GameOver() {
 
         float levelTime = (float)currentLevel.GetElapsedTime();
-        MLLogger.SetStat(LevelStat.LevelTime, levelTime);
+        MLLogger.SetStat(PlayStat.LevelTime, levelTime);
+        MLCommunicator.writeMLTrainFile();
     }
     
     public static void GameWon()
