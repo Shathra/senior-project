@@ -31,6 +31,11 @@ public class AIController {
         return manager.GetPlayer();
     }
 
+    public static List<Enemy> GetEnemies() {
+
+        return manager.GetEnemies();
+    }
+
     public static void GameOver() {
 
         //TODO: Implement it
