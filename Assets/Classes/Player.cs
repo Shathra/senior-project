@@ -135,7 +135,7 @@ public class Player : MonoBehaviour {
     }
     void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.gameObject.GetComponent<Vision>() != null)
+        if (col.gameObject.GetComponent<Vision>() != null || col.gameObject.GetComponent<SecurityCameraVision>() != null)
         {
             AIController.lastKnownPosition = midPoint;
             playerGhost.transform.position = midPoint;
@@ -144,7 +144,7 @@ public class Player : MonoBehaviour {
     }
     void OnTriggerStay2D(Collider2D col)
     {
-        if (col.gameObject.GetComponent<Vision>() != null)
+        if (col.gameObject.GetComponent<Vision>() != null || col.gameObject.GetComponent<SecurityCameraVision>() != null)
         {
             AIController.lastKnownPosition = midPoint;
         }
@@ -155,7 +155,7 @@ public class Player : MonoBehaviour {
     }
     void OnTriggerExit2D(Collider2D col)
     {
-        if (col.gameObject.GetComponent<Vision>() != null)
+        if (col.gameObject.GetComponent<Vision>() != null || col.gameObject.GetComponent<SecurityCameraVision>() != null)
         {
             AIController.lastKnownPosition = midPoint;
             playerGhost.transform.position = midPoint;
