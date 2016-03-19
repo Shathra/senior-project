@@ -7,18 +7,18 @@ using UnityEngine;
 public class AIManager : MonoBehaviour{
 
     protected Graph levelGraph;
-    protected List<Enemy> enemies;
+    protected List<Guardian> guardians;
     protected Player player;
 
     public void Awake() {
 
         AIController.Init(this);
         levelGraph = new Graph();
-        enemies = new List<Enemy>();
+        guardians = new List<Guardian>();
 
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         contructGraph();
-        setEnemies();
+        setGuardians();
     }
 
     internal Player GetPlayer() {
@@ -45,11 +45,11 @@ public class AIManager : MonoBehaviour{
         }
     }
 
-    protected void setEnemies() {
+    protected void setGuardians() {
 
-        Transform enemiesObj = GameObject.Find("Enemies").transform;
-        foreach (Transform child in enemiesObj)
-            enemies.Add(child.GetComponent<Enemy>());
+        Transform guardiansObj = GameObject.Find("Guardians").transform;
+        foreach (Transform child in guardiansObj)
+            guardians.Add(child.GetComponent<Guardian>());
     }
 
     protected void contructGraph()
@@ -79,8 +79,8 @@ public class AIManager : MonoBehaviour{
         return levelGraph.ShortestPath(source, target);
     }
 
-    public List<Enemy> GetEnemies() {
+    public List<Guardian> GetGuardians() {
 
-        return enemies;
+        return guardians;
     }
 }
