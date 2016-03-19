@@ -6,11 +6,23 @@ using System.Collections;
 /// </summary>
 public class SecurityCamera : Enemy {
 	private const float ROTATION_AMOUNT = 85;
+	public const float RANGE = 10;
+
+	public float visionAngle { get; set; }
+
+	private SecurityCameraVision vision;
+	private MeshFilter visionMesh;
+	private PolygonCollider2D visionCollider;
 
 	private bool direction;
 
 	void Start() {
 		direction = false;
+		visionAngle = 30;
+		vision = GetComponentInChildren<SecurityCameraVision>();
+		visionMesh = vision.gameObject.GetComponent<MeshFilter>();
+		visionCollider = vision.gameObject.GetComponent<PolygonCollider2D>();
+		GenerateVision();
 	}
 
 	void FixedUpdate() {
@@ -20,5 +32,26 @@ public class SecurityCamera : Enemy {
 			direction = false;
 		else if (Mathf.Abs(transform.eulerAngles.z - (180 + ROTATION_AMOUNT)) < 1)
 			direction = true;
+	}
+
+
+	public void GenerateVision() {
+		Vector2[] points = new Vector2[3];
+		points[0] = Vector2.zero;
+		float x = Mathf.Sin((visionAngle / 2) * Mathf.Deg2Rad) * RANGE;
+		float y = Mathf.Cos((visionAngle / 2) * Mathf.Deg2Rad) * RANGE; ;
+		points[1] = new Vector2(-x, y);
+		points[2] = new Vector2(x, y);
+		visionCollider.points = points;
+		Mesh mesh = new Mesh();
+		mesh.vertices = new Vector3[] { (Vector3)points[0], (Vector3)points[1], (Vector3)points[2] };
+		mesh.triangles = new int[] { 0, 1, 2 };
+		mesh.RecalculateNormals();
+		mesh.RecalculateBounds();
+		visionMesh.mesh = mesh;
+	}
+
+	public void Spot(Player player) {
+
 	}
 }
