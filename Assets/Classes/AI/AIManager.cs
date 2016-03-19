@@ -69,6 +69,11 @@ public class AIManager : MonoBehaviour{
         return levelGraph.GetNearestNode( pos);
     }
 
+    public Graph GetGraph() {
+
+        return levelGraph;
+    }
+
     public List<Node> GetPath( Vector2 source, Vector2 target) {
 
         return levelGraph.ShortestPath(source, target);

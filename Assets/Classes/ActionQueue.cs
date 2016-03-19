@@ -54,10 +54,10 @@ public class ActionQueue {
             }
         }
 
-        Debug.Log("Action is added" + action);
-        Debug.Log("heap[0]" + heap[0]);
-        if( heap.Count > 1)
-            Debug.Log("heap[1]" + heap[1]);
+       // Debug.Log("Action is added" + action);
+       // Debug.Log("heap[0]" + heap[0]);
+        //if( heap.Count > 1)
+        //    Debug.Log("heap[1]" + heap[1]);
     }
 
     /// <summary>

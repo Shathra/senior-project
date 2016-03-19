@@ -82,7 +82,7 @@ public class Graph
             guardianMarks[i] = 0;
             guardianTimes[i] = 0;
             guardianCurrentNodes.Add(searchers[i]);
-            result[i] = new List<Node>();
+            result.Add( new List<Node>());
         }
 
         for( int i = 0; i < noGuardians; i++) {
@@ -145,6 +145,7 @@ public class Graph
             List<Node> path = graph.ShortestPath(guardianCurrentNodes[freeGuard], unvisited[0]);
             path.RemoveAt(0);
             result[freeGuard].AddRange(path);
+            Node tempNode = unvisited[0];
             for (int j = 0; j < path.Count; j++) {
 
                 if (unvisited.Contains(path[j])) {
@@ -154,7 +155,7 @@ public class Graph
                 }
             }
             guardianTimes[freeGuard] += guardianToNodeDistance;
-            guardianCurrentNodes[freeGuard] = unvisited[0];
+            guardianCurrentNodes[freeGuard] = tempNode;
         }
 
         return result;
@@ -298,7 +299,6 @@ public class Graph
 
         path.Reverse();
 
-        Debug.Log(path.Count);
         return path;
     }
 
