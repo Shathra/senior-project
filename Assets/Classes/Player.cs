@@ -9,6 +9,7 @@ public class Player : MonoBehaviour {
 	private BoxCollider2D hitbox;
 	private Rigidbody2D body;
 	private bool _onLadder;
+    Vector2 lastPosition;       //MLLogger
 
     public bool carriesTarget;
 
@@ -52,7 +53,12 @@ public class Player : MonoBehaviour {
 	}
 
 	void Update() {
-		float crouching = anim.GetFloat("Crouching");
+        //MLLogger distance travelled
+        MLLogger.IncrementStat(PlayStat.PlayerTravelDistance, Vector2.Distance(transform.position, lastPosition));
+        lastPosition = transform.position;
+        //MLLogger Stuff End
+
+        float crouching = anim.GetFloat("Crouching");
 		bool ground = false;
 		Vector2 hitboxBottom = new Vector2(hitbox.bounds.min.x, hitbox.bounds.min.y);
 		RaycastHit2D[] result = new RaycastHit2D[1];
