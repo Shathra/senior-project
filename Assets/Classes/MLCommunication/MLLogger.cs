@@ -3,9 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-public enum LevelStat {
+public enum PlayStat {
 
-    LevelNo, PlayerId, LevelTime, NumberOfTrials, PlayerTravelDistance, EstimatedDifficulty
+    LevelNo, LevelTime, NumberOfTrials, PlayerTravelDistance, Result
+}
+
+public enum SurveyStat {
+
+    PlayerId, EstimatedDifficulty
 }
 
 /// <summary>
@@ -13,13 +18,18 @@ public enum LevelStat {
 /// </summary>
 public class MLLogger {
 
-    protected static Dictionary<LevelStat, float> stats;
+    protected static Dictionary<PlayStat, float> playStats;
+    protected static Dictionary<SurveyStat, float> surveyStats;
 
     public static void Init() {
 
-        stats = new Dictionary<LevelStat, float>();
-        foreach (LevelStat val in Enum.GetValues(typeof(LevelStat))) {
-            stats.Add(val, Constants.INVALID_STAT);
+        playStats = new Dictionary<PlayStat, float>();
+        foreach (PlayStat val in Enum.GetValues(typeof(PlayStat))) {
+            playStats.Add(val, Constants.INVALID_STAT);
+        }
+        surveyStats = new Dictionary<SurveyStat, float>();
+        foreach (SurveyStat val in Enum.GetValues(typeof(SurveyStat))) {
+            surveyStats.Add(val, Constants.INVALID_STAT);
         }
     }
 
@@ -28,9 +38,9 @@ public class MLLogger {
     /// </summary>
     /// <param name="stat">LevelStat value</param>
     /// <param name="value">float value</param>
-    public static void IncrementStat( LevelStat stat, float value) {
+    public static void IncrementStat( PlayStat stat, float value) {
 
-        stats[stat] += value;
+        playStats[stat] += value;
     }
 
     /// <summary>
@@ -38,13 +48,48 @@ public class MLLogger {
     /// </summary>
     /// <param name="stat">LevelStat value</param>
     /// <param name="value">float value</param>
-    public static void DecrementStat( LevelStat stat, float value) {
+    public static void DecrementStat( PlayStat stat, float value) {
 
-        stats[stat] -= value;
+        playStats[stat] -= value;
     }
 
-    public static void SetStat( LevelStat stat, float value) {
+    public static void SetStat( PlayStat stat, float value) {
 
-        stats[stat] = value;
+        playStats[stat] = value;
+    }
+
+    /// <summary>
+    /// Note:Make sure stat value is set before increment or decrement
+    /// </summary>
+    /// <param name="stat">SurveyStat value</param>
+    /// <param name="value">float value</param>
+    public static void IncrementStat(SurveyStat stat, float value) {
+
+        surveyStats[stat] += value;
+    }
+
+    /// <summary>
+    /// Note:Make sure stat value is set before increment or decrement
+    /// </summary>
+    /// <param name="stat">SurveyStat value</param>
+    /// <param name="value">float value</param>
+    public static void DecrementStat(SurveyStat stat, float value) {
+
+        surveyStats[stat] -= value;
+    }
+
+    public static void SetStat(SurveyStat stat, float value) {
+
+        surveyStats[stat] = value;
+    }
+
+    public static Dictionary<PlayStat, float> GetPlayStats() {
+
+        return playStats;
+    }
+
+    public static Dictionary<SurveyStat, float> GetSurveyStats() {
+
+        return surveyStats;
     }
 }

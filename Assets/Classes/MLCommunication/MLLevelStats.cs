@@ -1,41 +1,55 @@
 ﻿
+using System;
 using System.Collections.Generic;
+
+public enum LevelStat {
+
+    GuardianSpeed, GuardianTurnRate, GuardianWeaponDamage, GuardianMissileSpeed,
+    GuardianAwarenessRange, GuardianWeaponAccuracy, GuardianReactionTime, GuardianAlertInterval, TurretAngularSpeed, TurretWeaponAccuracy,
+    TurretMissleSpeed, CameraAngularSpeed, CameraAwarenessRange
+}
 
 /// <summary>
 /// Data class for level statistics
 /// </summary>
 public class MLLevelStats {
 
-    //Level Information
-    public static float GuardianSpeed           = 1.0f;
-    public static float GuardianTurnRate        = 1.0f;
-    public static float GuardianWeaponDamage    = 1.0f;
-    public static float GuardianMissileSpeed    = 1.0f;
-    public static float GuardianAwarenessRange  = 1.0f;
-    public static float GuardianWeaponAccuracy  = 1.0f;
-    public static float GuardianReactionTime    = 1.0f;
-    public static float GuardianAlertInterval   = 1.0f;
-    public static float TurretAngularSpeed      = 1.0f;
-    public static float TurretWeaponAccuracy    = 1.0f;
-    public static float TurretMissleSpeed       = 1.0f;
-    public static float CameraAngularSpeed      = 1.0f;
-    public static float CameraAwarenessRange    = 1.0f;
-    
-    /// <summary>
-    /// Initializes an empty object
-    /// </summary>
-    public MLLevelStats()
-    {
-        //TODO:Implement
+    public static Dictionary<LevelStat, float> levelStats;
+
+    public static void Init() {
+
+        levelStats = new Dictionary<LevelStat, float>();
+        foreach (LevelStat val in Enum.GetValues(typeof(LevelStat))) {
+            levelStats.Add(val, Constants.INVALID_STAT);
+        }
+
+        levelStats[LevelStat.GuardianSpeed] = 1.0f;
+        levelStats[LevelStat.GuardianTurnRate] = 1.0f;
+        levelStats[LevelStat.GuardianWeaponDamage] = 1.0f;
+        levelStats[LevelStat.GuardianMissileSpeed] = 1.0f;
+        levelStats[LevelStat.GuardianAwarenessRange] = 1.0f;
+        levelStats[LevelStat.GuardianWeaponAccuracy] = 1.0f;
+        levelStats[LevelStat.GuardianReactionTime] = 1.0f;
+        levelStats[LevelStat.GuardianAlertInterval] = 1.0f;
+        levelStats[LevelStat.TurretAngularSpeed] = 1.0f;
+        levelStats[LevelStat.TurretWeaponAccuracy] = 1.0f;
+        levelStats[LevelStat.TurretMissleSpeed] = 1.0f;
+        levelStats[LevelStat.CameraAngularSpeed] = 1.0f;
+        levelStats[LevelStat.CameraAwarenessRange] = 1.0f;
     }
 
-    /// <summary>
-    /// Convert MLLevelStats to JSON
-    /// </summary>
-    /// <returns>Return json as string</returns>
-    public string getJson()
-    {
-        //TODO:Implement
-        return null;
+    public static void SetStat(LevelStat stat, float value) {
+
+        levelStats[stat] = value;
+    }
+
+    public static float GetStat(LevelStat stat) {
+
+        return levelStats[stat];
+    }
+
+    public static Dictionary<LevelStat, float> GetStats() {
+
+        return levelStats;
     }
 }

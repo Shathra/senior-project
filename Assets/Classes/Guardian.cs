@@ -48,7 +48,7 @@ public class Guardian : Enemy, ISpotable, IApproachable {
 
 	public new void Awake() {
 		base.Awake();
-		this.moveSpeed = MLLevelStats.GuardianSpeed;
+		this.moveSpeed = MLLevelStats.GetStat(LevelStat.GuardianSpeed);
 		hitbox = GetComponent<BoxCollider2D>();
 		body = GetComponent<Rigidbody2D>();
 		onLadder = false;

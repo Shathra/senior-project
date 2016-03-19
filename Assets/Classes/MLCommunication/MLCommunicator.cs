@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
+using UnityEngine;
 
 /// <summary>
 /// Class required to communicate with machine learning module.
@@ -21,9 +23,46 @@ public class MLCommunicator {
     /// writes level stats to a file to be used by machine learning module
     /// </summary>
     /// <param name="levelStats">LevelStats of current level</param>
-    public static void writeMLFile( MLLevelStats levelStats) {
+    public static void writeMLTrainFile() {
 
-        //TODO:Implement
-        return;
+        string path = Application.persistentDataPath + "/" + "train_" + DateTime.Now.ToString("yy_mm_dd_hh_mm_ss") + ".in";
+        using (StreamWriter writetext = new StreamWriter( path)) {
+
+            foreach (KeyValuePair<LevelStat, float> entry in MLLevelStats.GetStats()) {
+
+                writetext.WriteLine(entry.Value.ToString() + ":" + entry.Key + ";");
+            }
+
+            foreach (KeyValuePair<PlayStat, float> entry in MLLogger.GetPlayStats()) {
+
+                writetext.WriteLine(entry.Value.ToString() + ":" + entry.Key + ";");
+            }
+
+            foreach (KeyValuePair<SurveyStat, float> entry in MLLogger.GetSurveyStats()) {
+
+                writetext.WriteLine(entry.Value.ToString() + ":" + entry.Key + ";");
+            }
+        }
+    }
+
+    /// <summary>
+    /// writes level stats to a file to be used by machine learning module
+    /// </summary>
+    /// <param name="levelStats">LevelStats of current level</param>
+    public static void writeMLPredictFile() {
+
+        string path = Application.persistentDataPath + "/" + "predict_" + DateTime.Now.ToString("yy_mm_dd_hh_mm_ss") + ".in";
+        using (StreamWriter writetext = new StreamWriter(path)) {
+
+            foreach (KeyValuePair<LevelStat, float> entry in MLLevelStats.GetStats()) {
+
+                writetext.WriteLine(entry.Value.ToString() + ":" + entry.Key + ";");
+            }
+
+            foreach (KeyValuePair<PlayStat, float> entry in MLLogger.GetPlayStats()) {
+
+                writetext.WriteLine(entry.Value.ToString() + ":" + entry.Key + ";");
+            }
+        }
     }
 }
