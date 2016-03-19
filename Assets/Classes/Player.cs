@@ -9,7 +9,10 @@ public class Player : MonoBehaviour {
 	private BoxCollider2D hitbox;
 	private Rigidbody2D body;
 	private bool _onLadder;
-	private bool onLadder {
+
+    public bool carriesTarget;
+
+    private bool onLadder {
 		get {
 			return _onLadder;
 		}
