@@ -916,7 +916,7 @@ GameObject:
   - 23: {fileID: 349334765}
   - 61: {fileID: 349334764}
   m_Layer: 9
-  m_Name: ladder (1)
+  m_Name: ladder 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -932,8 +932,8 @@ Transform:
   m_LocalPosition: {x: -10.32, y: 3.66, z: 0.2}
   m_LocalScale: {x: 1, y: 4.41, z: 1}
   m_Children: []
-  m_Father: {fileID: 357517538}
-  m_RootOrder: 6
+  m_Father: {fileID: 1143078836}
+  m_RootOrder: 1
 --- !u!61 &349334764
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1007,17 +1007,9 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1477899191}
-  - {fileID: 710735227}
-  - {fileID: 359839374}
-  - {fileID: 2144587239}
-  - {fileID: 399837338}
-  - {fileID: 2016567103}
-  - {fileID: 349334763}
-  - {fileID: 575251030}
-  - {fileID: 1144936228}
-  - {fileID: 1860311678}
   - {fileID: 1805981526}
+  - {fileID: 1326517153}
+  - {fileID: 1143078836}
   m_Father: {fileID: 0}
   m_RootOrder: 5
 --- !u!114 &357517539
@@ -1070,7 +1062,7 @@ GameObject:
   - 23: {fileID: 359839376}
   - 61: {fileID: 359839375}
   m_Layer: 8
-  m_Name: Ground (1)
+  m_Name: Ground 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1086,7 +1078,7 @@ Transform:
   m_LocalPosition: {x: 8.67, y: 7.17, z: 0}
   m_LocalScale: {x: 8.554607, y: 0.27500042, z: 1}
   m_Children: []
-  m_Father: {fileID: 357517538}
+  m_Father: {fileID: 1326517153}
   m_RootOrder: 2
 --- !u!61 &359839375
 BoxCollider2D:
@@ -1157,7 +1149,7 @@ GameObject:
   - 23: {fileID: 399837340}
   - 61: {fileID: 399837339}
   m_Layer: 9
-  m_Name: ladder
+  m_Name: ladder 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1173,8 +1165,8 @@ Transform:
   m_LocalPosition: {x: -1.08, y: 3.66, z: 0.2}
   m_LocalScale: {x: 1, y: 4.41, z: 1}
   m_Children: []
-  m_Father: {fileID: 357517538}
-  m_RootOrder: 4
+  m_Father: {fileID: 1143078836}
+  m_RootOrder: 0
 --- !u!61 &399837339
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1294,7 +1286,7 @@ GameObject:
   - 23: {fileID: 575251032}
   - 61: {fileID: 575251031}
   m_Layer: 8
-  m_Name: Ground 2 (2)
+  m_Name: Ground 6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1310,8 +1302,8 @@ Transform:
   m_LocalPosition: {x: -13.66, y: 4.19, z: 0}
   m_LocalScale: {x: 5.9187484, y: 0.25000003, z: 1}
   m_Children: []
-  m_Father: {fileID: 357517538}
-  m_RootOrder: 7
+  m_Father: {fileID: 1326517153}
+  m_RootOrder: 5
 --- !u!61 &575251031
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1641,7 +1633,7 @@ Transform:
   m_LocalPosition: {x: -5.66, y: 4.19, z: 0}
   m_LocalScale: {x: 8.392423, y: 0.25000003, z: 1}
   m_Children: []
-  m_Father: {fileID: 357517538}
+  m_Father: {fileID: 1326517153}
   m_RootOrder: 1
 --- !u!61 &710735228
 BoxCollider2D:
@@ -2674,6 +2666,37 @@ Transform:
 Transform:
   m_PrefabParentObject: {fileID: 405052, guid: b9a465a6690b21e4191aeb31346eaa74, type: 2}
   m_PrefabInternal: {fileID: 1213044648}
+--- !u!1 &1143078835
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1143078836}
+  m_Layer: 8
+  m_Name: Ladders
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1143078836
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1143078835}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 399837338}
+  - {fileID: 349334763}
+  - {fileID: 1144936228}
+  - {fileID: 1860311678}
+  m_Father: {fileID: 357517538}
+  m_RootOrder: 2
 --- !u!1 &1144936227
 GameObject:
   m_ObjectHideFlags: 0
@@ -2686,7 +2709,7 @@ GameObject:
   - 23: {fileID: 1144936230}
   - 61: {fileID: 1144936229}
   m_Layer: 9
-  m_Name: ladder (2)
+  m_Name: ladder 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2702,8 +2725,8 @@ Transform:
   m_LocalPosition: {x: 4.07, y: 6.38, z: 0.2}
   m_LocalScale: {x: 1, y: 4.41, z: 1}
   m_Children: []
-  m_Father: {fileID: 357517538}
-  m_RootOrder: 8
+  m_Father: {fileID: 1143078836}
+  m_RootOrder: 2
 --- !u!61 &1144936229
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3004,6 +3027,39 @@ Transform:
   - {fileID: 670940551}
   m_Father: {fileID: 1946442388}
   m_RootOrder: 0
+--- !u!1 &1326517152
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1326517153}
+  m_Layer: 8
+  m_Name: Grounds
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1326517153
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1326517152}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1477899191}
+  - {fileID: 710735227}
+  - {fileID: 359839374}
+  - {fileID: 2144587239}
+  - {fileID: 2016567103}
+  - {fileID: 575251030}
+  m_Father: {fileID: 357517538}
+  m_RootOrder: 1
 --- !u!1 &1340740345
 GameObject:
   m_ObjectHideFlags: 0
@@ -3285,7 +3341,7 @@ Transform:
   m_LocalPosition: {x: 11.36, y: 4.22, z: 0}
   m_LocalScale: {x: 24.202126, y: 0.17500016, z: 1}
   m_Children: []
-  m_Father: {fileID: 357517538}
+  m_Father: {fileID: 1326517153}
   m_RootOrder: 0
 --- !u!61 &1477899192
 BoxCollider2D:
@@ -4092,7 +4148,7 @@ Transform:
   - {fileID: 1907216861}
   - {fileID: 2003134018}
   m_Father: {fileID: 357517538}
-  m_RootOrder: 10
+  m_RootOrder: 0
 --- !u!1 &1824187700
 GameObject:
   m_ObjectHideFlags: 0
@@ -4165,7 +4221,7 @@ GameObject:
   - 23: {fileID: 1860311680}
   - 61: {fileID: 1860311679}
   m_Layer: 9
-  m_Name: ladder (3)
+  m_Name: ladder 4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4181,8 +4237,8 @@ Transform:
   m_LocalPosition: {x: 13.31, y: 6.38, z: 0.2}
   m_LocalScale: {x: 1, y: 4.41, z: 1}
   m_Children: []
-  m_Father: {fileID: 357517538}
-  m_RootOrder: 9
+  m_Father: {fileID: 1143078836}
+  m_RootOrder: 3
 --- !u!61 &1860311679
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4358,6 +4414,10 @@ Prefab:
     - target: {fileID: 161352, guid: d7b0752a283d6914192cbc47169cdc5d, type: 2}
       propertyPath: m_TagString
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 5058074, guid: d7b0752a283d6914192cbc47169cdc5d, type: 2}
+      propertyPath: m_Constraints
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d7b0752a283d6914192cbc47169cdc5d, type: 2}
@@ -4735,7 +4795,7 @@ GameObject:
   - 23: {fileID: 2016567105}
   - 61: {fileID: 2016567104}
   m_Layer: 8
-  m_Name: Ground 2 (1)
+  m_Name: Ground 5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4751,8 +4811,8 @@ Transform:
   m_LocalPosition: {x: -16.33, y: 6.07, z: 0}
   m_LocalScale: {x: 4.792493, y: 0.25000003, z: 1}
   m_Children: []
-  m_Father: {fileID: 357517538}
-  m_RootOrder: 5
+  m_Father: {fileID: 1326517153}
+  m_RootOrder: 4
 --- !u!61 &2016567104
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5081,7 +5141,7 @@ GameObject:
   - 23: {fileID: 2144587241}
   - 61: {fileID: 2144587240}
   m_Layer: 8
-  m_Name: Ground (2)
+  m_Name: Ground 4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5097,7 +5157,7 @@ Transform:
   m_LocalPosition: {x: -5.83, y: 1.43, z: 0}
   m_LocalScale: {x: 11.915339, y: 0.27500042, z: 1}
   m_Children: []
-  m_Father: {fileID: 357517538}
+  m_Father: {fileID: 1326517153}
   m_RootOrder: 3
 --- !u!61 &2144587240
 BoxCollider2D:
