@@ -2919,6 +2919,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rockPrefab: {fileID: 131752, guid: af9b97566fa7cc94992250c3a53d3787, type: 2}
+  playerGhost: {fileID: 0}
+  carriesTarget: 0
 --- !u!124 &12489836
 Behaviour:
   m_ObjectHideFlags: 1

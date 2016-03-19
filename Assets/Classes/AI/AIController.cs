@@ -35,4 +35,9 @@ public class AIController {
 
         return manager.GetEnemies();
     }
+
+    public static Graph GetGraph() {
+
+        return manager.GetGraph();
+    }
 }
