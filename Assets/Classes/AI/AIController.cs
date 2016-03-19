@@ -8,6 +8,8 @@ public class AIController {
 
     protected static AIManager manager;
 
+    public static Vector2 lastKnownPosition;
+
     public static void Init( AIManager initManager) {
 
         manager = initManager;
