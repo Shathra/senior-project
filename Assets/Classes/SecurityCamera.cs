@@ -1,16 +1,17 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 /// <summary>
 /// Immobile unit which alerts other enemy in a range when it sees a player
 /// </summary>
-public class SecurityCamera : Enemy {
+public class SecurityCamera : Enemy, ISpotable {
     private const float ROTATION_AMOUNT = 85;
     public const float RANGE = 10;
 
     public float visionAngle { get; set; }
 
-    private SecurityCameraVision vision;
+    private Vision vision;
     private MeshFilter visionMesh;
     private PolygonCollider2D visionCollider;
 
@@ -19,10 +20,11 @@ public class SecurityCamera : Enemy {
     void Start() {
         direction = false;
         visionAngle = 30;
-        vision = GetComponentInChildren<SecurityCameraVision>();
+        vision = GetComponentInChildren<Vision>();
+		vision.spotable = this;
         visionMesh = vision.gameObject.GetComponent<MeshFilter>();
         visionCollider = vision.gameObject.GetComponent<PolygonCollider2D>();
-        GenerateVision();
+		GenerateVision();
     }
 
     void FixedUpdate() {
@@ -71,4 +73,8 @@ public class SecurityCamera : Enemy {
         }
         return enemy;
     }
+
+	public void Spot(GameObject obj) {
+		
+	}
 }

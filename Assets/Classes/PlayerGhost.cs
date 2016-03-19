@@ -2,10 +2,11 @@
 using System.Collections;
 
 public class PlayerGhost : MonoBehaviour {
+	public static PlayerGhost instance { get; private set; }
 
 	// Use this for initialization
 	void Start () {
-	
+		PlayerGhost.instance = this;
 	}
 	
 	// Update is called once per frame

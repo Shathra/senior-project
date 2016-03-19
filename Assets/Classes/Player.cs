@@ -2,6 +2,8 @@
 using System.Collections;
 
 public class Player : MonoBehaviour {
+	public static Player instance { get; private set; }
+
 	public GameObject rockPrefab;
     public GameObject playerGhost;
 
@@ -26,12 +28,24 @@ public class Player : MonoBehaviour {
 	}
 
 	void Start() {
-
+		Player.instance = this;
         playerGhost = GameObject.Find("PlayerGhost");
         anim = GetComponent<Animator>();
 		hitbox = GetComponent<BoxCollider2D>();
 		body = GetComponent<Rigidbody2D>();
 		onLadder = false;
+	}
+
+	public Vector2[] keyPoints {
+		get {
+			Vector2[] points = new Vector2[5];
+			points[0] = midPoint;
+			points[1] = new Vector2(hitbox.bounds.min.x, hitbox.bounds.min.y);
+			points[2] = new Vector2(hitbox.bounds.min.x, hitbox.bounds.max.y);
+			points[3] = new Vector2(hitbox.bounds.max.x, hitbox.bounds.max.y);
+			points[4] = new Vector2(hitbox.bounds.max.x, hitbox.bounds.min.y);
+			return points;
+		}
 	}
 
 	public Vector2 topPoint {
@@ -138,34 +152,5 @@ public class Player : MonoBehaviour {
 		float distance = 0.25f;
 		Vector2 direction = transform.localScale.x > 0 ? Vector2.right : -Vector2.right;
 		Debug.DrawLine(origin, origin + direction * distance, Color.red, 1.0f);
-    }
-    void OnTriggerEnter2D(Collider2D col)
-    {
-        if (col.gameObject.GetComponent<Vision>() != null || col.gameObject.GetComponent<SecurityCameraVision>() != null)
-        {
-            AIController.lastKnownPosition = midPoint;
-            playerGhost.transform.position = midPoint;
-            playerGhost.transform.GetChild(0).gameObject.SetActive(false);   //set Model to false
-        }
-    }
-    void OnTriggerStay2D(Collider2D col)
-    {
-        if (col.gameObject.GetComponent<Vision>() != null || col.gameObject.GetComponent<SecurityCameraVision>() != null)
-        {
-            AIController.lastKnownPosition = midPoint;
-        }
-        if(col.gameObject.GetComponent<Guardian>() != null)
-        {
-            GameController.GameLost();
-        }
-    }
-    void OnTriggerExit2D(Collider2D col)
-    {
-        if (col.gameObject.GetComponent<Vision>() != null || col.gameObject.GetComponent<SecurityCameraVision>() != null)
-        {
-            AIController.lastKnownPosition = midPoint;
-            playerGhost.transform.position = midPoint;
-            playerGhost.transform.GetChild(0).gameObject.SetActive(true);   //set Model to true
-        }
     }
 }
