@@ -35,9 +35,4 @@ public class AIController {
 
         return manager.GetEnemies();
     }
-
-    public static void GameOver() {
-
-        //TODO: Implement it
-    }
 }

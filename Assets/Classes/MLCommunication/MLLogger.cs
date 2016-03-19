@@ -5,9 +5,7 @@ using System.Text;
 
 public enum LevelStat {
 
-    //TODO:Specify LevelStats
-    LevelTime, NumberOfTrials, PlayerTravelDistance, EstimatedDifficulty, GuardianSpeed,
-    GuardianAwarenessRange, GuardianReactionTime
+    LevelNo, PlayerId, LevelTime, NumberOfTrials, PlayerTravelDistance, EstimatedDifficulty
 }
 
 /// <summary>
@@ -15,21 +13,38 @@ public enum LevelStat {
 /// </summary>
 public class MLLogger {
 
-    protected static Dictionary<LevelStat, float> stats = new Dictionary<LevelStat, float>();
-    //protected static MLLevelStats currentStats;
+    protected static Dictionary<LevelStat, float> stats;
 
-    public static void incrementStat( LevelStat stat, float value) {
+    public static void Init() {
 
-        //TODO:Implement
+        stats = new Dictionary<LevelStat, float>();
+        foreach (LevelStat val in Enum.GetValues(typeof(LevelStat))) {
+            stats.Add(val, Constants.INVALID_STAT);
+        }
     }
 
-    public static void decrementStat( LevelStat stat, float value) {
+    /// <summary>
+    /// Note:Make sure stat value is set before increment or decrement
+    /// </summary>
+    /// <param name="stat">LevelStat value</param>
+    /// <param name="value">float value</param>
+    public static void IncrementStat( LevelStat stat, float value) {
 
-        //TODO:Implement
+        stats[stat] += value;
     }
 
-    public static void setStat( LevelStat stat, float value) {
+    /// <summary>
+    /// Note:Make sure stat value is set before increment or decrement
+    /// </summary>
+    /// <param name="stat">LevelStat value</param>
+    /// <param name="value">float value</param>
+    public static void DecrementStat( LevelStat stat, float value) {
 
-        //TODO:Implement
+        stats[stat] -= value;
+    }
+
+    public static void SetStat( LevelStat stat, float value) {
+
+        stats[stat] = value;
     }
 }
