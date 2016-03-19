@@ -1,3 +1,4 @@
+﻿
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,5 +29,15 @@ public class AIController {
     public static Player GetPlayer() {
 
         return manager.GetPlayer();
+    }
+
+    public static List<Enemy> GetEnemies() {
+
+        return manager.GetEnemies();
+    }
+
+    public static void GameOver() {
+
+        //TODO: Implement it
     }
 }

@@ -55,7 +55,7 @@ public class Player : MonoBehaviour {
 		RaycastHit2D[] result = new RaycastHit2D[1];
 		float side = (hitbox.bounds.max.x - hitbox.bounds.min.x);
 		//Debug.Log(side);
-		if (Physics2D.BoxCast(bottomPoint, new Vector2(side, 0.01f), 0, -Vector2.up, 0.01f, LayerMask.GetMask("Obstacle")))
+		if (Physics2D.BoxCast(bottomPoint, new Vector2(side - 0.01f, 0.01f), 0, -Vector2.up, 0.01f, LayerMask.GetMask("Obstacle")))
 			ground = true;
 		anim.SetBool("Ground", ground);
 

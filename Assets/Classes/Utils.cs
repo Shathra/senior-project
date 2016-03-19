@@ -31,6 +31,10 @@ public class Utils {
 
         return new IntFloatPair( index, min);
     }
+
+    public static void Log( string message, int channel) {
+
+    }
 }
 
 public class IntFloatPair {
