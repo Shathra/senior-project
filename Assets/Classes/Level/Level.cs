@@ -14,6 +14,7 @@ public class Level : MonoBehaviour {
 
         timer = new Stopwatch();
         timer.Start();
+        levelId = Constants.INVALID_LEVEL;
         initLevel();
     }
 
@@ -25,5 +26,10 @@ public class Level : MonoBehaviour {
 
     protected virtual void initLevel() {
 
+    }
+
+    public int GetId() {
+
+        return levelId;
     }
 }

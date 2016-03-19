@@ -30,17 +30,17 @@ public class MLCommunicator {
 
             foreach (KeyValuePair<LevelStat, float> entry in MLLevelStats.GetStats()) {
 
-                writetext.WriteLine(entry.Value.ToString() + ":" + entry.Key + ";");
+                writetext.WriteLine(entry.Key + ":" + entry.Value.ToString() + ";");
             }
 
             foreach (KeyValuePair<PlayStat, float> entry in MLLogger.GetPlayStats()) {
 
-                writetext.WriteLine(entry.Value.ToString() + ":" + entry.Key + ";");
+                writetext.WriteLine(entry.Key + ":" + entry.Value.ToString() + ";");
             }
 
             foreach (KeyValuePair<SurveyStat, float> entry in MLLogger.GetSurveyStats()) {
 
-                writetext.WriteLine(entry.Value.ToString() + ":" + entry.Key + ";");
+                writetext.WriteLine(entry.Key + ":" + entry.Value.ToString() + ";");
             }
         }
     }
@@ -56,12 +56,12 @@ public class MLCommunicator {
 
             foreach (KeyValuePair<LevelStat, float> entry in MLLevelStats.GetStats()) {
 
-                writetext.WriteLine(entry.Value.ToString() + ":" + entry.Key + ";");
+                writetext.WriteLine(entry.Key + ":" + entry.Value.ToString() + ";");
             }
 
             foreach (KeyValuePair<PlayStat, float> entry in MLLogger.GetPlayStats()) {
 
-                writetext.WriteLine(entry.Value.ToString() + ":" + entry.Key + ";");
+                writetext.WriteLine(entry.Key + ":" + entry.Value.ToString() + ";");
             }
         }
     }
