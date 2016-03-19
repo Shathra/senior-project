@@ -989,9 +989,10 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 357517538}
+  - 114: {fileID: 357517539}
   m_Layer: 8
   m_Name: Level
-  m_TagString: Untagged
+  m_TagString: Level
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1019,6 +1020,17 @@ Transform:
   - {fileID: 1805981526}
   m_Father: {fileID: 0}
   m_RootOrder: 6
+--- !u!114 &357517539
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 357517537}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 093f92fff607bd646b5bd888da2887e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &359509298
 GameObject:
   m_ObjectHideFlags: 0
