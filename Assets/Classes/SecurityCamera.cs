@@ -1,17 +1,16 @@
 ﻿using UnityEngine;
-using System.Collections;
-using System;
+using System.Collections.Generic;
 
 /// <summary>
 /// Immobile unit which alerts other enemy in a range when it sees a player
 /// </summary>
-public class SecurityCamera : Enemy, ISpotable {
+public class SecurityCamera : Enemy {
     private const float ROTATION_AMOUNT = 85;
     public const float RANGE = 10;
 
     public float visionAngle { get; set; }
 
-    private Vision vision;
+    private SecurityCameraVision vision;
     private MeshFilter visionMesh;
     private PolygonCollider2D visionCollider;
 
@@ -20,11 +19,10 @@ public class SecurityCamera : Enemy, ISpotable {
     void Start() {
         direction = false;
         visionAngle = 30;
-        vision = GetComponentInChildren<Vision>();
-		vision.spotable = this;
+        vision = GetComponentInChildren<SecurityCameraVision>();
         visionMesh = vision.gameObject.GetComponent<MeshFilter>();
         visionCollider = vision.gameObject.GetComponent<PolygonCollider2D>();
-		GenerateVision();
+        GenerateVision();
     }
 
     void FixedUpdate() {
@@ -54,27 +52,22 @@ public class SecurityCamera : Enemy, ISpotable {
     }
 
     public void Spot(Player player) {
-        GameObject nearestGuard = NearestGuard();
-        nearestGuard.GetComponent<Guardian>().Spot(player.gameObject);
+        Guardian nearestGuard = NearestGuard();
+        nearestGuard.Spot(player.gameObject);
     }
-    private GameObject NearestGuard()
-    {
-        GameObject enemies = GameObject.Find("Enemies");
-        GameObject enemy = enemies.transform.GetChild(0).gameObject;
-        float smallestDistance = Mathf.Abs(Vector2.Distance(enemy.transform.position, GameObject.FindGameObjectWithTag("Player").transform.position));
-        for (int i = 1; i < enemies.transform.childCount; i++)
+    private Guardian NearestGuard() {
+        List<Guardian> guards = AIController.GetGuardians();
+        Guardian guard = guards[0];
+        float smallestDistance = Mathf.Abs(Vector2.Distance(guard.transform.position, GameObject.FindGameObjectWithTag("Player").transform.position));
+        for (int i = 1; i < guards.Count; i++)
         {
-            float distance = Mathf.Abs(Vector2.Distance(enemies.transform.GetChild(i).position, GameObject.FindGameObjectWithTag("Player").transform.position));
+            float distance = Mathf.Abs(Vector2.Distance(guards[0].transform.position, GameObject.FindGameObjectWithTag("Player").transform.position));
             if ( distance < smallestDistance)
             {
                 smallestDistance = distance;
-                enemy = enemies.transform.GetChild(i).gameObject;
+                guard = guards[0];
             }
         }
-        return enemy;
+        return guard;
     }
-
-	public void Spot(GameObject obj) {
-		
-	}
 }

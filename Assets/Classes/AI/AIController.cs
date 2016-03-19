@@ -31,9 +31,9 @@ public class AIController {
         return manager.GetPlayer();
     }
 
-    public static List<Enemy> GetEnemies() {
+    public static List<Guardian> GetGuardians() {
 
-        return manager.GetEnemies();
+        return manager.GetGuardians();
     }
 
     public static Graph GetGraph() {
