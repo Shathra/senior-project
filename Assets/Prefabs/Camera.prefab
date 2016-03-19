@@ -26,7 +26,7 @@ GameObject:
   - 33: {fileID: 3397770}
   - 60: {fileID: 6094210}
   - 23: {fileID: 2348966}
-  - 114: {fileID: 11403112}
+  - 114: {fileID: 11411536}
   m_Layer: 0
   m_Name: Vision
   m_TagString: Untagged
@@ -99,7 +99,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 166758}
   m_LocalRotation: {x: 0, y: 0, z: 1, w: -1.62920685e-07}
-  m_LocalPosition: {x: -3.54999995, y: 6.69999981, z: 0}
+  m_LocalPosition: {x: -10.3800001, y: 6.69999981, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 495894}
@@ -197,7 +197,7 @@ PolygonCollider2D:
     - - {x: -.0113430014, y: .00183201209}
       - {x: -.534310639, y: 1.21799576}
       - {x: .569201052, y: .960556328}
---- !u!114 &11403112
+--- !u!114 &11411536
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -205,7 +205,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 170610}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 488146d45dc386c4387eeb25a9c73386, type: 3}
+  m_Script: {fileID: 11500000, guid: eddeb99a329caf5459fb02bd3ef405b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &11458996
