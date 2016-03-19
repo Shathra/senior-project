@@ -7,7 +7,9 @@ public class Bullet : MonoBehaviour {
 			Destroy(gameObject);
 		} else if(col.gameObject.layer == LayerMask.NameToLayer("Player")) {
 			Destroy(gameObject);
-			//Destroy(col.gameObject);
+            //Destroy(col.gameObject);
+            GameController.GameLost();
 		}
 	}
+
 }

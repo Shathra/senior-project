@@ -148,6 +148,10 @@ public class Player : MonoBehaviour {
         {
             AIController.lastKnownPosition = midPoint;
         }
+        if(col.gameObject.GetComponent<Guardian>() != null)
+        {
+            GameController.GameLost();
+        }
     }
     void OnTriggerExit2D(Collider2D col)
     {

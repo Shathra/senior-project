@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class CubeScript : MonoBehaviour {
+public class Target : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
@@ -17,7 +17,7 @@ public class CubeScript : MonoBehaviour {
         if(col.gameObject.tag == "Player")
         {
             col.gameObject.GetComponent<Player>().carriesTarget = true;
-            Destroy(this);
+            Destroy(gameObject);
         }
     }
 }
