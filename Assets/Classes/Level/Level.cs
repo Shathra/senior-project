@@ -19,6 +19,7 @@ public class Level : MonoBehaviour {
 
     public long GetElapsedTime() {
 
+        timer.Stop();
         return timer.ElapsedMilliseconds / 1000;
     }
 

@@ -20,34 +20,7 @@ public class MLLevelStats {
     public static float TurretMissleSpeed       = 1.0f;
     public static float CameraAngularSpeed      = 1.0f;
     public static float CameraAwarenessRange    = 1.0f;
-
-    /*
-     - Level time(sn cinsinden)
- - Level number
- - Kullanılan mermi sayısı
- - Number of guardians*
- - Zemin cinsi
- - Number of guardians*
- - Gadget'ların kullanma sayısı(frekans)
- - Öldürme stili
- - Number of guardians spawning interval
- - Difficulty(Sadece training datası için)
- - Guardian özellikleri
- 	- Weapon damage
- 	- Weapon missile spped
- 	- Weapon accuracy
- 	- Speed
- 	- Awareness range
- 	- Reaction time
- 	- Alert süresi
- - Laser turret
- 	- Period speed
- 	- Weapon accuracy
- 	- Weapon missle speed
-    */
-
     
-
     /// <summary>
     /// Initializes an empty object
     /// </summary>
