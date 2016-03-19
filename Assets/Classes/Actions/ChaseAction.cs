@@ -15,7 +15,9 @@ public class ChaseAction : Action {
 	public override void Execute(Enemy enemy) {
 
         IApproachable movingObj = (IApproachable)enemy;
-        Debug.Log("asdfasd"+this.player + " asd" + enemy);
-		movingObj.Approach(player.midPoint);
+        
+        movingObj.Approach(AIController.lastKnownPosition);
+
+
 	}
 }

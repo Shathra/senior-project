@@ -3,8 +3,9 @@ using System.Collections;
 
 public class Player : MonoBehaviour {
 	public GameObject rockPrefab;
+    public GameObject playerGhost;
 
-	private Animator anim;
+    private Animator anim;
 	private BoxCollider2D hitbox;
 	private Rigidbody2D body;
 	private bool _onLadder;
@@ -21,7 +22,9 @@ public class Player : MonoBehaviour {
 	}
 
 	void Start() {
-		anim = GetComponent<Animator>();
+
+        playerGhost = GameObject.Find("PlayerGhost");
+        anim = GetComponent<Animator>();
 		hitbox = GetComponent<BoxCollider2D>();
 		body = GetComponent<Rigidbody2D>();
 		onLadder = false;
@@ -126,5 +129,30 @@ public class Player : MonoBehaviour {
 		float distance = 0.25f;
 		Vector2 direction = transform.localScale.x > 0 ? Vector2.right : -Vector2.right;
 		Debug.DrawLine(origin, origin + direction * distance, Color.red, 1.0f);
-	}
+    }
+    void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.gameObject.GetComponent<Vision>() != null)
+        {
+            AIController.lastKnownPosition = midPoint;
+            playerGhost.transform.position = midPoint;
+            playerGhost.transform.GetChild(0).gameObject.SetActive(false);   //set Model to false
+        }
+    }
+    void OnTriggerStay2D(Collider2D col)
+    {
+        if (col.gameObject.GetComponent<Vision>() != null)
+        {
+            AIController.lastKnownPosition = midPoint;
+        }
+    }
+    void OnTriggerExit2D(Collider2D col)
+    {
+        if (col.gameObject.GetComponent<Vision>() != null)
+        {
+            AIController.lastKnownPosition = midPoint;
+            playerGhost.transform.position = midPoint;
+            playerGhost.transform.GetChild(0).gameObject.SetActive(true);   //set Model to true
+        }
+    }
 }

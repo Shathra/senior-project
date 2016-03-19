@@ -1,3 +1,4 @@
+﻿
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,6 +8,8 @@ using UnityEngine;
 public class AIController {
 
     protected static AIManager manager;
+
+    public static Vector2 lastKnownPosition;
 
     public static void Init( AIManager initManager) {
 
@@ -26,11 +29,6 @@ public class AIController {
     public static Player GetPlayer() {
 
         return manager.GetPlayer();
-    }
-
-    public static List<Enemy> GetEnemies() {
-
-        return manager.GetEnemies();
     }
 
     public static void GameOver() {
