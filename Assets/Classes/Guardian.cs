@@ -2,6 +2,7 @@
 using System.Collections;
 
 public class Guardian : Enemy, ISpotable, IApproachable {
+	public Vision vision { get; set; }
 
 	protected float moveSpeed;
 	protected float turnRate;
@@ -54,6 +55,9 @@ public class Guardian : Enemy, ISpotable, IApproachable {
         onLadder = false;
         gameObject.layer = 11;                          //11 is Guardian Layer
         Idle(patrolType);
+		vision = GetComponentInChildren<Vision>();
+        vision.spotable = this;
+		vision.GenerateVision(30, 10);
     }
 	public void Approach(Vector2 target) {
 

@@ -10,9 +10,9 @@ public class SecurityCamera : Enemy, ISpotable {
     public const float RANGE = 10;
 
     public float visionAngle { get; set; }
+	public Vision vision { get; set; }
 
-    private Vision vision;
-    private MeshFilter visionMesh;
+	private MeshFilter visionMesh;
     private PolygonCollider2D visionCollider;
 
     private bool direction;
@@ -24,7 +24,7 @@ public class SecurityCamera : Enemy, ISpotable {
 		vision.spotable = this;
         visionMesh = vision.gameObject.GetComponent<MeshFilter>();
         visionCollider = vision.gameObject.GetComponent<PolygonCollider2D>();
-        GenerateVision();
+        vision.GenerateVision(visionAngle, RANGE);
     }
 
     void FixedUpdate() {
@@ -34,23 +34,6 @@ public class SecurityCamera : Enemy, ISpotable {
             direction = false;
         else if (Mathf.Abs(transform.eulerAngles.z - (180 + ROTATION_AMOUNT)) < 1)
             direction = true;
-    }
-
-
-    public void GenerateVision() {
-        Vector2[] points = new Vector2[3];
-        points[0] = Vector2.zero;
-        float x = Mathf.Sin((visionAngle / 2) * Mathf.Deg2Rad) * RANGE;
-        float y = Mathf.Cos((visionAngle / 2) * Mathf.Deg2Rad) * RANGE; ;
-        points[1] = new Vector2(-x, y);
-        points[2] = new Vector2(x, y);
-        visionCollider.points = points;
-        Mesh mesh = new Mesh();
-        mesh.vertices = new Vector3[] { (Vector3)points[0], (Vector3)points[1], (Vector3)points[2] };
-        mesh.triangles = new int[] { 0, 1, 2 };
-        mesh.RecalculateNormals();
-        mesh.RecalculateBounds();
-        visionMesh.mesh = mesh;
     }
 
     private Guardian NearestGuard() {

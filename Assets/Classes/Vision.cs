@@ -5,6 +5,8 @@ public class Vision : MonoBehaviour {
 	public ISpotable spotable { get; set; }
 	private bool playerCollidingVision;
 	private bool _playerInVision;
+	private PolygonCollider2D visionCollider;
+	private MeshFilter visionMesh;
 	public bool playerInVision {
 		get {
 			return _playerInVision;
@@ -20,6 +22,11 @@ public class Vision : MonoBehaviour {
 		}
 	}
 
+	void Awake() {
+		visionCollider = GetComponent<PolygonCollider2D>();
+		visionMesh = GetComponent<MeshFilter>();
+	}
+
 	void Start() {
 		_playerInVision = false;
 		playerCollidingVision = false;
@@ -29,12 +36,16 @@ public class Vision : MonoBehaviour {
 		if (playerCollidingVision) {
 			bool hit = false;
 			foreach (Vector2 point in Player.instance.keyPoints) {
-				if (Physics2D.Raycast(transform.position,
+				RaycastHit2D rcHit = Physics2D.Raycast(transform.position,
 					point - (Vector2)transform.position, 100,
-					LayerMask.GetMask("Player", "Obstacle"))
-						.collider.gameObject.layer == LayerMask.NameToLayer("Player")) {
-					hit = true;
-					break;
+					LayerMask.GetMask("Player", "Obstacle"));
+				if (rcHit) {
+					if (rcHit.collider != null) {
+						if (rcHit.collider.gameObject.layer == LayerMask.NameToLayer("Player")) {
+							hit = true;
+							break;
+						}
+					}
 				}
 			}
 			if (hit)
@@ -58,5 +69,21 @@ public class Vision : MonoBehaviour {
 	void Update() {
 		if (playerInVision)
 			spotable.Spot(Player.instance.gameObject);
+	}
+
+	public void GenerateVision(float angle, float range) {
+		Vector2[] points = new Vector2[3];
+		points[0] = Vector2.zero;
+		float x = Mathf.Sin((angle / 2) * Mathf.Deg2Rad) * range;
+		float y = Mathf.Cos((angle / 2) * Mathf.Deg2Rad) * range;
+		points[1] = new Vector2(-x, y);
+		points[2] = new Vector2(x, y);
+		visionCollider.points = points;
+		Mesh mesh = new Mesh();
+		mesh.vertices = new Vector3[] { (Vector3)points[0], (Vector3)points[1], (Vector3)points[2] };
+		mesh.triangles = new int[] { 0, 1, 2 };
+		mesh.RecalculateNormals();
+		mesh.RecalculateBounds();
+		visionMesh.mesh = mesh;
 	}
 }
