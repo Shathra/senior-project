@@ -123,7 +123,7 @@ public class Guardian : Enemy, ISpotable, IApproachable {
 
 	public void Fire(Vector2 target) {
 		Rigidbody2D bullet = ((GameObject)Instantiate(bulletPrefab, transform.position, Quaternion.identity)).GetComponent<Rigidbody2D>();
-		bullet.velocity = Quaternion.LookRotation(target - (Vector2)transform.position) * Vector3.up * 20;
+		bullet.velocity = Quaternion.LookRotation(target - (Vector2)transform.position, Vector3.back) * Vector3.up * 20;
 	}
 
 	public override void Update() {
