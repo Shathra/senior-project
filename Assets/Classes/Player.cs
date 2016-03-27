@@ -96,9 +96,9 @@ public class Player : MonoBehaviour {
 			anim.SetFloat("Movement", 0);
 		}
 
-		if (Input.GetKeyDown(KeyCode.Space) && ground)
+		if (Input.GetKeyDown(KeyCode.Space)/* && ground*/)
 			body.velocity += new Vector2(0, 7 - crouching * 1);
-		if (!ground && !Input.GetKey(KeyCode.Space) && body.velocity.y > 0)
+		if (!ground &&!Input.GetKey(KeyCode.Space) && body.velocity.y > 0)
 			body.velocity = new Vector2(body.velocity.x, 0);
 
 		float height = 1.25f;
