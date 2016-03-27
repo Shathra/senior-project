@@ -1,7 +1,10 @@
 ﻿Shader "Pattern" {
 	Properties {
 		_MainTex ("Texture", 2D) = "white" {}
+		_Color ("Color", COLOR) = (1,1,1,1)
 		_TexScale ("Texture Scale", Float) = 1.0
+		[MaterialToggle] _isVertical("Is Vertical", Float) = 0
+		[MaterialToggle] _isHorizontal("Is Horizontal", Float) = 0
 	}
 	SubShader {
 		Pass {
@@ -11,6 +14,9 @@
 
 			uniform sampler2D _MainTex;
 			uniform float _TexScale;
+			uniform float _isVertical;
+			uniform float _isHorizontal;
+			uniform float4 _Color;
 
 			struct vin {
 				float4 pos : POSITION;
@@ -33,14 +39,24 @@
 
             float4 frag(vout v) : COLOR {
 				float scale = 1.0f / _TexScale;
-				float x = fmod(v.posWorld.x * scale, 1.0f);
-				float y = fmod(v.posWorld.y * scale, 1.0f);
+				float x, y;
+				if(_isHorizontal > 0) {
+					x = fmod(v.posWorld.x * scale, 1.0f);
+				} else
+					x = v.tex.x;
+
+				if(_isVertical > 0) {
+					y = fmod(v.posWorld.y * scale, 1.0f);
+				} else
+					y = v.tex.y;
+
 				if(x < 0.0)
 					x += 1.0f;
 				if(y < 0.0)
 					y += 1.0f;
+
 				float4 col = tex2D (_MainTex, float2(x, y)).rgba;
-				return col;
+				return col * _Color;
             }
             ENDCG
         }
