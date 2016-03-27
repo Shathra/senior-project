@@ -8,26 +8,11 @@ class LevelEz : Level {
 
     protected override void initLevel() {
         base.initLevel();
+
         List<Guardian> guards = AIController.GetGuardians();
+        Graph graph = AIController.GetGraph();
+        guards[0].actionQueue.Insert(new PatrolAction(new Vector2(-10.25f, 5.0f), new Vector2(-1.1f, 5.0f)));
+
         levelId = Constants.LEVEL_ID_EASY;
-
-        List<Node> enemyPositions = new List<Node>();
-        foreach( Enemy enemy in guards) {
-            enemyPositions.Add(AIController.GetNearestNode(enemy.transform.position));
-        }
-        List<List<Node>> listPath = Graph.SearchGraph( AIController.GetGraph(), enemyPositions);
-
-        for (int i = 0; i < guards.Count; i++) {
-
-            Node prev = AIController.GetNearestNode(guards[i].transform.position);
-            int am = 20;
-            foreach (Node node in listPath[i]) {
-
-                Debug.Log(node);
-                guards[i].actionQueue.Insert(new ApproachAction(prev.transform.position, node.transform.position, am));
-                prev = node;
-                am++;
-            }
-        }
     }
 }

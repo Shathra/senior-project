@@ -22,7 +22,8 @@ public class AIManager : MonoBehaviour{
     }
 
     internal Player GetPlayer() {
-        throw new NotImplementedException();
+
+        return player;
     }
 
     public void Start() {

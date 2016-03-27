@@ -38,11 +38,9 @@ public class ActionQueue {
         bool ordered = false;
         while ( index != 0 && !ordered)
         {
-            int parentIndex = (index + 1) / 2 - 1;  
-            //Debug.Log(parentIndex+"----"+index+"-----"+heap.Count);
-            if ( heap[index].priority <= heap[parentIndex].priority)
+            int parentIndex = (index + 1) / 2 - 1;
+            if ( heap[index].priority >= heap[parentIndex].priority)
             {
-                //Debug.Log(parentIndex + "----" + index + "-----" + heap.Count);
                 Action temp = heap[index];
                 heap[index] = heap[parentIndex];
                 heap[parentIndex] = temp;
@@ -53,11 +51,6 @@ public class ActionQueue {
                 ordered = true;
             }
         }
-
-       // Debug.Log("Action is added" + action);
-       // Debug.Log("heap[0]" + heap[0]);
-        //if( heap.Count > 1)
-        //    Debug.Log("heap[1]" + heap[1]);
     }
 
     /// <summary>
@@ -106,9 +99,9 @@ public class ActionQueue {
         if (rightIndex >= heap.Count)
             minIndex = leftIndex;
         else
-            minIndex = heap[leftIndex].priority < heap[rightIndex].priority ? leftIndex : rightIndex;
+            minIndex = heap[leftIndex].priority > heap[rightIndex].priority ? leftIndex : rightIndex;
 
-        if( heap[minIndex].priority <= heap[index].priority)
+        if( heap[minIndex].priority > heap[index].priority)
         {
             Action temp = heap[index];
             heap[index] = heap[minIndex];

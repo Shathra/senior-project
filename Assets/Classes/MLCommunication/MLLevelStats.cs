@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public enum LevelStat {
 
-    GuardianSpeed, GuardianTurnRate, GuardianWeaponDamage, GuardianMissileSpeed,
+    GuardianSpeed, GuardianTurnRate, GuardianWeaponDamage, GuardianMissileSpeed, GuardianWeaponFireRate,
     GuardianAwarenessRange, GuardianWeaponAccuracy, GuardianReactionTime, GuardianAlertInterval, TurretAngularSpeed, TurretWeaponAccuracy,
     TurretMissleSpeed, CameraAngularSpeed, CameraAwarenessRange
 }
@@ -31,6 +31,7 @@ public class MLLevelStats {
         levelStats[LevelStat.GuardianWeaponAccuracy] = 1.0f;
         levelStats[LevelStat.GuardianReactionTime] = 1.0f;
         levelStats[LevelStat.GuardianAlertInterval] = 1.0f;
+        levelStats[LevelStat.GuardianWeaponFireRate] = 2.0f;
         levelStats[LevelStat.TurretAngularSpeed] = 1.0f;
         levelStats[LevelStat.TurretWeaponAccuracy] = 1.0f;
         levelStats[LevelStat.TurretMissleSpeed] = 1.0f;

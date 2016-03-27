@@ -32,4 +32,33 @@ public class Level : MonoBehaviour {
 
         return levelId;
     }
+
+    /// <summary>
+    /// Yaz bunu güzel laf
+    /// </summary>
+    public void GiveSearchOrderToAllGuardians() {
+
+        List<Guardian> guards = AIController.GetGuardians();
+
+        List<Node> enemyPositions = new List<Node>();
+        foreach (Enemy enemy in guards) {
+            enemyPositions.Add(AIController.GetNearestNode(enemy.transform.position));
+        }
+        List<List<Node>> listPath = Graph.SearchGraph(AIController.GetGraph(), enemyPositions);
+        List<ActionBundle> enemyActions = new List<ActionBundle>();
+
+        for (int i = 0; i < guards.Count; i++) {
+
+            enemyActions[i] = new ActionBundle();
+            Node prev = AIController.GetNearestNode(guards[i].transform.position);
+            foreach (Node node in listPath[i]) {
+
+                enemyActions[i].Add(new ApproachAction(prev.transform.position, node.transform.position));
+                //guards[i].actionQueue.Insert(new ApproachAction(prev.transform.position, node.transform.position, am));
+                prev = node;
+            }
+
+            guards[i].actionQueue.Insert(enemyActions[i]);
+        }
+    }
 }

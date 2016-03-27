@@ -31,10 +31,10 @@ public class EventManager {
 
     public static Action Spot( SpotEvent gameEvent) {
 
+        Debug.Log("SpotIn");
         Action actionToReturn = null;
         if (gameEvent.Source.GetType() == typeof(Guardian)) {
-            //Vector2 pos = gameEvent.Source.transform.position;
-            actionToReturn = new ChaseAction();
+            actionToReturn = new FireAction(AIController.GetPlayer());
         }
 
         else if (gameEvent.Source.GetType() == typeof(Turret)) {
@@ -47,5 +47,18 @@ public class EventManager {
         }
 
         return actionToReturn;
+    }
+
+    public static Action SpotOut( SpotOutEvent gameEvent) {
+
+        Debug.Log("SpotOut");
+        if (gameEvent.Source.GetType() == typeof(Guardian)) {
+
+            Guardian guardian = (Guardian)(gameEvent.Source);
+            guardian.actionQueue.Remove();
+            return new ApproachAction(guardian.transform.position, PlayerGhost.instance.transform.position, Action.PRIORITY_HOSTILE);
+        }
+
+        return new EmptyAction();
     }
 }

@@ -84,6 +84,7 @@ public class Guardian : Enemy, ISpotable, IApproachable {
 
 	public void Spot(GameObject obj) {
 
+        Debug.Log("SPOTTED");
         Player player = obj.GetComponentInParent<Player>();
 		if (player != null) {
             //todofirat Alert
@@ -99,6 +100,7 @@ public class Guardian : Enemy, ISpotable, IApproachable {
 			return;
 		}
 
+        /*
 		Rock rock = obj.GetComponent<Rock>();
 		if (rock != null) {
             //todofirat Suspicious
@@ -118,11 +120,14 @@ public class Guardian : Enemy, ISpotable, IApproachable {
             //
             return;
 		}
+        */
 	}
 
 	public void SpotOut(GameObject obj) {
 
-	}
+        Debug.Log("SPOTT OUTED");
+        actionQueue.Insert(EventManager.SpotOut(new SpotOutEvent(this, PlayerGhost.instance.transform.position)));
+    }
 
 	public void Fire(Vector2 target) {
 		Rigidbody2D bullet = ((GameObject)Instantiate(bulletPrefab, transform.position, Quaternion.identity)).GetComponent<Rigidbody2D>();
@@ -136,6 +141,7 @@ public class Guardian : Enemy, ISpotable, IApproachable {
 
     void Idle(int patrolType)
     {
+        /*
         if (patrolType == 2)
         {
             actionQueue.Insert(new PatrolAction(transform.position, patrolCoordinate));     //walking patrol
@@ -148,14 +154,16 @@ public class Guardian : Enemy, ISpotable, IApproachable {
         {
             //No rotation or no walking but may add some functions
         }
+        */
     }
     void Searching()
     {
-
+        /*
         if (searchIsFinished)
         {
             state.SetState(Status.HasSeen);
         }          ///selam
+        */
     }   
     void HasSeen()
     {

@@ -31,12 +31,13 @@ class PatrolAction : Action {
 
     public override void Execute(Enemy enemy) {
 
-        //Debug.Log("Executing Patrol Action");
         IApproachable movingObj = (IApproachable)enemy;
-        if( toPoint1 )
-            enemy.actionQueue.Insert( new ApproachAction( enemy.transform.position, point1.transform.position, -1));
-        else
-            enemy.actionQueue.Insert(new ApproachAction(enemy.transform.position, point2.transform.position, -1));
+        if (toPoint1) {
+            enemy.actionQueue.Insert(new ApproachAction(enemy.transform.position, point1.transform.position, Action.PRIORITY_DEFAULT));
+        }
+        else {
+            enemy.actionQueue.Insert(new ApproachAction(enemy.transform.position, point2.transform.position, Action.PRIORITY_DEFAULT));
+        }
         toPoint1 = !toPoint1;
     }
 }
