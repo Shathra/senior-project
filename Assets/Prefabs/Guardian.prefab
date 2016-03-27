@@ -77,7 +77,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 118562}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.7081714, y: -1.1547713, z: -1.0078125}
+  m_LocalPosition: {x: -4.5, y: 1.54, z: -0.50390625}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 480214}
@@ -230,6 +230,7 @@ MonoBehaviour:
   patrolType: 0
   patrolCoordinate: {x: 0, y: 0}
   turnAroundTime: 3
+  bulletPrefab: {fileID: 195508, guid: 16998795b75807744ac896a4fb690498, type: 2}
   exclamationPrefab: {fileID: 174048, guid: 1a97d1c4497692d419d4ee11a16760b5, type: 2}
 --- !u!114 &11470988
 MonoBehaviour:

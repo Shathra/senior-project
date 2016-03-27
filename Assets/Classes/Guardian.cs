@@ -15,6 +15,7 @@ public class Guardian : Enemy, ISpotable, IApproachable {
     public int patrolType;
     public Vector2 patrolCoordinate;
     public float turnAroundTime;
+	public GameObject bulletPrefab;
 
     private bool searchIsFinished;
 
@@ -116,7 +117,8 @@ public class Guardian : Enemy, ISpotable, IApproachable {
 	}
 
 	public void Fire(Vector2 target) {
-
+		Rigidbody2D bullet = ((GameObject)Instantiate(bulletPrefab, transform.position, Quaternion.identity)).GetComponent<Rigidbody2D>();
+		bullet.velocity = Quaternion.LookRotation(target - (Vector2)transform.position) * Vector3.up * 20;
 	}
 
 	public override void Update() {
