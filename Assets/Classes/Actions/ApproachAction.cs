@@ -18,7 +18,7 @@ public class ApproachAction : Action {
 
     public override void Execute(Enemy enemy) {
 
-        //Debug.Log("Executing approach action");
+        //Debug.Log("Executing approach action to " + target);
         IApproachable movingObj = (IApproachable)enemy;
         
         if( path.Count == 0) {
