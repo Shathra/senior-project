@@ -17,6 +17,9 @@ public class Vision : MonoBehaviour {
 			if (!value && playerInVision) {
 				PlayerGhost.instance.transform.position = Player.instance.midPoint;
 				PlayerGhost.instance.transform.GetChild(0).gameObject.SetActive(true);
+				spotable.Spot(Player.instance.gameObject);
+			} else if(value && playerInVision) {
+				spotable.SpotOut(Player.instance.gameObject);
 			}
 			_playerInVision = value;
 		}
@@ -67,8 +70,6 @@ public class Vision : MonoBehaviour {
 	}
 
 	void Update() {
-		if (playerInVision)
-			spotable.Spot(Player.instance.gameObject);
 	}
 
 	public void GenerateVision(float angle, float range) {

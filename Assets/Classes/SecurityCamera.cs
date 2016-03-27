@@ -56,4 +56,8 @@ public class SecurityCamera : Enemy, ISpotable {
 		Guardian nearestGuard = NearestGuard();
 		nearestGuard.Spot(Player.instance.gameObject);
 	}
+
+	public void SpotOut(GameObject obj) {
+		Spot(obj);
+	}
 }

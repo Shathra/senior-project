@@ -14,4 +14,5 @@ public interface ISpotable
     /// </summary>
     /// <param name="obj">Spotted object</param>
     void Spot(GameObject obj);
+    void SpotOut(GameObject obj);
 }

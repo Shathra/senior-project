@@ -111,6 +111,14 @@ public class Guardian : Enemy, ISpotable, IApproachable {
 		}
 	}
 
+	public void SpotOut(GameObject obj) {
+
+	}
+
+	public void Fire(Vector2 target) {
+
+	}
+
 	public override void Update() {
 		base.Update();
 		//actionQueue.Insert(EventManager.Spot(new SpotEvent(this, new Vector2(-4.85f, 4.87f))));
