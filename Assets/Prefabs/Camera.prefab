@@ -27,6 +27,8 @@ GameObject:
   - 60: {fileID: 6094210}
   - 23: {fileID: 2348966}
   - 114: {fileID: 11411536}
+  - 114: {fileID: 11495972}
+  - 114: {fileID: 11432660}
   m_Layer: 0
   m_Name: Vision
   m_TagString: Untagged
@@ -75,8 +77,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 191892}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: .100000001, z: 0}
-  m_LocalScale: {x: .100000001, y: .300000012, z: 1}
+  m_LocalPosition: {x: 0, y: 0.1, z: 0}
+  m_LocalScale: {x: 0.1, y: 0.3, z: 1}
   m_Children: []
   m_Father: {fileID: 495894}
   m_RootOrder: 0
@@ -86,8 +88,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 170610}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: .200000003, z: .100000001}
+  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071067}
+  m_LocalPosition: {x: 0, y: 0.2, z: 0.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 495894}
@@ -98,8 +100,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 166758}
-  m_LocalRotation: {x: 0, y: 0, z: 1, w: -1.62920685e-07}
-  m_LocalPosition: {x: -10.3800001, y: 6.69999981, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 1, w: -0.00000016292068}
+  m_LocalPosition: {x: -10.38, y: 6.7, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 495894}
@@ -137,8 +139,10 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_AutoUVMaxDistance: .5
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
@@ -161,8 +165,10 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_AutoUVMaxDistance: .5
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
@@ -188,15 +194,16 @@ PolygonCollider2D:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 170610}
   m_Enabled: 1
+  m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   m_Points:
     m_Paths:
-    - - {x: -.0113430014, y: .00183201209}
-      - {x: -.534310639, y: 1.21799576}
-      - {x: .569201052, y: .960556328}
+    - - {x: -0.011343001, y: 0.0018320121}
+      - {x: -0.53431064, y: 1.2179958}
+      - {x: 0.56920105, y: 0.9605563}
 --- !u!114 &11411536
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -208,6 +215,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eddeb99a329caf5459fb02bd3ef405b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  visionCollider: {fileID: 0}
+--- !u!114 &11432660
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 170610}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77d2953568b92364a96502b515cccffc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  status: 0
+  materials:
+  - {fileID: 2100000, guid: 94b01fc33032f0e4ea7b286f6df8e0b6, type: 2}
 --- !u!114 &11458996
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -219,6 +241,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6438a1ed693fee45a1ea2491f97a390, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &11495972
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 170610}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2ab1cecfe34f29428b3db4262e106f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  raysGizmosEnabled: 0
+  quality: 1
+  fovAngle: 30
+  fovMaxDistance: 15
+  cullingMask:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!120 &12033188
 LineRenderer:
   m_ObjectHideFlags: 1
@@ -237,8 +277,10 @@ LineRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_AutoUVMaxDistance: .5
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
@@ -247,8 +289,8 @@ LineRenderer:
   - {x: 0, y: 0, z: 0}
   - {x: 0, y: 0, z: 0}
   m_Parameters:
-    startWidth: .0500000007
-    endWidth: .0500000007
+    startWidth: 0.05
+    endWidth: 0.05
     m_StartColor:
       serializedVersion: 2
       rgba: 4278190335

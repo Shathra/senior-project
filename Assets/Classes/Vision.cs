@@ -5,7 +5,7 @@ public class Vision : MonoBehaviour {
 	public ISpotable spotable { get; set; }
 	private bool playerCollidingVision;
 	private bool _playerInVision;
-	private PolygonCollider2D visionCollider;
+	public PolygonCollider2D visionCollider;
 	private MeshFilter visionMesh;
 	public bool playerInVision {
 		get {
@@ -72,19 +72,19 @@ public class Vision : MonoBehaviour {
 	void Update() {
 	}
 
-	public void GenerateVision(float angle, float range) {
+	/*public void GenerateVision(float angle, float range) {
 		Vector2[] points = new Vector2[3];
 		points[0] = Vector2.zero;
 		float x = Mathf.Sin((angle / 2) * Mathf.Deg2Rad) * range;
 		float y = Mathf.Cos((angle / 2) * Mathf.Deg2Rad) * range;
 		points[1] = new Vector2(-x, y);
 		points[2] = new Vector2(x, y);
-		visionCollider.points = points;
+		//visionCollider.points = points;
 		Mesh mesh = new Mesh();
 		mesh.vertices = new Vector3[] { (Vector3)points[0], (Vector3)points[1], (Vector3)points[2] };
 		mesh.triangles = new int[] { 0, 1, 2 };
 		mesh.RecalculateNormals();
 		mesh.RecalculateBounds();
 		visionMesh.mesh = mesh;
-	}
+	}*/
 }

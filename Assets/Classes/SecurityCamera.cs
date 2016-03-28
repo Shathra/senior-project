@@ -24,7 +24,7 @@ public class SecurityCamera : Enemy, ISpotable {
 		vision.spotable = this;
         visionMesh = vision.gameObject.GetComponent<MeshFilter>();
         visionCollider = vision.gameObject.GetComponent<PolygonCollider2D>();
-        vision.GenerateVision(visionAngle, RANGE);
+        //vision.GenerateVision(visionAngle, RANGE);
     }
 
     void FixedUpdate() {

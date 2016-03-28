@@ -24,9 +24,10 @@ public class Guardian : Enemy, ISpotable, IApproachable {
 		}
 		set {
 			_direction = value;
-			transform.localScale = new Vector3((direction ? 1 : -1) * Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
-		}
-	}
+			transform.localScale = new Vector3((_direction ? 1 : -1) * Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+            transform.GetChild(1).transform.GetChild(0).transform.Rotate(new Vector3(180f, 0f, 180f));
+        }
+    }
 	public bool onLadder {
 		get {
 			return _onLadder;
@@ -57,21 +58,28 @@ public class Guardian : Enemy, ISpotable, IApproachable {
         Idle(patrolType);
 		vision = GetComponentInChildren<Vision>();
         vision.spotable = this;
-		vision.GenerateVision(30, 10);
+		//vision.GenerateVision(30, 10);
     }
-	public void Approach(Vector2 target) {
+    public void Approach(Vector2 target) {
 
-		if (!onLadder && Physics2D.Raycast(topPoint, -Vector2.up, 0.01f, LayerMask.GetMask("Ladder"))) {
-			onLadder = true;
-		} else if (onLadder && !Physics2D.Raycast(topPoint, -Vector2.up, 0.01f, LayerMask.GetMask("Ladder"))) {
-			onLadder = false;
-		}
-		transform.position = Vector2.MoveTowards(transform.position, new Vector2(target.x, onLadder ? target.y : transform.position.y), Time.deltaTime * moveSpeed);
-		if (target.x - transform.position.x > 0)
-			direction = true;
-		else if (target.x - transform.position.x < 0)
-			direction = false;
-	}
+        if (!onLadder && Physics2D.Raycast(topPoint, -Vector2.up, 0.01f, LayerMask.GetMask("Ladder"))) {
+            onLadder = true;
+        } else if (onLadder && !Physics2D.Raycast(topPoint, -Vector2.up, 0.01f, LayerMask.GetMask("Ladder"))) {
+            onLadder = false;
+        }
+        transform.position = Vector2.MoveTowards(transform.position, new Vector2(target.x, onLadder ? target.y : transform.position.y), Time.deltaTime * moveSpeed);
+
+        if (target.x - transform.position.x > 0){
+            if (!direction) {
+                direction = true;
+            }
+        }
+        else if (target.x - transform.position.x < 0) {
+            if (direction) {
+                direction = false;
+            }
+        }
+    }
 
 	public void Spot(GameObject obj) {
 
@@ -121,8 +129,8 @@ public class Guardian : Enemy, ISpotable, IApproachable {
 
 	public override void Update() {
 		base.Update();
-		//actionQueue.Insert(EventManager.Spot(new SpotEvent(this, new Vector2(-4.85f, 4.87f))));
-	}
+        //actionQueue.Insert(EventManager.Spot(new SpotEvent(this, new Vector2(-4.85f, 4.87f))));
+    }
 
     void Idle(int patrolType)
     {
