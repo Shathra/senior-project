@@ -6,6 +6,7 @@ public class Player : MonoBehaviour {
 
 	public GameObject rockPrefab;
     public GameObject playerGhost;
+	public GameObject soundPrefab;
 
     private Animator anim;
 	private BoxCollider2D hitbox;

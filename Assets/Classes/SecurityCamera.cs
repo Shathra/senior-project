@@ -52,12 +52,12 @@ public class SecurityCamera : Enemy, ISpotable {
         return guard;
     }
 
-	public void Spot(GameObject obj) {
+	public void Spot() {
 		Guardian nearestGuard = NearestGuard();
-		nearestGuard.Spot(Player.instance.gameObject);
+		nearestGuard.Spot();
 	}
 
-	public void SpotOut(GameObject obj) {
-		Spot(obj);
+	public void SpotOut() {
+		
 	}
 }

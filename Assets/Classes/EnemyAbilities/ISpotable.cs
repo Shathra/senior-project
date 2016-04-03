@@ -13,6 +13,6 @@ public interface ISpotable
     /// Defines what happens after an object is spotted
     /// </summary>
     /// <param name="obj">Spotted object</param>
-    void Spot(GameObject obj);
-    void SpotOut(GameObject obj);
+    void Spot();
+    void SpotOut();
 }

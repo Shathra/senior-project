@@ -82,10 +82,10 @@ public class Guardian : Enemy, ISpotable, IApproachable {
         }
     }
 
-	public void Spot(GameObject obj) {
+	public void Spot() {
 
         Debug.Log("SPOTTED");
-        Player player = obj.GetComponentInParent<Player>();
+		Player player = Player.instance;
 		if (player != null) {
             //todofirat Alert
             state.SetState(Status.Alert);
@@ -123,7 +123,7 @@ public class Guardian : Enemy, ISpotable, IApproachable {
         */
 	}
 
-	public void SpotOut(GameObject obj) {
+	public void SpotOut() {
 
         Debug.Log("SPOTT OUTED");
         actionQueue.Insert(EventManager.SpotOut(new SpotOutEvent(this, PlayerGhost.instance.transform.position)));
