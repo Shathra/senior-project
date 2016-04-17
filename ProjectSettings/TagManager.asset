@@ -42,3 +42,18 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Ground
+    uniqueID: 822834703
+    locked: 0
+  - name: Ladder
+    uniqueID: 169099785
+    locked: 0
+  - name: Wall
+    uniqueID: 800166043
+    locked: 0
+  - name: Door
+    uniqueID: 2339742185
+    locked: 0
+  - name: Player
+    uniqueID: 848980521
+    locked: 0
