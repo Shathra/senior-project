@@ -12,7 +12,7 @@ public class Player : MonoBehaviour {
 	private BoxCollider2D hitbox;
 	private Rigidbody2D body;
 	private bool _onLadder;
-    Vector2 lastPosition;       //MLLogger
+    public Vector2 lastPosition;       //MLLogger
 
     public bool carriesTarget;
 
@@ -88,7 +88,7 @@ public class Player : MonoBehaviour {
 			if (Input.GetKey(KeyCode.A))
 				direction = false;
 			float speed = (5 - crouching * 2.5f) * (direction ? 1 : -1) * (onLadder ? 0.5f : 1.0f);
-			transform.localScale = new Vector3((direction ? 1 : -1) * Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+			transform.GetChild(0).transform.localScale = new Vector3((direction ? 1 : -1) * Mathf.Abs(transform.GetChild(0).transform.localScale.x), transform.GetChild(0).transform.localScale.y, transform.GetChild(0).localScale.z);
 			//transform.position += speed * Vector3.right;
 			body.velocity = new Vector2(speed, body.velocity.y);
 			anim.SetFloat("Movement", 1);
