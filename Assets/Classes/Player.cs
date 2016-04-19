@@ -12,8 +12,9 @@ public class Player : MonoBehaviour {
 	private BoxCollider2D hitbox;
 	private Rigidbody2D body;
 	private bool _onLadder;
-    public Vector2 lastPosition;       //MLLogger
 
+    public Vector2 lastPosition;       //MLLogger
+    
     public bool carriesTarget;
 
     private bool onLadder {
@@ -67,10 +68,10 @@ public class Player : MonoBehaviour {
 		}
 	}
 
-	void Update() {
+	void Update()
+    {
         //MLLogger distance travelled
         MLLogger.IncrementStat(PlayStat.PlayerTravelDistance, Vector2.Distance(transform.position, lastPosition));
-        lastPosition = transform.position;
         //MLLogger Stuff End
 
         float crouching = anim.GetFloat("Crouching");
@@ -149,7 +150,12 @@ public class Player : MonoBehaviour {
 		anim.SetFloat("VerticalSpeed", body.velocity.y);
 	}
 
-	public void Takedown() {
+    }
+    void LateUpdate()
+    {
+        lastPosition = transform.position;
+    }
+    public void Takedown() {
 		Vector2 origin = new Vector2((transform.localScale.x > 0 ? hitbox.bounds.max.x + 0.001f : hitbox.bounds.min.x - 0.001f), (hitbox.bounds.min.y + hitbox.bounds.max.y) / 2);
 		float distance = 0.25f;
 		Vector2 direction = transform.localScale.x > 0 ? Vector2.right : -Vector2.right;
