@@ -146,6 +146,7 @@ public class Player : MonoBehaviour {
 				midPoint, Quaternion.identity)).GetComponent<Rigidbody2D>();
 			rock.AddForce(direction.normalized * 40);
 		}
+		anim.SetFloat("VerticalSpeed", body.velocity.y);
 	}
 
 	public void Takedown() {
