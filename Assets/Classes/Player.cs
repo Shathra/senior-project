@@ -150,11 +150,11 @@ public class Player : MonoBehaviour {
 		anim.SetFloat("VerticalSpeed", body.velocity.y);
 	}
 
-    }
     void LateUpdate()
     {
         lastPosition = transform.position;
     }
+
     public void Takedown() {
 		Vector2 origin = new Vector2((transform.localScale.x > 0 ? hitbox.bounds.max.x + 0.001f : hitbox.bounds.min.x - 0.001f), (hitbox.bounds.min.y + hitbox.bounds.max.y) / 2);
 		float distance = 0.25f;
