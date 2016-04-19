@@ -202,6 +202,7 @@ MonoBehaviour:
   rockPrefab: {fileID: 131752, guid: af9b97566fa7cc94992250c3a53d3787, type: 2}
   playerGhost: {fileID: 103938, guid: 44f472653f620af42ab2291063cab0fb, type: 2}
   soundPrefab: {fileID: 199250, guid: 96d2c16f2ffcf524d86480d26c58be23, type: 2}
+  lastPosition: {x: 0, y: 0}
   carriesTarget: 0
 --- !u!124 &12489836
 Behaviour:
