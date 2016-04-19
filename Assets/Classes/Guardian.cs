@@ -131,10 +131,11 @@ public class Guardian : Enemy, ISpotable, IApproachable {
 
 	public void Fire(Vector2 target) {
 		Rigidbody2D bullet = ((GameObject)Instantiate(bulletPrefab, transform.position, Quaternion.identity)).GetComponent<Rigidbody2D>();
-		float angle = Mathf.Atan((target.y - transform.position.y) / (target.x - transform.position.x));
+		float angle = Mathf.Atan(( target.y - transform.position.y) / (target.x - transform.position.x));
 		Debug.Log(angle);
-		bullet.velocity = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * -10;
-	}
+        bullet.transform.Rotate(new Vector3(0, 0, angle * 180 / Mathf.PI));
+        bullet.velocity = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * -10;
+    }
 
 	public override void Update() {
 		base.Update();

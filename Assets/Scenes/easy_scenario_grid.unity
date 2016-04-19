@@ -1925,6 +1925,48 @@ BoxCollider2D:
   m_Offset: {x: 0.024784088, y: 1.2644825}
   serializedVersion: 2
   m_Size: {x: 2.140051, y: 5.610798}
+--- !u!1001 &834411716
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 425376, guid: 16998795b75807744ac896a4fb690498, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 425376, guid: 16998795b75807744ac896a4fb690498, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 3.34
+      objectReference: {fileID: 0}
+    - target: {fileID: 425376, guid: 16998795b75807744ac896a4fb690498, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 425376, guid: 16998795b75807744ac896a4fb690498, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 425376, guid: 16998795b75807744ac896a4fb690498, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 425376, guid: 16998795b75807744ac896a4fb690498, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 425376, guid: 16998795b75807744ac896a4fb690498, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 425376, guid: 16998795b75807744ac896a4fb690498, type: 2}
+      propertyPath: m_RootOrder
+      value: 8
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 16998795b75807744ac896a4fb690498, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1001 &841896169
 Prefab:
   m_ObjectHideFlags: 0
@@ -1981,7 +2023,6 @@ GameObject:
   - 4: {fileID: 966463196}
   - 212: {fileID: 966463197}
   - 114: {fileID: 966463198}
-  - 50: {fileID: 966463199}
   m_Layer: 10
   m_Name: Background 3
   m_TagString: Untagged
@@ -2043,23 +2084,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parallaxCoefficent: 4
---- !u!50 &966463199
-Rigidbody2D:
-  serializedVersion: 2
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 966463195}
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!1 &969648559
 GameObject:
   m_ObjectHideFlags: 0
@@ -2486,7 +2510,6 @@ GameObject:
   - 4: {fileID: 1143082505}
   - 212: {fileID: 1143082507}
   - 114: {fileID: 1143082506}
-  - 50: {fileID: 1143082508}
   m_Layer: 10
   m_Name: Background 4
   m_TagString: Untagged
@@ -2548,23 +2571,6 @@ SpriteRenderer:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
---- !u!50 &1143082508
-Rigidbody2D:
-  serializedVersion: 2
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1143082504}
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!1 &1178515927
 GameObject:
   m_ObjectHideFlags: 0
@@ -3536,7 +3542,6 @@ GameObject:
   - 4: {fileID: 1443315061}
   - 212: {fileID: 1443315062}
   - 114: {fileID: 1443315063}
-  - 50: {fileID: 1443315064}
   m_Layer: 10
   m_Name: Background 2
   m_TagString: Untagged
@@ -3598,23 +3603,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parallaxCoefficent: 3
---- !u!50 &1443315064
-Rigidbody2D:
-  serializedVersion: 2
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1443315060}
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!1 &1467255585
 GameObject:
   m_ObjectHideFlags: 0

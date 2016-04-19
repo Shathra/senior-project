@@ -7,9 +7,7 @@ public class ParallaxScript : MonoBehaviour {
     float yDisplacement;
 
     public float parallaxCoefficent;
-
-    private Rigidbody2D body;
-
+    
     // Use this for initialization
     void Start () {
 	    
@@ -20,6 +18,5 @@ public class ParallaxScript : MonoBehaviour {
         displacement = Player.instance.lastPosition.x - Player.instance.transform.position.x;
         yDisplacement = Player.instance.lastPosition.y - Player.instance.transform.position.y;
         transform.Translate(new Vector3(displacement/(parallaxCoefficent*5), yDisplacement,0));
-        body.velocity = new Vector2(-body.velocity.x, 0);
     }
 }
