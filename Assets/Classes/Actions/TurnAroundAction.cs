@@ -24,7 +24,7 @@ class TurnAroundAction : Action
         {
             timeLeft -= Time.deltaTime;
         }else{
-            enemy.transform.localScale = new Vector3(-1*enemy.transform.localScale.x, enemy.transform.localScale.y, enemy.transform.localScale.z);
+            enemy.direction = !enemy.direction;
             timeLeft = period;
         }
     }
