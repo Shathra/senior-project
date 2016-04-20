@@ -9,17 +9,18 @@ public class Guardian : Enemy, ISpotable, IApproachable {
 
 	private BoxCollider2D hitbox;
 	private Rigidbody2D body;
+	private Animator anim;
 	private bool _onLadder;
-
-    public int patrolType;
+	private Vector2 prevPos;
+    
+	public int patrolType;
     public Node patrolCoordinate1;
     public Node patrolCoordinate2;
     public float turnAroundTime;
 	public GameObject bulletPrefab;
 
     private bool searchIsFinished;
-
-
+    
 	public bool onLadder {
 		get {
 			return _onLadder;
@@ -50,6 +51,8 @@ public class Guardian : Enemy, ISpotable, IApproachable {
         Idle(patrolType);
 		vision = GetComponentInChildren<Vision>();
         vision.spotable = this;
+		prevPos = transform.position;
+		anim = GetComponent<Animator>();
 		//vision.GenerateVision(30, 10);
     }
     public void Approach(Vector2 target) {
@@ -130,11 +133,14 @@ public class Guardian : Enemy, ISpotable, IApproachable {
 
 	public override void Update() {
 		base.Update();
-        //actionQueue.Insert(EventManager.Spot(new SpotEvent(this, new Vector2(-4.85f, 4.87f))));
-    }
+		//actionQueue.Insert(EventManager.Spot(new SpotEvent(this, new Vector2(-4.85f, 4.87f))));
+		float movement = Vector2.Distance(transform.position, prevPos);
+		anim.SetFloat("Speed", movement > 0.01f ? 1.0f : 0.0f);
+	}
 
     void Idle(int patrolType)
     {
+        
         if (patrolType == 2)
         {
             actionQueue.Insert(new PatrolAction(patrolCoordinate1, patrolCoordinate2));     //walking patrol
@@ -147,6 +153,7 @@ public class Guardian : Enemy, ISpotable, IApproachable {
         {
             //No rotation or no walking but may add some functions
         }
+        
     }
     void Searching()
     {
