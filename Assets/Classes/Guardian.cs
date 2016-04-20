@@ -9,10 +9,13 @@ public class Guardian : Enemy, ISpotable, IApproachable {
 
 	private BoxCollider2D hitbox;
 	private Rigidbody2D body;
+	private Animator anim;
 	private bool _onLadder;
 	private bool _direction;
+	private Vector2 prevPos;
 
-    public int patrolType;
+
+	public int patrolType;
     public Vector2 patrolCoordinate;
     public float turnAroundTime;
 	public GameObject bulletPrefab;
@@ -59,6 +62,8 @@ public class Guardian : Enemy, ISpotable, IApproachable {
         Idle(patrolType);
 		vision = GetComponentInChildren<Vision>();
         vision.spotable = this;
+		prevPos = transform.position;
+		anim = GetComponent<Animator>();
 		//vision.GenerateVision(30, 10);
     }
     public void Approach(Vector2 target) {
@@ -139,8 +144,10 @@ public class Guardian : Enemy, ISpotable, IApproachable {
 
 	public override void Update() {
 		base.Update();
-        //actionQueue.Insert(EventManager.Spot(new SpotEvent(this, new Vector2(-4.85f, 4.87f))));
-    }
+		//actionQueue.Insert(EventManager.Spot(new SpotEvent(this, new Vector2(-4.85f, 4.87f))));
+		float movement = Vector2.Distance(transform.position, prevPos);
+		anim.SetFloat("Speed", movement > 0.01f ? 1.0f : 0.0f);
+	}
 
     void Idle(int patrolType)
     {
