@@ -52,7 +52,8 @@ public class Turret : Enemy {
 			transform.localEulerAngles = new Vector3(0, 0, Mathf.MoveTowards(0, angle, ROTATION_AMOUNT));
 			if (shoot <= 0 && remainingDelay <= 0) {
 				Rigidbody2D bullet = ((GameObject)Instantiate(bulletPrefab, tip, Quaternion.identity)).GetComponent<Rigidbody2D>();
-				bullet.velocity = transform.rotation * Vector3.up * 20;
+                bullet.transform.Rotate(new Vector3(0, 0, angle+90));
+                bullet.velocity = transform.rotation * Vector3.up * 20;
 				shoot = FIRE_RATE;
 			} else {
 				shoot -= Time.deltaTime;
