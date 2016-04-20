@@ -25,8 +25,8 @@ public class Guardian : Enemy, ISpotable, IApproachable {
 		}
 		set {
 			_direction = value;
-			transform.localScale = new Vector3((_direction ? 1 : -1) * Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
-            transform.GetChild(1).transform.GetChild(0).transform.Rotate(new Vector3(180f, 0f, 180f));
+			transform.GetChild(0).transform.localScale = new Vector3((_direction ? 1 : -1) * Mathf.Abs(transform.GetChild(0).transform.localScale.x), transform.GetChild(0).transform.localScale.y, transform.GetChild(0).transform.localScale.z);
+            transform.GetChild(1).transform.GetChild(0).transform.Rotate(new Vector3(0f, 0f, 180f));
         }
     }
 	public bool onLadder {
@@ -119,8 +119,8 @@ public class Guardian : Enemy, ISpotable, IApproachable {
             actionQueue.Insert(new ApproachAction(transform.position, nearestNode.transform.position, -1));
             //
             return;
-		}
-        */
+		}*/
+        
 	}
 
 	public void SpotOut() {
