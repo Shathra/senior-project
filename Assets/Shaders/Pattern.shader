@@ -1,12 +1,15 @@
 ﻿Shader "Pattern" {
 	Properties {
-		_MainTex ("Texture", 2D) = "white" {}
+		_MainTex ("Color (RGB) Alpha (A)", 2D) = "white" {}
 		_Color ("Color", COLOR) = (1,1,1,1)
 		_TexScale ("Texture Scale", Float) = 1.0
 		[MaterialToggle] _isVertical("Is Vertical", Float) = 0
 		[MaterialToggle] _isHorizontal("Is Horizontal", Float) = 0
 	}
 	SubShader {
+		Tags{ "Queue" = "Transparent" "RenderType" = "Transparent" }
+		Blend SrcAlpha OneMinusSrcAlpha
+		Cull Off
 		Pass {
             CGPROGRAM
             #pragma vertex vert
