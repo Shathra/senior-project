@@ -103,7 +103,7 @@ public class Player : MonoBehaviour {
 		if (!ground &&!Input.GetKey(KeyCode.Space) && body.velocity.y > 0)
 			body.velocity = new Vector2(body.velocity.x, 0);
 
-		float height = 1.25f;
+		float height = 1f;
 		float crouchHeight = 0.8f;
 		float crouchSpeed = 2.5f;
 		if (Input.GetKeyDown(KeyCode.C)) {
@@ -114,10 +114,10 @@ public class Player : MonoBehaviour {
 				anim.SetFloat("Crouching", 1);
 		}
 		if (anim.GetFloat("Crouching") > 0) {
-			hitbox.offset = Vector2.MoveTowards(hitbox.offset, new Vector2(0, crouchHeight / 2), Time.deltaTime * crouchSpeed);
+			//hitbox.offset = Vector2.MoveTowards(hitbox.offset, new Vector2(0, crouchHeight / 2), Time.deltaTime * crouchSpeed);
 			hitbox.size = Vector2.MoveTowards(hitbox.size, new Vector2(hitbox.size.x, crouchHeight), Time.deltaTime * crouchSpeed);
 		} else {
-			hitbox.offset = Vector2.MoveTowards(hitbox.offset, new Vector2(0, height / 2), Time.deltaTime * crouchSpeed);
+			//hitbox.offset = Vector2.MoveTowards(hitbox.offset, new Vector2(0, height / 2), Time.deltaTime * crouchSpeed);
 			hitbox.size = Vector2.MoveTowards(hitbox.size, new Vector2(hitbox.size.x, height), Time.deltaTime * crouchSpeed);
 		}
 
