@@ -147,6 +147,7 @@ public class Guardian : Enemy, ISpotable, IApproachable {
 		//actionQueue.Insert(EventManager.Spot(new SpotEvent(this, new Vector2(-4.85f, 4.87f))));
 		float movement = Vector2.Distance(transform.position, prevPos);
 		anim.SetFloat("Speed", movement > 0.01f ? 1.0f : 0.0f);
+		prevPos = transform.position;
 	}
 
     void Idle(int patrolType)
