@@ -18,7 +18,7 @@ class Initializer : MonoBehaviour {
         MLLevelStats.Init();
 
         string strCmdText;
-        strCmdText = "/C cd DifficultyEstimator & python estimator.py & set /p DUMMY=Hit ENTER to continue...";
+        strCmdText = "/C cd DifficultyEstimator & python estimator.py";
         System.Diagnostics.Process.Start("CMD.exe", strCmdText);
 
         MLCommunicator.Init();
