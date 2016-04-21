@@ -13,7 +13,6 @@ public class SecurityCamera : Enemy, ISpotable {
 	public Vision vision { get; set; }
 
 	private MeshFilter visionMesh;
-    private PolygonCollider2D visionCollider;
 
     private bool direction;
 
@@ -23,7 +22,6 @@ public class SecurityCamera : Enemy, ISpotable {
         vision = GetComponentInChildren<Vision>();
 		vision.spotable = this;
         visionMesh = vision.gameObject.GetComponent<MeshFilter>();
-        visionCollider = vision.gameObject.GetComponent<PolygonCollider2D>();
         //vision.GenerateVision(visionAngle, RANGE);
     }
 

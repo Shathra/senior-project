@@ -15,8 +15,8 @@ public class ChaseAction : Action {
 	public override void Execute(Enemy enemy) {
 
         IApproachable movingObj = (IApproachable)enemy;
-        
-        movingObj.Approach(AIController.lastKnownPosition);
+        enemy.actionQueue.Insert(new ApproachAction(enemy.transform.position, AIController.lastKnownPosition));
+        //movingObj.Approach(AIController.lastKnownPosition);
 
 
 	}
