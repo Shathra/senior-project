@@ -11,27 +11,16 @@ public class Guardian : Enemy, ISpotable, IApproachable {
 	private Rigidbody2D body;
 	private Animator anim;
 	private bool _onLadder;
-	private bool _direction;
 	private Vector2 prevPos;
-
-
+    
 	public int patrolType;
-    public Vector2 patrolCoordinate;
+    public Node patrolCoordinate1;
+    public Node patrolCoordinate2;
     public float turnAroundTime;
 	public GameObject bulletPrefab;
 
     private bool searchIsFinished;
-
-    public bool direction {
-		get {
-			return _direction;
-		}
-		set {
-			_direction = value;
-			transform.GetChild(0).transform.localScale = new Vector3((_direction ? 1 : -1) * Mathf.Abs(transform.GetChild(0).transform.localScale.x), transform.GetChild(0).transform.localScale.y, transform.GetChild(0).transform.localScale.z);
-            transform.GetChild(1).transform.GetChild(0).transform.Rotate(new Vector3(0f, 0f, 180f));
-        }
-    }
+    
 	public bool onLadder {
 		get {
 			return _onLadder;
@@ -137,7 +126,7 @@ public class Guardian : Enemy, ISpotable, IApproachable {
 	public void Fire(Vector2 target) {
 		Rigidbody2D bullet = ((GameObject)Instantiate(bulletPrefab, transform.position, Quaternion.identity)).GetComponent<Rigidbody2D>();
 		float angle = Mathf.Atan(( target.y - transform.position.y) / (target.x - transform.position.x));
-		Debug.Log(angle);
+		//Debug.Log(angle);
         bullet.transform.Rotate(new Vector3(0, 0, angle * 180 / Mathf.PI));
         bullet.velocity = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * -10;
     }
@@ -152,10 +141,10 @@ public class Guardian : Enemy, ISpotable, IApproachable {
 
     void Idle(int patrolType)
     {
-        /*
+        
         if (patrolType == 2)
         {
-            actionQueue.Insert(new PatrolAction(transform.position, patrolCoordinate));     //walking patrol
+            actionQueue.Insert(new PatrolAction(patrolCoordinate1, patrolCoordinate2));     //walking patrol
         }
         else if (patrolType == 1)
         {
@@ -165,7 +154,7 @@ public class Guardian : Enemy, ISpotable, IApproachable {
         {
             //No rotation or no walking but may add some functions
         }
-        */
+        
     }
     void Searching()
     {
