@@ -65,13 +65,12 @@ public class Guardian : Enemy, ISpotable, IApproachable {
         transform.position = Vector2.MoveTowards(transform.position, new Vector2(target.x, onLadder ? target.y : transform.position.y), Time.deltaTime * moveSpeed);
 
         if (target.x - transform.position.x > 0){
-            if (!direction) {
-                direction = true;
-            }
-        }
-        else if (target.x - transform.position.x < 0) {
             if (direction) {
                 direction = false;
+            }
+        }else if (target.x - transform.position.x < 0) {
+            if (!direction) {
+                direction = true;
             }
         }
     }

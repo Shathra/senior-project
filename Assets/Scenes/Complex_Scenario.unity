@@ -709,6 +709,22 @@ Prefab:
       propertyPath: m_Name
       value: Guardian (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 425362, guid: b9a465a6690b21e4191aeb31346eaa74, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 405052, guid: b9a465a6690b21e4191aeb31346eaa74, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 437496, guid: b9a465a6690b21e4191aeb31346eaa74, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 437496, guid: b9a465a6690b21e4191aeb31346eaa74, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b9a465a6690b21e4191aeb31346eaa74, type: 2}
   m_IsPrefabParent: 0
