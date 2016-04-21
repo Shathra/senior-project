@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -19,7 +20,7 @@ class Initializer : MonoBehaviour {
 
         string strCmdText;
         strCmdText = "/C cd DifficultyEstimator & python estimator.py";
-        System.Diagnostics.Process.Start("CMD.exe", strCmdText);
+        Process.Start("CMD.exe", strCmdText);
 
         MLCommunicator.Init();
 
