@@ -5,7 +5,7 @@ using System.Text;
 
 public enum PlayStat {
 
-    LevelNo, LevelTime, NumberOfTrials, PlayerTravelDistance, Result
+    LevelTime, NumberOfTrials, PlayerTravelDistance, Result
 }
 
 public enum SurveyStat {

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using UnityEngine;
 
 
@@ -15,5 +16,18 @@ class Initializer : MonoBehaviour {
         GameController.Init();
         MLLogger.Init();
         MLLevelStats.Init();
+
+        string strCmdText;
+        strCmdText = "/C cd DifficultyEstimator & python estimator.py & set /p DUMMY=Hit ENTER to continue...";
+        System.Diagnostics.Process.Start("CMD.exe", strCmdText);
+
+        MLCommunicator.Init();
+
+        MLCommunicator.predictDifficulty();
+    }
+
+    public void OnApplicationQuit() {
+
+        MLCommunicator.Close();
     }
 }

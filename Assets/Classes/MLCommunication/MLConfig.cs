@@ -8,6 +8,8 @@ public class MLConfig {
 
     protected static readonly bool isConfigureFromFile = false;
     protected static readonly string configFilePath = "";
+    public static readonly int MLPort = 5005;
+    public static readonly float DefaultDifficulty = 50.0f;
 
     public static string MLInputPath { get; protected set; }
 

@@ -21,7 +21,7 @@ class GameController {
         float levelTime = (float)currentLevel.GetElapsedTime();
         MLLogger.SetStat(PlayStat.LevelTime, levelTime);
         MLLogger.SetStat(PlayStat.Result, gameWon ? 1 : 0);
-        MLLogger.SetStat(PlayStat.LevelNo, currentLevel.GetId());
+        //MLLogger.SetStat(PlayStat.LevelNo, currentLevel.GetId());
         MLCommunicator.writeMLTrainFile();
     }
     
