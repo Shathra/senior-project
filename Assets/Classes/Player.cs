@@ -157,8 +157,9 @@ public class Player : MonoBehaviour {
 
     public void Takedown() {
 		Vector2 origin = new Vector2((transform.localScale.x > 0 ? hitbox.bounds.max.x + 0.001f : hitbox.bounds.min.x - 0.001f), (hitbox.bounds.min.y + hitbox.bounds.max.y) / 2);
-		float distance = 0.25f;
+		float distance = 0.5f;
 		Vector2 direction = transform.localScale.x > 0 ? Vector2.right : -Vector2.right;
 		Debug.DrawLine(origin, origin + direction * distance, Color.red, 1.0f);
+		Physics2D.Raycast(origin, direction, distance, LayerMask.GetMask("Guardian"));
     }
 }

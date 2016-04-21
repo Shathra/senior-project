@@ -2791,9 +2791,9 @@ Prefab:
       propertyPath: m_Name
       value: Turret (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 21241642, guid: e5825961123d2d043915aa33555b087a, type: 2}
-      propertyPath: m_SortingLayerID
-      value: 848980521
+    - target: {fileID: 406466, guid: e5825961123d2d043915aa33555b087a, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -0.1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e5825961123d2d043915aa33555b087a, type: 2}
