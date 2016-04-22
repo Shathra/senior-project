@@ -154,6 +154,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 567bb0a1c04c51745b92c409934b9806, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  blastPrefab: {fileID: 125370, guid: a8461b138b9c60c49b043a368a7cfad0, type: 2}
 --- !u!212 &21216192
 SpriteRenderer:
   m_ObjectHideFlags: 1
