@@ -12,6 +12,7 @@ public class Player : MonoBehaviour {
 	private BoxCollider2D hitbox;
 	private Rigidbody2D body;
 	private bool _onLadder;
+	private bool takedownLock;
 
     public Vector2 lastPosition;       //MLLogger
     
@@ -36,6 +37,7 @@ public class Player : MonoBehaviour {
 		hitbox = GetComponent<BoxCollider2D>();
 		body = GetComponent<Rigidbody2D>();
 		onLadder = false;
+		takedownLock = false;
 	}
 
 	public Vector2[] keyPoints {
@@ -72,8 +74,10 @@ public class Player : MonoBehaviour {
     {
         //MLLogger distance travelled
         MLLogger.IncrementStat(PlayStat.PlayerTravelDistance, Vector2.Distance(transform.position, lastPosition));
-        //MLLogger Stuff End
+		//MLLogger Stuff End
 
+		if (takedownLock)
+			return;
         float crouching = anim.GetFloat("Crouching");
 		bool ground = false;
 		Vector2 hitboxBottom = new Vector2(hitbox.bounds.min.x, hitbox.bounds.min.y);
@@ -136,7 +140,7 @@ public class Player : MonoBehaviour {
 			}
 		}
 
-		if (Input.GetKeyDown(KeyCode.F))
+		if (Input.GetKeyDown(KeyCode.F) && ground)
 			Takedown();
 
 		if (Input.GetKeyDown(KeyCode.Mouse0)) {
@@ -156,10 +160,21 @@ public class Player : MonoBehaviour {
     }
 
     public void Takedown() {
+		if (onLadder)
+			return;
 		Vector2 origin = new Vector2((transform.localScale.x > 0 ? hitbox.bounds.max.x + 0.001f : hitbox.bounds.min.x - 0.001f), (hitbox.bounds.min.y + hitbox.bounds.max.y) / 2);
 		float distance = 0.5f;
 		Vector2 direction = transform.localScale.x > 0 ? Vector2.right : -Vector2.right;
-		Debug.DrawLine(origin, origin + direction * distance, Color.red, 1.0f);
-		Physics2D.Raycast(origin, direction, distance, LayerMask.GetMask("Guardian"));
-    }
+		RaycastHit2D hit = Physics2D.Raycast(origin, direction, distance, LayerMask.GetMask("Guardian", "Obstacle"));
+		if (hit) {
+			if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Guardian")) {
+				takedownLock = true;
+				anim.SetTrigger("Takedown");
+			}
+		}
+	}
+
+	public void RemoveTakedownLock() {
+		takedownLock = false;
+	}
 }
