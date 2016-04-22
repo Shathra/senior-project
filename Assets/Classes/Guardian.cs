@@ -176,4 +176,8 @@ public class Guardian : Enemy, ISpotable, IApproachable {
     {
         //sooner
     }
+
+    public void Knockout() {
+
+    }
 }

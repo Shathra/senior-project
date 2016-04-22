@@ -3,6 +3,7 @@ using System.Collections;
 
 public class Player : MonoBehaviour {
 	public static Player instance { get; private set; }
+    private static float RUN_SOUND_DELAY = 0.3f;
 
 	public GameObject rockPrefab;
     public GameObject playerGhost;
@@ -13,6 +14,7 @@ public class Player : MonoBehaviour {
 	private Rigidbody2D body;
 	private bool _onLadder;
 	private bool takedownLock;
+    private float runSoundInterval;
 
     public Vector2 lastPosition;       //MLLogger
     
@@ -38,6 +40,7 @@ public class Player : MonoBehaviour {
 		body = GetComponent<Rigidbody2D>();
 		onLadder = false;
 		takedownLock = false;
+        runSoundInterval = RUN_SOUND_DELAY;
 	}
 
 	public Vector2[] keyPoints {
@@ -88,7 +91,16 @@ public class Player : MonoBehaviour {
 			ground = true;
 		anim.SetBool("Ground", ground);
 
-		if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D)) {
+        if (Input.GetKeyDown(KeyCode.A) ^ Input.GetKeyDown(KeyCode.D))
+            runSoundInterval = 0;
+		if (Input.GetKey(KeyCode.A) ^ Input.GetKey(KeyCode.D)) {
+            if (ground && !onLadder && crouching < 0.5f) {
+                runSoundInterval -= Time.deltaTime;
+                if (runSoundInterval <= 0) {
+                    Sound.GenerateSound(bottomPoint, 4);
+                    runSoundInterval = RUN_SOUND_DELAY;
+                }
+            }
 			bool direction = true;
 			if (Input.GetKey(KeyCode.A))
 				direction = false;
@@ -170,6 +182,7 @@ public class Player : MonoBehaviour {
 			if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Guardian")) {
 				takedownLock = true;
 				anim.SetTrigger("Takedown");
+                hit.collider.GetComponent<Guardian>().Knockout();
 			}
 		}
 	}
