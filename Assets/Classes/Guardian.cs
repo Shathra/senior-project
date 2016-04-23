@@ -3,6 +3,9 @@ using System.Collections;
 
 public class Guardian : Enemy, ISpotable, IApproachable {
     public Vision vision { get; set; }
+    public Head head { get; set; }
+    public Gun gun { get; set; }
+
     public float totalUnconsciousTime { get; set; }
 
     protected float moveSpeed;
@@ -14,6 +17,7 @@ public class Guardian : Enemy, ISpotable, IApproachable {
     private bool _onLadder;
     private Vector2 prevPos;
     private float unconsciousTime;
+    private float angle;
 
     public int patrolType;
     public Node patrolCoordinate1;
@@ -44,6 +48,8 @@ public class Guardian : Enemy, ISpotable, IApproachable {
     public GameObject exclamationPrefab;
 
     public void Start() {
+        head = transform.GetChild(0).transform.GetChild(0).GetComponent<Head>();
+        gun  = transform.GetChild(0).transform.GetChild(1).GetComponent<Gun>();
         this.moveSpeed = MLLevelStats.GetStat(LevelStat.GuardianSpeed);
         hitbox = GetComponent<BoxCollider2D>();
         body = GetComponent<Rigidbody2D>();
@@ -127,13 +133,31 @@ public class Guardian : Enemy, ISpotable, IApproachable {
 
     public void Fire(Vector2 target) {
         Rigidbody2D bullet = ((GameObject)Instantiate(bulletPrefab, transform.position, Quaternion.identity)).GetComponent<Rigidbody2D>();
-        float angle = Mathf.Atan((target.y - transform.position.y) / (target.x - transform.position.x));
+        angle = Mathf.Atan((target.y - transform.position.y) / (target.x - transform.position.x));
         //Debug.Log(angle);
         bullet.transform.Rotate(new Vector3(0, 0, angle * 180 / Mathf.PI));
         bullet.velocity = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * -10;
     }
 
     public override void Update() {
+        if (vision.playerInVision)
+        {
+            angle = Mathf.Atan((Player.instance.transform.position.y - transform.position.y) / (Player.instance.transform.position.x - transform.position.x));
+            head.transform.GetChild(0).transform.eulerAngles = new Vector3(0, 0, angle * 180 / Mathf.PI);
+            gun.transform.eulerAngles = new Vector3(0, 0, angle * 180 / Mathf.PI);
+            if (direction)
+            {
+                head.transform.GetChild(1).transform.eulerAngles = new Vector3(0, 0, angle * 180 / Mathf.PI);
+                gun.transform.eulerAngles = new Vector3(0, 0, -angle * 180 / Mathf.PI);
+            }
+        }
+        else
+        {
+            head.transform.GetChild(0).transform.eulerAngles = new Vector3(0, 0, 0);
+            head.transform.GetChild(1).transform.eulerAngles = new Vector3(0, 0, 0);
+            gun.transform.eulerAngles = new Vector3(0, 0, 0);
+
+        }
         if (unconsciousTime > 0) {
             unconsciousTime -= Time.deltaTime;
             return;
