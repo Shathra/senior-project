@@ -36,13 +36,6 @@ AnimationClip:
     - time: 0
       value: {fileID: 0}
     attribute: m_Sprite
-    path: Body/Head
-    classID: 212
-    script: {fileID: 0}
-  - curve:
-    - time: 0
-      value: {fileID: 0}
-    attribute: m_Sprite
     path: Body/Gun
     classID: 212
     script: {fileID: 0}
@@ -51,6 +44,13 @@ AnimationClip:
       value: {fileID: 0}
     attribute: m_Sprite
     path: Body/Legs
+    classID: 212
+    script: {fileID: 0}
+  - curve:
+    - time: 0
+      value: {fileID: 0}
+    attribute: m_Sprite
+    path: Body/Head/HeadSprite
     classID: 212
     script: {fileID: 0}
   m_SampleRate: 12
@@ -66,12 +66,6 @@ AnimationClip:
       classID: 212
       customType: 23
       isPPtrCurve: 1
-    - path: 694585260
-      attribute: 0
-      script: {fileID: 0}
-      classID: 212
-      customType: 23
-      isPPtrCurve: 1
     - path: 1627720902
       attribute: 0
       script: {fileID: 0}
@@ -79,6 +73,12 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     - path: 1938633402
+      attribute: 0
+      script: {fileID: 0}
+      classID: 212
+      customType: 23
+      isPPtrCurve: 1
+    - path: 860819774
       attribute: 0
       script: {fileID: 0}
       classID: 212
