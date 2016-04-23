@@ -55,7 +55,7 @@ public class Guardian : Enemy, ISpotable, IApproachable {
         prevPos = transform.position;
         anim = GetComponent<Animator>();
         unconsciousTime = 0;
-        totalUnconsciousTime = 10;
+        totalUnconsciousTime = 1;
         //vision.GenerateVision(30, 10);
     }
     public void Approach(Vector2 target) {
@@ -138,7 +138,7 @@ public class Guardian : Enemy, ISpotable, IApproachable {
             unconsciousTime -= Time.deltaTime;
             return;
         } else
-            anim.SetBool("Unconscious", true);
+            anim.SetBool("Unconscious", false);
         if (anim.GetCurrentAnimatorStateInfo(0).IsName("Unconscious") ||
             anim.GetCurrentAnimatorStateInfo(0).IsName("WakingUp")) {
             return;
