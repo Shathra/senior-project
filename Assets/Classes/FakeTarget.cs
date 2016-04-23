@@ -3,10 +3,13 @@ using System.Collections;
 
 public class FakeTarget : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-	
-	}
+    public Sprite sprite1;
+    public Sprite sprite2;
+
+    // Use this for initialization
+    void Start () {
+        gameObject.GetComponent<SpriteRenderer>().sprite = sprite1;
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -14,10 +17,8 @@ public class FakeTarget : MonoBehaviour {
     }
     void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.gameObject.tag == "Player")
-        {
-            Debug.Log("Princess is another castle");
-            Destroy(gameObject);
+        if (col.gameObject.tag == "Player") {
+            gameObject.GetComponent<SpriteRenderer>().sprite = sprite2;
         }
     }
 }
