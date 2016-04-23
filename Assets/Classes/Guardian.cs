@@ -71,6 +71,7 @@ public class Guardian : Enemy, ISpotable, IApproachable {
         } else if (onLadder && !Physics2D.Raycast(topPoint, -Vector2.up, 0.01f, LayerMask.GetMask("Ladder"))) {
             onLadder = false;
         }
+        anim.SetBool("Flying", onLadder);
         transform.position = Vector2.MoveTowards(transform.position, new Vector2(target.x, onLadder ? target.y : transform.position.y), Time.deltaTime * moveSpeed);
 
         if (target.x - transform.position.x > 0) {
