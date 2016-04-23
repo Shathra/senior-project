@@ -181,7 +181,9 @@ public class Player : MonoBehaviour {
 		if (hit) {
 			if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Guardian")) {
 				takedownLock = true;
-				anim.SetTrigger("Takedown");
+                anim.SetTrigger("Takedown");
+                anim.SetFloat("Movement", 0.0f);
+                body.velocity = Vector2.zero;
                 hit.collider.GetComponent<Guardian>().Knockout();
 			}
 		}
