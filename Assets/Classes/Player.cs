@@ -41,6 +41,7 @@ public class Player : MonoBehaviour {
 		onLadder = false;
 		takedownLock = false;
         runSoundInterval = RUN_SOUND_DELAY;
+        lastPosition = transform.position;
 	}
 
 	public Vector2[] keyPoints {
