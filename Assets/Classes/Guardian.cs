@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class Guardian : Enemy, ISpotable, IApproachable {
@@ -18,6 +19,7 @@ public class Guardian : Enemy, ISpotable, IApproachable {
     private Vector2 prevPos;
     private float unconsciousTime;
     private float angle;
+	private Text unconsciousText;
 
     public int patrolType;
     public Node patrolCoordinate1;
@@ -62,6 +64,7 @@ public class Guardian : Enemy, ISpotable, IApproachable {
         anim = GetComponent<Animator>();
         unconsciousTime = 0;
         totalUnconsciousTime = 1;
+		unconsciousText = GetComponentInChildren<Text>();
         //vision.GenerateVision(30, 10);
     }
     public void Approach(Vector2 target) {
@@ -141,6 +144,7 @@ public class Guardian : Enemy, ISpotable, IApproachable {
     }
 
     public override void Update() {
+		unconsciousText.text = unconsciousTime > 0 ? "" + unconsciousTime.ToString("F1") : "";
         if (vision.playerInVision)
         {
             angle = Mathf.Atan((Player.instance.transform.position.y - transform.position.y) / (Player.instance.transform.position.x - transform.position.x));
