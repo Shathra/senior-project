@@ -20,7 +20,7 @@ class Initializer : MonoBehaviour {
 
         string strCmdText;
         strCmdText = "/C cd DifficultyEstimator & python estimator.py";
-        Process.Start("CMD.exe", strCmdText);
+        //Process.Start("CMD.exe", strCmdText);
 
         MLCommunicator.Init();
 
