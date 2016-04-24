@@ -22,6 +22,7 @@ public class Guardian : Enemy, ISpotable, IApproachable {
     private float unconsciousTime;
     private float angle;
 	private Text unconsciousText;
+	private Image unconsciousImage;
 
     public int patrolType;
     public Node patrolCoordinate1;
@@ -83,6 +84,7 @@ public class Guardian : Enemy, ISpotable, IApproachable {
         unconsciousTime = 0;
         totalUnconsciousTime = 1;
 		unconsciousText = GetComponentInChildren<Text>();
+		unconsciousImage = GetComponentInChildren<Image>();
         //vision.GenerateVision(30, 10);
     }
     public void Approach(Vector2 target) {
@@ -162,8 +164,9 @@ public class Guardian : Enemy, ISpotable, IApproachable {
     }
 
     public override void Update() {
-		unconsciousText.text = unconsciousTime > 0 ? "" + unconsciousTime.ToString("F1") : "";
-        if (vision.playerInVision)
+		unconsciousText.text = unconsciousTime > 0 ? "" + Mathf.Round(unconsciousTime) : "";
+		unconsciousImage.fillAmount = unconsciousTime / totalUnconsciousTime;
+		if (vision.playerInVision)
         {
             angle = Mathf.Atan((Player.instance.transform.position.y - transform.position.y) / (Player.instance.transform.position.x - transform.position.x));
             eye.transform.eulerAngles = new Vector3(0, 0, angle * 180 / Mathf.PI);
