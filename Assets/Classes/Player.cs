@@ -162,10 +162,10 @@ public class Player : MonoBehaviour {
 		if (Input.GetKeyDown(KeyCode.Mouse0)) {
 			Vector2 mousePos = UnityEngine.Camera.main.ScreenToWorldPoint(Input.mousePosition);
 			Vector2 direction = mousePos -
-				new Vector2(transform.position.x, transform.position.y);
-			Rigidbody2D rock = ((GameObject)Instantiate(rockPrefab,
+				midPoint;
+			Rigidbody2D shuriken = ((GameObject)Instantiate(rockPrefab,
 				midPoint, Quaternion.identity)).GetComponent<Rigidbody2D>();
-			rock.AddForce(direction.normalized * 40);
+			shuriken.AddForce(direction.normalized * 80);
 		}
 		anim.SetFloat("VerticalSpeed", body.velocity.y);
 		anim.SetBool("Ladder", onLadder);

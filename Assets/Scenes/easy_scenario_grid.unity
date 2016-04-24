@@ -1798,7 +1798,7 @@ Transform:
   m_Children:
   - {fileID: 1178515928}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
 --- !u!1001 &777886009
 Prefab:
   m_ObjectHideFlags: 0
@@ -2306,7 +2306,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 428886, guid: e5825961123d2d043915aa33555b087a, type: 2}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 495126, guid: e5825961123d2d043915aa33555b087a, type: 2}
       propertyPath: m_LocalPosition.x
@@ -2809,6 +2809,10 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 21299308, guid: d7b0752a283d6914192cbc47169cdc5d, type: 2}
       propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 482610, guid: d7b0752a283d6914192cbc47169cdc5d, type: 2}
+      propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -5372,6 +5376,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7405e4fc4f71ce4b8efae684bbffa19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sprite1: {fileID: 0}
+  sprite2: {fileID: 0}
 --- !u!212 &2003134017
 SpriteRenderer:
   m_ObjectHideFlags: 0
