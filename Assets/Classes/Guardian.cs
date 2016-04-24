@@ -4,7 +4,9 @@ using System.Collections;
 
 public class Guardian : Enemy, ISpotable, IApproachable {
     public Vision vision { get; set; }
-    public Head head { get; set; }
+    public HeadSprite head { get; set; }
+    public Eye eye { get; set; }
+
     public Gun gun { get; set; }
 
     public float totalUnconsciousTime { get; set; }
@@ -29,6 +31,21 @@ public class Guardian : Enemy, ISpotable, IApproachable {
 
     private bool searchIsFinished;
 
+    private bool _direction;
+    public bool direction
+    {
+        get
+        {
+            return _direction;
+        }
+        set
+        {
+            _direction = value;
+            transform.GetChild(0).transform.localScale = new Vector3((_direction ? -1 : 1) * Mathf.Abs(transform.GetChild(0).transform.localScale.x), transform.GetChild(0).transform.localScale.y, transform.GetChild(0).transform.localScale.z);
+            transform.GetChild(0).transform.GetChild(0).transform.GetChild(0).transform.GetChild(0).transform.localScale = new Vector3((_direction ? -1 : 1) * Mathf.Abs(transform.GetChild(0).transform.localScale.x), transform.GetChild(0).transform.localScale.y, transform.GetChild(0).transform.localScale.z);
+            transform.GetChild(0).transform.GetChild(0).transform.GetChild(0).transform.GetChild(0).transform.Rotate(new Vector3(0f, 0f, 180f));
+        }
+    }
     public bool onLadder {
         get {
             return _onLadder;
@@ -50,7 +67,8 @@ public class Guardian : Enemy, ISpotable, IApproachable {
     public GameObject exclamationPrefab;
 
     public void Start() {
-        head = transform.GetChild(0).transform.GetChild(0).GetComponent<Head>();
+        head = transform.GetChild(0).transform.GetChild(0).transform.GetChild(1).GetComponent<HeadSprite>();
+        eye = transform.GetChild(0).transform.GetChild(0).transform.GetChild(0).GetComponent<Eye>();
         gun  = transform.GetChild(0).transform.GetChild(1).GetComponent<Gun>();
         this.moveSpeed = MLLevelStats.GetStat(LevelStat.GuardianSpeed);
         hitbox = GetComponent<BoxCollider2D>();
@@ -148,20 +166,20 @@ public class Guardian : Enemy, ISpotable, IApproachable {
         if (vision.playerInVision)
         {
             angle = Mathf.Atan((Player.instance.transform.position.y - transform.position.y) / (Player.instance.transform.position.x - transform.position.x));
-            head.transform.GetChild(0).transform.eulerAngles = new Vector3(0, 0, angle * 180 / Mathf.PI);
+            eye.transform.eulerAngles = new Vector3(0, 0, angle * 180 / Mathf.PI);
             gun.transform.eulerAngles = new Vector3(0, 0, angle * 180 / Mathf.PI);
+            head.transform.eulerAngles = new Vector3(0, 0, -angle * 180 / Mathf.PI);
             if (direction)
             {
-                head.transform.GetChild(1).transform.eulerAngles = new Vector3(0, 0, angle * 180 / Mathf.PI);
+                head.transform.eulerAngles = new Vector3(0, 0, angle * 180 / Mathf.PI);
                 gun.transform.eulerAngles = new Vector3(0, 0, -angle * 180 / Mathf.PI);
             }
         }
         else
         {
-            head.transform.GetChild(0).transform.eulerAngles = new Vector3(0, 0, 0);
-            head.transform.GetChild(1).transform.eulerAngles = new Vector3(0, 0, 0);
+            eye.transform.eulerAngles = new Vector3(0, 0, 0);
+            head.transform.eulerAngles = new Vector3(0, 0, 0);
             gun.transform.eulerAngles = new Vector3(0, 0, 0);
-
         }
         if (unconsciousTime > 0) {
             unconsciousTime -= Time.deltaTime;

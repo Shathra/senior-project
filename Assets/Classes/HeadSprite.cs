@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Head : MonoBehaviour {
-}
+public class HeadSprite : MonoBehaviour {}

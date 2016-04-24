@@ -19,7 +19,6 @@ public class Vision : MonoBehaviour {
 				PlayerGhost.instance.transform.GetChild(0).gameObject.SetActive(true);
 				spotable.SpotOut();
 			} else if(value && !playerInVision){
-                PlayerGhost.instance.transform.GetChild(0).gameObject.SetActive(false);
                 spotable.Spot();
             }
 			_playerInVision = value;
