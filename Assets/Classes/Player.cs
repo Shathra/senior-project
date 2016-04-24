@@ -138,10 +138,12 @@ public class Player : MonoBehaviour {
 			hitbox.size = Vector2.MoveTowards(hitbox.size, new Vector2(hitbox.size.x, height), Time.deltaTime * crouchSpeed);
 		}
 
-		if (onLadder)
+		if (onLadder) {
+			anim.SetBool("LadderMoving", false);
 			if (!Physics2D.Raycast(topPoint, -Vector2.up, 0.01f, LayerMask.GetMask("Ladder")))
 				onLadder = false;
-		if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S)) {
+		}
+		if (Input.GetKey(KeyCode.W) ^ Input.GetKey(KeyCode.S)) {
 			if (Physics2D.Raycast(topPoint, -Vector2.up, 0.01f, LayerMask.GetMask("Ladder"))) {
 				Vector2 prev = transform.position;
 				float climbSpeed = 2 * Time.deltaTime;
@@ -150,10 +152,11 @@ public class Player : MonoBehaviour {
 				onLadder = true;
 				if (!Physics2D.Raycast(topPoint, -Vector2.up, 0.01f, LayerMask.GetMask("Ladder")))
 					transform.position = prev;
+				anim.SetBool("LadderMoving", true);
 			}
 		}
 
-		if (Input.GetKeyDown(KeyCode.F) && ground)
+		if (Input.GetKeyDown(KeyCode.F) && ground && !onLadder)
 			Takedown();
 
 		if (Input.GetKeyDown(KeyCode.Mouse0)) {
@@ -165,6 +168,7 @@ public class Player : MonoBehaviour {
 			rock.AddForce(direction.normalized * 40);
 		}
 		anim.SetFloat("VerticalSpeed", body.velocity.y);
+		anim.SetBool("Ladder", onLadder);
 	}
 
     void LateUpdate()
@@ -173,8 +177,6 @@ public class Player : MonoBehaviour {
     }
 
     public void Takedown() {
-		if (onLadder)
-			return;
 		Vector2 origin = new Vector2((transform.localScale.x > 0 ? hitbox.bounds.max.x + 0.001f : hitbox.bounds.min.x - 0.001f), (hitbox.bounds.min.y + hitbox.bounds.max.y) / 2);
 		float distance = 0.5f;
 		Vector2 direction = transform.localScale.x > 0 ? Vector2.right : -Vector2.right;
