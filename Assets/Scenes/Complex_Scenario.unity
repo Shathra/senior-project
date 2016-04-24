@@ -1061,17 +1061,17 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 11406842, guid: b9a465a6690b21e4191aeb31346eaa74, type: 2}
+      propertyPath: patrolCoordinate1
+      value: 
+      objectReference: {fileID: 1656802209}
+    - target: {fileID: 11406842, guid: b9a465a6690b21e4191aeb31346eaa74, type: 2}
+      propertyPath: patrolCoordinate2
+      value: 
+      objectReference: {fileID: 1690029851}
     - target: {fileID: 118562, guid: b9a465a6690b21e4191aeb31346eaa74, type: 2}
       propertyPath: m_Name
       value: Guardian (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 457010, guid: b9a465a6690b21e4191aeb31346eaa74, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 457010, guid: b9a465a6690b21e4191aeb31346eaa74, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: -0.00000016292068
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b9a465a6690b21e4191aeb31346eaa74, type: 2}
@@ -1581,11 +1581,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 499350, guid: 3b3eae84300cbd54e9cd196c08ee801c, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 1.05
+      value: 1.08
       objectReference: {fileID: 0}
     - target: {fileID: 499350, guid: 3b3eae84300cbd54e9cd196c08ee801c, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 7.66
+      value: 8.09
       objectReference: {fileID: 0}
     - target: {fileID: 499350, guid: 3b3eae84300cbd54e9cd196c08ee801c, type: 2}
       propertyPath: m_LocalPosition.z
@@ -1613,11 +1613,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 499350, guid: 3b3eae84300cbd54e9cd196c08ee801c, type: 2}
       propertyPath: m_LocalScale.y
-      value: 13.228728
+      value: 14.098424
       objectReference: {fileID: 0}
     - target: {fileID: 499350, guid: 3b3eae84300cbd54e9cd196c08ee801c, type: 2}
       propertyPath: m_LocalScale.x
-      value: 1.0781554
+      value: 1.0085806
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3b3eae84300cbd54e9cd196c08ee801c, type: 2}
@@ -2086,6 +2086,14 @@ Prefab:
       propertyPath: m_Name
       value: Guardian (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 11406842, guid: b9a465a6690b21e4191aeb31346eaa74, type: 2}
+      propertyPath: patrolCoordinate1
+      value: 
+      objectReference: {fileID: 1656802209}
+    - target: {fileID: 11406842, guid: b9a465a6690b21e4191aeb31346eaa74, type: 2}
+      propertyPath: patrolCoordinate2
+      value: 
+      objectReference: {fileID: 1690029851}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b9a465a6690b21e4191aeb31346eaa74, type: 2}
   m_IsPrefabParent: 0

@@ -69,6 +69,12 @@ TagManager:
   - name: Player
     uniqueID: 848980521
     locked: 0
+  - name: Head
+    uniqueID: 2433164581
+    locked: 0
+  - name: Gun
+    uniqueID: 1142484383
+    locked: 0
   - name: Forefront
     uniqueID: 2566604889
     locked: 0
