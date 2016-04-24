@@ -25,4 +25,11 @@ public class Node : MonoBehaviour {
 
         return "Node " + transform.position;
     }
+
+	public void OnDrawGizmos() {
+		Color prevColor = Gizmos.color;
+		Gizmos.color = Color.yellow;
+		Gizmos.DrawSphere(transform.position, 0.25f);
+		Gizmos.color = prevColor;
+	}
 }
