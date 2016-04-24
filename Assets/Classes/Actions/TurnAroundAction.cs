@@ -24,7 +24,7 @@ class TurnAroundAction : Action
         {
             timeLeft -= Time.deltaTime;
         }else{
-            enemy.direction = !enemy.direction;
+            ((Guardian)enemy).direction = !((Guardian)enemy).direction;
             timeLeft = period;
         }
     }
