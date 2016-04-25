@@ -32,7 +32,7 @@ public class Turret : Enemy {
 		fireRate = 1; //MLLevelStats.GetStat(LevelStat.TurretFireRate);
 		delay = 0.5f; //MLLevelStats.GetStat(LevelStat.TurretFireDelay);
 		rotationSpeed = MLLevelStats.GetStat(LevelStat.TurretAngularSpeed);
-		bulletSpeed = MLLevelStats.GetStat(LevelStat.TurretMissleSpeed);
+		bulletSpeed = MLLevelStats.GetStat(LevelStat.TurretMissileSpeed);
 		line = GetComponent<LineRenderer>();
 		direction = false;
 		tracingObject = null;
