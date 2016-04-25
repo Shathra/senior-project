@@ -23,6 +23,7 @@ public class Guardian : Enemy, ISpotable, IApproachable {
     private float angle;
 	private Text unconsciousText;
 	private Image unconsciousImage;
+	private float bulletSpeed;
 
     public int patrolType;
     public Node patrolCoordinate1;
@@ -82,12 +83,14 @@ public class Guardian : Enemy, ISpotable, IApproachable {
         Idle(patrolType);
         vision = GetComponentInChildren<Vision>();
         vision.spotable = this;
+		vision.gameObject.GetComponent<FOV2DEyes>().fovMaxDistance = MLLevelStats.GetStat(LevelStat.GuardianAwarenessRange); ;
         prevPos = transform.position;
         anim = GetComponent<Animator>();
         unconsciousTime = 0;
-        totalUnconsciousTime = 1;
+        totalUnconsciousTime = 3; //MLLevelStats.GetStat(LevelStat.GuardianUnconsciousTime);
 		unconsciousText = GetComponentInChildren<Text>();
 		unconsciousImage = GetComponentInChildren<Image>();
+		bulletSpeed = MLLevelStats.GetStat(LevelStat.GuardianMissileSpeed);
         //vision.GenerateVision(30, 10);
     }
     public void Approach(Vector2 target) {
@@ -160,7 +163,7 @@ public class Guardian : Enemy, ISpotable, IApproachable {
         angle = Mathf.Atan((target.y - transform.position.y) / (target.x - transform.position.x));
         //Debug.Log(angle);
         bullet.transform.Rotate(new Vector3(0, 0, angle * 180 / Mathf.PI));
-        bullet.velocity = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * -10 * (direction?1:-1);
+        bullet.velocity = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * -10 * (direction?1:-1) * bulletSpeed / 3;
     }
 
     public override void Update() {
