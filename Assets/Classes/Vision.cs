@@ -10,6 +10,7 @@ public class Vision : MonoBehaviour {
     //From functions
     bool hit;
     RaycastHit2D rcHit;
+	public FOV2DEyes eyes { get; set; }
     public bool playerInVision {
 		get {
 			return _playerInVision;
@@ -36,6 +37,7 @@ public class Vision : MonoBehaviour {
 	void Start() {
 		_playerInVision = false;
 		playerCollidingVision = false;
+		eyes = GetComponent<FOV2DEyes>();
 	}
 
 	void FixedUpdate() {

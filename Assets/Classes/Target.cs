@@ -29,7 +29,7 @@ public class Target : MonoBehaviour {
 	// Use this for initialization
 	void Start() {
 		gameObject.GetComponent<SpriteRenderer>().sprite = sprite1;
-		requiredTime = 3;
+		requiredTime = MLLevelStats.GetStat(LevelStat.HackingTime);
 		playerIn = false;
 		timer = requiredTime;
 		taken = false;

@@ -146,7 +146,8 @@ public class MLLevelStats {
     }
 
     public static float GetStat(LevelStat stat) {
-
+		if (levelStats == null)
+			Init();
         return levelStats[stat];
     }
 

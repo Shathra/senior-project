@@ -127,6 +127,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 195508, guid: 16998795b75807744ac896a4fb690498, type: 2}
+  fireRate: 1
+  delay: 0.5
 --- !u!120 &12040812
 LineRenderer:
   m_ObjectHideFlags: 1

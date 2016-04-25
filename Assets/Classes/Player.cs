@@ -179,6 +179,7 @@ public class Player : MonoBehaviour {
     {
         lastPosition = transform.position;
     }
+    
 
     public void Takedown()
     {
@@ -233,5 +234,11 @@ public class Player : MonoBehaviour {
 			return new Vector2(hitbox.bounds.min.x + hitbox.size.x / 2, hitbox.bounds.min.y);
 		}
 	}
+    void OnCollisionEnter2D(Collision2D col) {
 
+        if (col.gameObject.layer == LayerMask.NameToLayer("Ground")) {
+            Debug.Log("Sound!");
+            Sound.GenerateSound(bottomPoint, body.velocity.y/2);
+        }
+    }
 }

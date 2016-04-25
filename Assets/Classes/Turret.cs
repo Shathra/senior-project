@@ -9,8 +9,11 @@ public class Turret : Enemy {
 
 	private const float ROTATION_AMOUNT = 85;
 	private const float RANGE = 100;
-	private const float FIRE_RATE = 0.3f;
-	private const float DELAY = 0.5f;
+
+	public float fireRate { get; set; }
+	public float delay { get; set; }
+	public float rotationSpeed { get; set; }
+	public float bulletSpeed { get; set; }
 
 	private float shoot;
 	private float remainingDelay;
@@ -26,11 +29,15 @@ public class Turret : Enemy {
     RaycastHit2D hit;
     Color color;
     void Start() {
+		fireRate = MLLevelStats.GetStat(LevelStat.TurretFireRate);
+		delay = MLLevelStats.GetStat(LevelStat.TurretFireDelay);
+		rotationSpeed = MLLevelStats.GetStat(LevelStat.TurretAngularSpeed);
+		bulletSpeed = MLLevelStats.GetStat(LevelStat.TurretMissileSpeed);
 		line = GetComponent<LineRenderer>();
 		direction = false;
 		tracingObject = null;
 		shoot = 0;
-		remainingDelay = DELAY;
+		remainingDelay = delay;
 	}
     
 	public Vector2 tip {
@@ -42,12 +49,12 @@ public class Turret : Enemy {
 	void FixedUpdate() {
 		if (tracingObject == null) {
 			transform.eulerAngles = new Vector3(0, 0,
-			Mathf.MoveTowards(transform.eulerAngles.z, direction ? 180 - ROTATION_AMOUNT : 180 + ROTATION_AMOUNT, Time.fixedDeltaTime * 40));
+			Mathf.MoveTowards(transform.eulerAngles.z, direction ? 180 - ROTATION_AMOUNT : 180 + ROTATION_AMOUNT, Time.fixedDeltaTime * rotationSpeed));
 			if (Mathf.Abs(transform.eulerAngles.z - (180 - ROTATION_AMOUNT)) < 1)
 				direction = false;
 			else if (Mathf.Abs(transform.eulerAngles.z - (180 + ROTATION_AMOUNT)) < 1)
 				direction = true;
-			remainingDelay = DELAY;
+			remainingDelay = delay;
 		} else {
 			vec = Vector3.Normalize(tracingObject.GetComponent<Player>().midPoint - (Vector2)transform.parent.position);
 			angle = Mathf.Rad2Deg * Mathf.Asin(vec.x);
@@ -55,8 +62,8 @@ public class Turret : Enemy {
 			if (shoot <= 0 && remainingDelay <= 0) {
 				bullet = ((GameObject)Instantiate(bulletPrefab, tip, Quaternion.identity)).GetComponent<Rigidbody2D>();
                 bullet.transform.Rotate(new Vector3(0, 0, angle+90));
-                bullet.velocity = transform.rotation * Vector3.up * 20;
-				shoot = FIRE_RATE;
+                bullet.velocity = transform.rotation * Vector3.up * 20 * bulletSpeed;
+				shoot = 1 / fireRate;
 			} else {
 				shoot -= Time.deltaTime;
 				remainingDelay -= Time.deltaTime;
