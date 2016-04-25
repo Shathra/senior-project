@@ -9,8 +9,13 @@ public class SkillSet {
 
 	public SkillSet() {
 		player = Player.instance;
-		skills = new Skill[1];
-		skills[0] = new ShurikenSkill();
+		skills = new Skill[6];
+        skills[0] = new ShurikenSkill();
+        skills[1] = new ShurikenSkill();
+        skills[2] = new ShurikenSkill();
+        skills[3] = new ShurikenSkill();
+        skills[4] = new ShurikenSkill();
+        skills[5] = new ShurikenSkill();
 		selectedSkill = 0;
 	}
 
