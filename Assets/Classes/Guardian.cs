@@ -67,6 +67,9 @@ public class Guardian : Enemy, ISpotable, IApproachable {
 
     public GameObject exclamationPrefab;
 
+    private Rigidbody2D bullet;
+    private float movement;
+
     public void Start() {
         head = transform.GetChild(0).transform.GetChild(0).transform.GetChild(1).GetComponent<HeadSprite>();
         eye = transform.GetChild(0).transform.GetChild(0).transform.GetChild(0).GetComponent<Eye>();
@@ -111,8 +114,7 @@ public class Guardian : Enemy, ISpotable, IApproachable {
     public void Spot() {
 
         Debug.Log("SPOTTED");
-        Player player = Player.instance;
-        if (player != null && actionQueue.Peek().GetType() != typeof(FireAction)) {
+        if (Player.instance != null && actionQueue.Peek().GetType() != typeof(FireAction)) {
             //todofirat Alert
             Exclamation ex = ((GameObject)Instantiate(exclamationPrefab,
                 new Vector2(transform.position.x, transform.position.y + 1),
@@ -120,7 +122,7 @@ public class Guardian : Enemy, ISpotable, IApproachable {
             ex.transform.SetParent(gameObject.transform);
             ex.type = ExclamationType.Alerted;
 
-            actionQueue.Insert(EventManager.Spot(new SpotEvent(this, player.midPoint)));
+            actionQueue.Insert(EventManager.Spot(new SpotEvent(this, Player.instance.midPoint)));
             return;
         }
 
@@ -154,7 +156,7 @@ public class Guardian : Enemy, ISpotable, IApproachable {
     }
 
     public void Fire(Vector2 target) {
-        Rigidbody2D bullet = ((GameObject)Instantiate(bulletPrefab, transform.position, Quaternion.identity)).GetComponent<Rigidbody2D>();
+        bullet = ((GameObject)Instantiate(bulletPrefab, transform.position, Quaternion.identity)).GetComponent<Rigidbody2D>();
         angle = Mathf.Atan((target.y - transform.position.y) / (target.x - transform.position.x));
         //Debug.Log(angle);
         bullet.transform.Rotate(new Vector3(0, 0, angle * 180 / Mathf.PI));
@@ -193,7 +195,7 @@ public class Guardian : Enemy, ISpotable, IApproachable {
             return;
         }
         //actionQueue.Insert(EventManager.Spot(new SpotEvent(this, new Vector2(-4.85f, 4.87f))));
-        float movement = Vector2.Distance(transform.position, prevPos);
+        movement = Vector2.Distance(transform.position, prevPos);
         anim.SetFloat("Speed", movement > 0.01f ? 1.0f : 0.0f);
         prevPos = transform.position;
     }

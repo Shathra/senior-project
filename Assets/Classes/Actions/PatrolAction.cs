@@ -23,11 +23,9 @@ class PatrolAction : Action {
 
     public PatrolAction(Vector2 point1, Vector2 point2)
         : base() {
-
-        Node node1 = AIController.GetNearestNode(point1);
-        Node node2 = AIController.GetNearestNode(point2);
-        this.point1 = node1;
-        this.point2 = node2;
+        
+        this.point1 = AIController.GetNearestNode(point1);
+        this.point2 = AIController.GetNearestNode(point2);
         toPoint1 = true;
     }
 

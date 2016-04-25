@@ -5,6 +5,7 @@ public class Sound : MonoBehaviour {
     private ParticleSystem particles;
     private CircleCollider2D col;
     private bool soundEmitted;
+    private Guardian guard;
 
     void Start() {
         particles = GetComponent<ParticleSystem>();
@@ -25,7 +26,7 @@ public class Sound : MonoBehaviour {
     }
 
     void OnTriggerEnter2D(Collider2D col) {
-        Guardian guard = col.gameObject.GetComponent<Guardian>();
+        guard = col.gameObject.GetComponent<Guardian>();
         if (guard != null) {
             //guard.actionQueue.Insert(new ApproachAction(guard.transform.position, transform.position, Action.PRIORITY_SEARCH_APPROACH));
         }

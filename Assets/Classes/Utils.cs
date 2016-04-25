@@ -7,7 +7,9 @@ using System.Text;
 /// Utility classes
 /// </summary>
 public class Utils {
-
+    private static float min;
+    private static int index;
+    private static float current;
     /// <summary>
     /// Assumes table is not empty and columnNo is valid
     /// </summary>
@@ -16,12 +18,11 @@ public class Utils {
     /// <returns></returns>
     public static IntFloatPair MinColumn( float[,] table, int columnNo) {
 
-        float min = table[0,columnNo];
-        int index = 0;
+        min = table[0,columnNo];
+        index = 0;
+        for ( int i = 1; i < table.GetLength(0); i++) {
 
-        for( int i = 1; i < table.GetLength(0); i++) {
-
-            float current = table[i, columnNo];
+            current = table[i, columnNo];
             if (current < min) {
 
                 min = current;

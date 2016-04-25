@@ -11,14 +11,13 @@ using UnityEngine;
 /// Initializer class which is responsible for initializeing static classes
 /// </summary>
 class Initializer : MonoBehaviour {
-
+    string strCmdText;
     public void Awake() {
 
         GameController.Init();
         MLLogger.Init();
         MLLevelStats.Init();
-
-        string strCmdText;
+        
         strCmdText = "/C cd DifficultyEstimator & python estimator.py";
         //Process.Start("CMD.exe", strCmdText);
 

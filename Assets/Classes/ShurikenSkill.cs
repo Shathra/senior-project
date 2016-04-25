@@ -4,9 +4,12 @@ using System.Collections;
 using System;
 
 public class ShurikenSkill : Skill {
-	private GameObject shurikenPrefab;
 
-	public ShurikenSkill() : base() {
+    private GameObject shurikenPrefab;
+    Vector2 direction;
+    Rigidbody2D shuriken;
+
+    public ShurikenSkill() : base() {
 		charges = 4;
 		name = "Shuriken";
 		description = "Despite the implication of its name, " +
@@ -16,8 +19,8 @@ public class ShurikenSkill : Skill {
 	}
 
 	public override void Cast(Vector2 target) {
-		Vector2 direction = target - player.midPoint;
-		Rigidbody2D shuriken = ((GameObject)MonoBehaviour.Instantiate(shurikenPrefab,
+		direction = target - player.midPoint;
+		shuriken = ((GameObject)MonoBehaviour.Instantiate(shurikenPrefab,
 			player.midPoint, Quaternion.identity)).GetComponent<Rigidbody2D>();
 		shuriken.AddForce(direction.normalized * 80);
 	}
