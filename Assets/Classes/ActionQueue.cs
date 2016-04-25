@@ -8,6 +8,15 @@ using System.Collections.Generic;
 public class ActionQueue {
 
     protected List<Action> heap;
+    //From functions
+    Action result;
+    int index;
+    int leftIndex;
+    int rightIndex;
+    int minIndex;
+    Action temp;
+    bool ordered;
+    int parentIndex;
 
     /// <summary>
     /// Blank constructor, initializes member variables.
@@ -30,18 +39,18 @@ public class ActionQueue {
     /// Obvious, adds an action.
     /// </summary>
     /// <param name="action"></param>
-	public void Insert( Action action)
+    public void Insert( Action action)
     {
         heap.Add(action);
 
-        int index = heap.Count - 1;
-        bool ordered = false;
+        index = heap.Count - 1;
+        ordered = false;
         while ( index != 0 && !ordered)
         {
-            int parentIndex = (index + 1) / 2 - 1;
+            parentIndex = (index + 1) / 2 - 1;
             if ( heap[index].priority >= heap[parentIndex].priority)
             {
-                Action temp = heap[index];
+                temp = heap[index];
                 heap[index] = heap[parentIndex];
                 heap[parentIndex] = temp;
                 index = parentIndex;
@@ -77,11 +86,12 @@ public class ActionQueue {
     /// Removes and returns highest priority action in the queue.
     /// </summary>
     /// <returns>Returns null if ActionQueue is empty</returns>
+
     public Action Remove()
     {
         if( heap.Count != 0)
         {
-            Action result = heap[0]; 
+            result = heap[0]; 
             heap[0] = heap[heap.Count - 1];
             heap.RemoveAt(heap.Count - 1);
             Heapify(0);
@@ -91,10 +101,10 @@ public class ActionQueue {
         return null;
     }
     public Action Remove(Action action) {
-        int index = heap.IndexOf(action);
+        index = heap.IndexOf(action);
             
         if (index >= 0) {
-            Action result = heap[index];
+            result = heap[index];
             heap[index] = heap[heap.Count - 1];
             heap.RemoveAt(heap.Count - 1);
             Heapify(index);
@@ -105,12 +115,11 @@ public class ActionQueue {
     }
     protected void Heapify( int index)
     {
-        int leftIndex = (index + 1) * 2 - 1;
-        int rightIndex = (index + 1) * 2;
+        leftIndex = (index + 1) * 2 - 1;
+        rightIndex = (index + 1) * 2;
         if (leftIndex >= heap.Count)
             return;
-
-        int minIndex;
+        
         if (rightIndex >= heap.Count)
             minIndex = leftIndex;
         else 
@@ -118,7 +127,7 @@ public class ActionQueue {
         
         if( heap[minIndex].priority > heap[index].priority)
         {
-            Action temp = heap[index];
+            temp = heap[index];
             heap[index] = heap[minIndex];
             heap[minIndex] = temp;
             Heapify(minIndex);

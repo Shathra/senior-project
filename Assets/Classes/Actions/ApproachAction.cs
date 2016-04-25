@@ -5,6 +5,9 @@ using System.Collections.Generic;
 public class ApproachAction : Action {
     private Vector2 target;
     private List<Node> path;
+    //From functions
+    IApproachable movingObj;
+    Vector2 nextNode;
 
     public ApproachAction(Vector2 source, Vector2 target)
         : base(PRIORITY_IDLE_APPROACH) {
@@ -21,14 +24,14 @@ public class ApproachAction : Action {
     public override void Execute(Enemy enemy) {
 
         //Debug.Log("Executing approach action to " + target);
-        IApproachable movingObj = (IApproachable)enemy;
+        movingObj = (IApproachable)enemy;
 
         if (path.Count == 0) {
             done = true;
             return;
         }
 
-        Vector2 nextNode = path[0].transform.position;
+        nextNode = path[0].transform.position;
         movingObj.Approach(nextNode);
         if (Vector2.Distance(enemy.transform.position, nextNode) < 0.6f) {
 

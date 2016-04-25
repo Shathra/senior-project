@@ -4,8 +4,9 @@ using System.Collections;
 public class PlayerGhost : MonoBehaviour {
 	public static PlayerGhost instance { get; private set; }
     public bool isActive;
-	// Use this for initialization
-	void Start () {
+    Guardian guard;
+    // Use this for initialization
+    void Start () {
 		PlayerGhost.instance = this;
 	}
 	
@@ -15,7 +16,7 @@ public class PlayerGhost : MonoBehaviour {
 	}
     public void OnTriggerEnter2D(Collider2D col)
     {
-        Guardian guard = col.gameObject.GetComponent<Guardian>();
+        guard = col.gameObject.GetComponent<Guardian>();
         if (guard != null && transform.GetChild(0).gameObject.activeInHierarchy)
         {
             guard.state.SetState(Status.Searching);

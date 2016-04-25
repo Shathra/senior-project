@@ -45,9 +45,6 @@ public class FOV2DVisionCone : MonoBehaviour
     {
         UpdateMesh();
         UpdateCollider();
-
-        UpdateMeshMaterial();
-
     }
     void UpdateCollider()
     {

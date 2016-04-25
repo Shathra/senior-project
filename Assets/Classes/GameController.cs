@@ -9,7 +9,8 @@ class GameController {
     protected static Level currentLevel;
     public static bool gameOver;
     public static bool gameWon;
-
+    //From functions
+    private static float levelTime;
     public static void Init() {
         gameWon = false;
         gameOver = false;
@@ -18,7 +19,7 @@ class GameController {
 
     public static void GameOver() {
 
-        float levelTime = (float)currentLevel.GetElapsedTime();
+        levelTime = (float)currentLevel.GetElapsedTime();
         MLLogger.SetStat(PlayStat.LevelTime, levelTime);
         MLLogger.SetStat(PlayStat.Result, gameWon ? 1 : 0);
         //MLLogger.SetStat(PlayStat.LevelNo, currentLevel.GetId());

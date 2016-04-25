@@ -7,7 +7,10 @@ public class Vision : MonoBehaviour {
 	private bool _playerInVision;
 	public PolygonCollider2D visionCollider;
 	private MeshFilter visionMesh;
-	public bool playerInVision {
+    //From functions
+    bool hit;
+    RaycastHit2D rcHit;
+    public bool playerInVision {
 		get {
 			return _playerInVision;
 		}
@@ -37,9 +40,9 @@ public class Vision : MonoBehaviour {
 
 	void FixedUpdate() {
 		if (playerCollidingVision) {
-			bool hit = false;
+			hit = false;
 			foreach (Vector2 point in Player.instance.keyPoints) {
-				RaycastHit2D rcHit = Physics2D.Raycast(transform.position,
+				rcHit = Physics2D.Raycast(transform.position,
 					point - (Vector2)transform.position, 100,
 					LayerMask.GetMask("Player", "Obstacle"));
 				if (rcHit) {
@@ -68,23 +71,4 @@ public class Vision : MonoBehaviour {
 		if (col.gameObject.layer == LayerMask.NameToLayer("Player"))
 			playerCollidingVision = false;
 	}
-
-	void Update() {
-	}
-
-	/*public void GenerateVision(float angle, float range) {
-		Vector2[] points = new Vector2[3];
-		points[0] = Vector2.zero;
-		float x = Mathf.Sin((angle / 2) * Mathf.Deg2Rad) * range;
-		float y = Mathf.Cos((angle / 2) * Mathf.Deg2Rad) * range;
-		points[1] = new Vector2(-x, y);
-		points[2] = new Vector2(x, y);
-		//visionCollider.points = points;
-		Mesh mesh = new Mesh();
-		mesh.vertices = new Vector3[] { (Vector3)points[0], (Vector3)points[1], (Vector3)points[2] };
-		mesh.triangles = new int[] { 0, 1, 2 };
-		mesh.RecalculateNormals();
-		mesh.RecalculateBounds();
-		visionMesh.mesh = mesh;
-	}*/
 }

@@ -4,6 +4,8 @@ using System.Collections;
 public class Door : MonoBehaviour {
     public bool isLevelEnd;
     public Door otherDoor;
+
+    private Player player;
 	// Use this for initialization
 	void Start () {
 	    
@@ -16,7 +18,7 @@ public class Door : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        Player player = col.gameObject.GetComponent<Player>();
+        player = col.gameObject.GetComponent<Player>();
         if (player != null)
         {
             if(player.carriesTarget)

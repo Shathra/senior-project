@@ -16,6 +16,11 @@ public class SecurityCamera : MonoBehaviour, ISpotable {
 
     private bool direction;
 
+    //From functions
+    List<Guardian> guards;
+    Guardian guard;
+    Guardian nearestGuard;
+
     void Start() {
         direction = false;
         visionAngle = 30;
@@ -35,8 +40,8 @@ public class SecurityCamera : MonoBehaviour, ISpotable {
     }
 
     private Guardian NearestGuard() {
-        List<Guardian> guards = AIController.GetGuardians();
-        Guardian guard = guards[0];
+        guards = AIController.GetGuardians();
+        guard = guards[0];
         float smallestDistance = Mathf.Abs(Vector2.Distance(guard.transform.position, GameObject.FindGameObjectWithTag("Player").transform.position));
         for (int i = 1; i < guards.Count; i++)
         {
@@ -51,7 +56,7 @@ public class SecurityCamera : MonoBehaviour, ISpotable {
     }
 
 	public void Spot() {
-		Guardian nearestGuard = NearestGuard();
+		nearestGuard = NearestGuard();
         if (nearestGuard.actionQueue.Peek().GetType() != typeof(FireAction)) {
             while (nearestGuard.actionQueue.Peek().priority == Action.PRIORITY_SEARCH || nearestGuard.actionQueue.Peek().priority == Action.PRIORITY_SEARCH_APPROACH){
                     nearestGuard.actionQueue.Remove();

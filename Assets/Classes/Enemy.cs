@@ -8,7 +8,7 @@ public class Enemy : MonoBehaviour {
 
     public ActionQueue actionQueue { get; set; }
     public State state;
-
+    Action action;
     public void Awake()
     {
         actionQueue = new ActionQueue();
@@ -19,7 +19,7 @@ public class Enemy : MonoBehaviour {
     {
         actionQueue.Display();
         Debug.Log(gameObject.name);
-        Action action = actionQueue.Peek();
+        action = actionQueue.Peek();
         if (action != null) {
             action.Execute(this);
             if (action.done) {
