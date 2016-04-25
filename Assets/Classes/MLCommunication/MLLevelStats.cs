@@ -4,9 +4,10 @@ using System.Collections.Generic;
 
 public enum LevelStat {
 
-    GuardianSpeed, GuardianTurnRate, GuardianWeaponDamage, GuardianMissileSpeed, GuardianWeaponFireRate,
-    GuardianAwarenessRange, GuardianWeaponAccuracy, GuardianReactionTime, GuardianAlertInterval, TurretAngularSpeed, TurretWeaponAccuracy,
-    TurretMissleSpeed, CameraAngularSpeed, CameraAwarenessRange
+    GuardianSpeed, GuardianMissileSpeed, GuardianWeaponFireRate,
+    GuardianAwarenessRange, GuardianReactionTime, GuardianUnconciousTime, TurretAngularSpeed,
+    TurretMissileSpeed, TurretFireRate, TurretFireDelay, CameraAngularSpeed, CameraAwarenessRange,
+    HackingTime, ShurikenLimit
 }
 
 /// <summary>
@@ -24,17 +25,20 @@ public class MLLevelStats {
         }
 
         levelStats[LevelStat.GuardianSpeed] = 1.0f;
-        levelStats[LevelStat.GuardianTurnRate] = 1.0f;
-        levelStats[LevelStat.GuardianWeaponDamage] = 1.0f;
         levelStats[LevelStat.GuardianMissileSpeed] = 1.0f;
-        levelStats[LevelStat.GuardianAwarenessRange] = 1.0f;
-        levelStats[LevelStat.GuardianWeaponAccuracy] = 1.0f;
-        levelStats[LevelStat.GuardianReactionTime] = 1.0f;
-        levelStats[LevelStat.GuardianAlertInterval] = 1.0f;
         levelStats[LevelStat.GuardianWeaponFireRate] = 2.0f;
+        levelStats[LevelStat.GuardianAwarenessRange] = 1.0f;
+        levelStats[LevelStat.GuardianReactionTime] = 1.0f;
+        levelStats[LevelStat.GuardianUnconciousTime] = 1.0f;
+
         levelStats[LevelStat.TurretAngularSpeed] = 1.0f;
-        levelStats[LevelStat.TurretWeaponAccuracy] = 1.0f;
-        levelStats[LevelStat.TurretMissleSpeed] = 1.0f;
+        levelStats[LevelStat.TurretMissileSpeed] = 1.0f;
+        levelStats[LevelStat.TurretFireRate] = 1.0f;
+        levelStats[LevelStat.TurretFireDelay] = 1.0f;
+
+        levelStats[LevelStat.HackingTime] = 1.0f;
+        levelStats[LevelStat.ShurikenLimit] = 1.0f;
+
         levelStats[LevelStat.CameraAngularSpeed] = 1.0f;
         levelStats[LevelStat.CameraAwarenessRange] = 1.0f;
     }
