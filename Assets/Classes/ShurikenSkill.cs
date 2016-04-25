@@ -10,7 +10,7 @@ public class ShurikenSkill : Skill {
     Rigidbody2D shuriken;
 
     public ShurikenSkill() : base() {
-		charges = 4; //MLLevelStats.GetStat(LevelStat.ShurikenLimit);
+		charges = Mathf.RoundToInt(MLLevelStats.GetStat(LevelStat.ShurikenLimit));
 		name = "Shuriken";
 		description = "Despite the implication of its name, " +
 			"Prometheus uses this seemingly uncivilized weapon " +

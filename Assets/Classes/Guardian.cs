@@ -87,7 +87,7 @@ public class Guardian : Enemy, ISpotable, IApproachable {
         prevPos = transform.position;
         anim = GetComponent<Animator>();
         unconsciousTime = 0;
-        totalUnconsciousTime = 3; //MLLevelStats.GetStat(LevelStat.GuardianUnconsciousTime);
+        totalUnconsciousTime = MLLevelStats.GetStat(LevelStat.GuardianUnconciousTime);
 		unconsciousText = GetComponentInChildren<Text>();
 		unconsciousImage = GetComponentInChildren<Image>();
 		bulletSpeed = MLLevelStats.GetStat(LevelStat.GuardianMissileSpeed);

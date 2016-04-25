@@ -29,8 +29,8 @@ public class Turret : Enemy {
     RaycastHit2D hit;
     Color color;
     void Start() {
-		fireRate = 1; //MLLevelStats.GetStat(LevelStat.TurretFireRate);
-		delay = 0.5f; //MLLevelStats.GetStat(LevelStat.TurretFireDelay);
+		fireRate = MLLevelStats.GetStat(LevelStat.TurretFireRate);
+		delay = MLLevelStats.GetStat(LevelStat.TurretFireDelay);
 		rotationSpeed = MLLevelStats.GetStat(LevelStat.TurretAngularSpeed);
 		bulletSpeed = MLLevelStats.GetStat(LevelStat.TurretMissileSpeed);
 		line = GetComponent<LineRenderer>();
