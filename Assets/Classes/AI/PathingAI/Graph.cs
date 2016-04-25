@@ -6,34 +6,7 @@ using UnityEngine;
 public class Graph
 {
     protected List<Node> nodes;
-    //From Functions
-    //SearchGraph
-    private static List<Node> visited;
-    private static List<Node> unvisited;
-    private static int noNodes;
-    private static int noGuardians;
-    private static int[] nodeMarks;
-    private static int[] guardianMarks;
-    private static float[] guardianTimes;
-    private static List<Node> guardianCurrentNodes;
-    private static float[,] distance;
-    private static float[,] distance_searcher;
-    private static int index;
-    private static List<List<Node>> result;
-    private static Node farNode;
-    private static IntFloatPair guardianDistancePair;
-    private static Node current_node;
-    private static IntFloatPair currentPair;
-    private static List<Node> path;
-    private static int freeGuard = 0;
-    private static float freeTime = guardianTimes[0];
-    private static float guardianToNodeDistance;
-    private static Node tempNode;
-    //CalculateShortestDistanceOfEachPair
-    private static int no_nodes;
-    private static float[,] prev_iteration;
-    private static float[,] current_iteration;
-    //
+
     public Graph()
     {
         nodes = new List<Node>();
@@ -82,26 +55,27 @@ public class Graph
     {
 
         //TODO:Finish the function and test it
-        visited = new List<Node>();
-        unvisited = new List<Node>();
-        noNodes = graph.nodes.Count;
-        noGuardians = searchers.Count;
-        nodeMarks = new int[noNodes];
-        guardianMarks = new int[noGuardians];
-        guardianTimes = new float[noGuardians];
-        guardianCurrentNodes = new List<Node>();
+        List<Node> visited = new List<Node>();
+        List<Node> unvisited = new List<Node>();
+        List<Node> nodes = graph.nodes;
+        int noNodes = nodes.Count;
+        int noGuardians = searchers.Count;
+        int[] nodeMarks = new int[noNodes];
+        int[] guardianMarks = new int[noGuardians];
+        float[] guardianTimes = new float[noGuardians];
+        List<Node> guardianCurrentNodes = new List<Node>();
 
-        distance = graph.CalculateShortestDistanceOfEachPair();
-        distance_searcher = new float[noGuardians, noNodes];
+        float[,] distance = graph.CalculateShortestDistanceOfEachPair();
+        float[,] distance_searcher = new float[noGuardians, noNodes];
         for (int i = 0; i < searchers.Count; i++)
         {
 
-            index = graph.nodes.IndexOf(searchers[i]);
+            int index = graph.nodes.IndexOf(searchers[i]);
             for (int j = 0; j < noNodes; j++)
                 distance_searcher[i, j] = distance[index, j];
         }
 
-        result = new List<List<Node>>();
+        List<List<Node>> result = new List<List<Node>>();
 
         for (int i = 0; i < noNodes; i++)
         {
@@ -112,6 +86,7 @@ public class Graph
 
         for (int i = 0; i < noGuardians; i++)
         {
+
             guardianMarks[i] = 0;
             guardianTimes[i] = 0;
             guardianCurrentNodes.Add(searchers[i]);
@@ -125,24 +100,26 @@ public class Graph
             if (unvisited.Count == 0)
                 break;
 
-            farNode = unvisited[0];
-            index = graph.nodes.IndexOf(farNode);
-            guardianDistancePair = Utils.MinColumn(distance_searcher, index);
+            Node farNode = unvisited[0];
+            int index = graph.nodes.IndexOf(farNode);
+            IntFloatPair guardianDistancePair = Utils.MinColumn(distance_searcher, index);
             for (int j = 1; j < unvisited.Count; j++)
             {
-                current_node = unvisited[j];
+
+                Node current_node = unvisited[j];
                 index = graph.nodes.IndexOf(current_node);
 
-                currentPair = Utils.MinColumn(distance_searcher, index);
+                IntFloatPair currentPair = Utils.MinColumn(distance_searcher, index);
                 if (currentPair.Value > guardianDistancePair.Value)
                 {
+
                     farNode = current_node;
                     guardianDistancePair = currentPair;
                 }
             }
 
             //Fartest node found, send closest guardian
-            path = null;
+            List<Node> path = null;
             path = graph.ShortestPath(searchers[guardianDistancePair.Index], farNode);
             result[guardianDistancePair.Index] = path;
             for (int j = 0; j < noNodes; j++)
@@ -164,28 +141,33 @@ public class Graph
         //While there is a unvisited node in the graph
         while (unvisited.Count != 0)
         {
+
             //Find guy who finish its job earliest and assign this node to him
-            freeGuard = 0;
-            freeTime = guardianTimes[0];
+            int freeGuard = 0;
+            float freeTime = guardianTimes[0];
             for (int i = 1; i < noGuardians; i++)
             {
+
                 if (freeTime > guardianTimes[i])
                 {
+
                     freeGuard = i;
                     freeTime = guardianTimes[i];
                 }
             }
 
             //Free guy found, assign this node to him.
-            guardianToNodeDistance = distance[graph.nodes.IndexOf(guardianCurrentNodes[freeGuard]), graph.nodes.IndexOf(unvisited[0])];
-            path = graph.ShortestPath(guardianCurrentNodes[freeGuard], unvisited[0]);
+            float guardianToNodeDistance = distance[graph.nodes.IndexOf(guardianCurrentNodes[freeGuard]), graph.nodes.IndexOf(unvisited[0])];
+            List<Node> path = graph.ShortestPath(guardianCurrentNodes[freeGuard], unvisited[0]);
             path.RemoveAt(0);
             result[freeGuard].AddRange(path);
-            tempNode = unvisited[0];
+            Node tempNode = unvisited[0];
             for (int j = 0; j < path.Count; j++)
             {
+
                 if (unvisited.Contains(path[j]))
                 {
+
                     unvisited.Remove(path[j]);
                     visited.Add(path[j]);
                 }
@@ -205,9 +187,9 @@ public class Graph
     public float[,] CalculateShortestDistanceOfEachPair()
     {
 
-        no_nodes = nodes.Count;
-        prev_iteration = new float[no_nodes, no_nodes];
-        current_iteration = null;
+        int no_nodes = nodes.Count;
+        float[,] prev_iteration = new float[no_nodes, no_nodes];
+        float[,] current_iteration = null;
 
         for (int i = 0; i < no_nodes; i++)
         {
@@ -246,8 +228,7 @@ public class Graph
         }
         return current_iteration;
     }
-    private static float total;
-    private static int nextIndex;
+
     /// <summary>
     /// A utility function which calculates the distance of a path by adding weights of all edges in the path
     /// </summary>
@@ -255,35 +236,28 @@ public class Graph
     /// <returns>Returns distance</returns>
     public static float CalculatePathDistance(List<Node> path)
     {
-        total = 0;
+
+        float total = 0;
         for (int i = 0; i < path.Count - 1; i++)
         {
 
-            nextIndex = Array.IndexOf(path[i].edges, path[i + 1]);
+            int nextIndex = Array.IndexOf(path[i].edges, path[i + 1]);
             total += path[i].weights[nextIndex];
         }
 
         return total;
     }
-    private Node sourceNode;
-    private Node targetNode;
+
     public List<Node> ShortestPath(Vector2 source, Vector2 target)
     {
 
-        sourceNode = GetNearestNode(source);
-        targetNode = GetNearestNode(target);
+        Node sourceNode = GetNearestNode(source);
+        Node targetNode = GetNearestNode(target);
 
         return ShortestPath(sourceNode, targetNode);
     }
 
-    List<int> prev;
-    List<float> distanceList;
-    List<Node> remaining;
-    int current;
-    float min;
-    int next;
-    int currentIndex;
-    int sourceIndex;
+
     /// <summary>
     /// Dijkstra algorithm
     /// </summary>
@@ -292,21 +266,21 @@ public class Graph
     /// <returns>Returns list of nodes which unit should traverse in order to achieve target node with shorthest path</returns>
     public List<Node> ShortestPath(Node source, Node target)
     {
-        prev = new List<int>();
-        distanceList = new List<float>();
+        List<int> prev = new List<int>();
+        List<float> distance = new List<float>();
 
-        remaining = new List<Node>();
+        List<Node> remaining = new List<Node>();
 
         for (int i = 0; i < nodes.Count; i++)
         {
 
-            distanceList.Add(float.MaxValue);
+            distance.Add(float.MaxValue);
             remaining.Add(nodes[i]);
             prev.Add(-1);
         }
 
-        current = nodes.IndexOf(source);
-        distanceList[current] = 0;
+        int current = nodes.IndexOf(source);
+        distance[current] = 0;
         remaining[current] = null;
 
         for (int i = 1; i < nodes.Count; i++)
@@ -316,26 +290,26 @@ public class Graph
             {
 
                 int toIndex = nodes.IndexOf(nodes[current].edges[j]);
-                if (distanceList[current] + nodes[current].weights[j] < distanceList[toIndex])
+                if (distance[current] + nodes[current].weights[j] < distance[toIndex])
                 {
 
-                    distanceList[toIndex] = distanceList[current] + nodes[current].weights[j];
+                    distance[toIndex] = distance[current] + nodes[current].weights[j];
                     prev[toIndex] = current;
                 }
             }
 
-            min = float.MaxValue;
-            next = -1;
+            float min = float.MaxValue;
+            int next = -1;
             for (int j = 0; j < remaining.Count; j++)
             {
 
                 if (remaining[j] != null)
                 {
 
-                    if (distanceList[j] < min)
+                    if (distance[j] < min)
                     {
 
-                        min = distanceList[j];
+                        min = distance[j];
                         next = j;
                     }
                 }
@@ -349,12 +323,13 @@ public class Graph
             }
         }
 
-        path = new List<Node>();
-        currentIndex = nodes.IndexOf(target);
-        sourceIndex = nodes.IndexOf(source);
+        List<Node> path = new List<Node>();
+        int currentIndex = nodes.IndexOf(target);
+        int sourceIndex = nodes.IndexOf(source);
         path.Add(target);
         while (currentIndex != sourceIndex)
         {
+
             path.Add(nodes[prev[currentIndex]]);
             currentIndex = prev[currentIndex];
         }
@@ -363,25 +338,24 @@ public class Graph
 
         return path;
     }
-    private Node nodeToReturn;
-    private float minDistance;
-    private float dist;
+
     public Node GetNearestNode(Vector2 pos)
     {
 
         if (nodes.Count == 0)
             return null;
 
-        nodeToReturn = nodes[0];
-        minDistance = Vector2.Distance(pos, nodeToReturn.transform.position);
+        Node nodeToReturn = nodes[0];
+        float minDistance = Vector2.Distance(pos, nodeToReturn.transform.position);
+        float distance;
         for (int i = 1; i < nodes.Count; i++)
         {
 
-            dist = Vector2.Distance(nodes[i].transform.position, pos);
-            if (dist < minDistance)
+            distance = Vector2.Distance(nodes[i].transform.position, pos);
+            if (distance < minDistance)
             {
 
-                minDistance = dist;
+                minDistance = distance;
                 nodeToReturn = nodes[i];
             }
         }
