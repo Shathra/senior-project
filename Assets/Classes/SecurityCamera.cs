@@ -5,7 +5,7 @@ using System;
 /// <summary>
 /// Immobile unit which alerts other enemy in a range when it sees a player
 /// </summary>
-public class SecurityCamera : Enemy, ISpotable {
+public class SecurityCamera : MonoBehaviour, ISpotable {
     private const float ROTATION_AMOUNT = 85;
     public const float RANGE = 10;
 
@@ -52,7 +52,12 @@ public class SecurityCamera : Enemy, ISpotable {
 
 	public void Spot() {
 		Guardian nearestGuard = NearestGuard();
-		nearestGuard.Spot();
+        if (nearestGuard.actionQueue.Peek().GetType() != typeof(FireAction)) {
+            while (nearestGuard.actionQueue.Peek().priority == Action.PRIORITY_SEARCH || nearestGuard.actionQueue.Peek().priority == Action.PRIORITY_SEARCH_APPROACH){
+                    nearestGuard.actionQueue.Remove();
+            }
+            nearestGuard.actionQueue.Insert(new SearchAction(Player.instance));
+        }
 	}
 
 	public void SpotOut() {

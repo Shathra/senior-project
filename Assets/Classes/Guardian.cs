@@ -110,10 +110,8 @@ public class Guardian : Enemy, ISpotable, IApproachable {
 
         Debug.Log("SPOTTED");
         Player player = Player.instance;
-        if (player != null) {
+        if (player != null && actionQueue.Peek().GetType() != typeof(FireAction)) {
             //todofirat Alert
-            state.SetState(Status.Alert);
-            //
             Exclamation ex = ((GameObject)Instantiate(exclamationPrefab,
                 new Vector2(transform.position.x, transform.position.y + 1),
                 Quaternion.identity)).GetComponent<Exclamation>();
@@ -158,10 +156,11 @@ public class Guardian : Enemy, ISpotable, IApproachable {
         angle = Mathf.Atan((target.y - transform.position.y) / (target.x - transform.position.x));
         //Debug.Log(angle);
         bullet.transform.Rotate(new Vector3(0, 0, angle * 180 / Mathf.PI));
-        bullet.velocity = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * -10;
+        bullet.velocity = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * -10 * (direction?1:-1);
     }
 
     public override void Update() {
+        base.Update();
 		unconsciousText.text = unconsciousTime > 0 ? "" + unconsciousTime.ToString("F1") : "";
         if (vision.playerInVision)
         {
@@ -190,7 +189,6 @@ public class Guardian : Enemy, ISpotable, IApproachable {
             anim.GetCurrentAnimatorStateInfo(0).IsName("WakingUp")) {
             return;
         }
-        base.Update();
         //actionQueue.Insert(EventManager.Spot(new SpotEvent(this, new Vector2(-4.85f, 4.87f))));
         float movement = Vector2.Distance(transform.position, prevPos);
         anim.SetFloat("Speed", movement > 0.01f ? 1.0f : 0.0f);
@@ -207,23 +205,6 @@ public class Guardian : Enemy, ISpotable, IApproachable {
             //No rotation or no walking but may add some functions
         }
 
-    }
-    void Searching() {
-        /*
-        if (searchIsFinished)
-        {
-            state.SetState(Status.HasSeen);
-        }          ///selam
-        */
-    }
-    void HasSeen() {
-        //later
-    }
-    void Suspicous() {
-        //later
-    }
-    void Alert() {
-        //sooner
     }
 
     public void Knockout() {

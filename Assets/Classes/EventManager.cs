@@ -13,7 +13,7 @@ public class EventManager {
     /// Adds an event. It should be used where type of event is not known otherwise related method should be used.
     /// </summary>
     /// <param name="gameEvent">GameEvent to be added</param>
-    public static void AddEvent( GameEvent gameEvent) {
+    public static void AddEvent(GameEvent gameEvent) {
 
         //TODO: Implement
         return;
@@ -29,29 +29,38 @@ public class EventManager {
         return null;
     }
 
-    public static Action Spot( SpotEvent gameEvent) {
+    public static Action Spot(SpotEvent gameEvent) {
 
         Debug.Log("SpotIn");
         Action actionToReturn = null;
         if (gameEvent.Source.GetType() == typeof(Guardian)) {
             actionToReturn = new FireAction(AIController.GetPlayer());
-        }else if (gameEvent.Source.GetType() == typeof(Turret)) {
+        } else if (gameEvent.Source.GetType() == typeof(Turret)) {
             actionToReturn = new FireAction(AIController.GetPlayer());
-        }else{
+        } else {
             Debug.Log("Null in Spot");
         }
 
         return actionToReturn;
     }
 
-    public static Action SpotOut( SpotOutEvent gameEvent) {
+    public static Action SpotOut(SpotOutEvent gameEvent) {
 
         Debug.Log("SpotOut");
         if (gameEvent.Source.GetType() == typeof(Guardian)) {
 
             Guardian guardian = (Guardian)(gameEvent.Source);
-            guardian.actionQueue.Remove();
-            return new ApproachAction(guardian.transform.position, PlayerGhost.instance.transform.position, Action.PRIORITY_HOSTILE);
+            if (guardian != null) {
+                if(guardian.vision.playerInVision){
+                    guardian.actionQueue.Remove();
+                    if (PlayerGhost.instance.isActive) {
+                        guardian.actionQueue.Insert(new SearchAction(PlayerGhost.instance));
+                    } else {
+                        guardian.actionQueue.Insert(new SearchAction(Player.instance));
+                    }
+                }
+            }
+            return new EmptyAction();
         }
 
         return new EmptyAction();

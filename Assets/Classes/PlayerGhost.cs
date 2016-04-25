@@ -3,7 +3,7 @@ using System.Collections;
 
 public class PlayerGhost : MonoBehaviour {
 	public static PlayerGhost instance { get; private set; }
-
+    public bool isActive;
 	// Use this for initialization
 	void Start () {
 		PlayerGhost.instance = this;
@@ -20,7 +20,13 @@ public class PlayerGhost : MonoBehaviour {
         {
             guard.state.SetState(Status.Searching);
             transform.GetChild(0).gameObject.SetActive(false);
+            isActive = false;
             //todo
         }
+    }
+    public void SetActive(bool isActive){
+        transform.position = Player.instance.midPoint;
+        transform.GetChild(0).gameObject.SetActive(isActive);
+        this.isActive = isActive;
     }
 }

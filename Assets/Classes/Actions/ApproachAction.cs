@@ -6,12 +6,14 @@ public class ApproachAction : Action {
     private Vector2 target;
     private List<Node> path;
 
-    public ApproachAction(Vector2 source, Vector2 target) : base(){
+    public ApproachAction(Vector2 source, Vector2 target)
+        : base(PRIORITY_IDLE_APPROACH) {
         this.target = target;
         path = AIController.GetPath(source, target);
     }
 
-    public ApproachAction(Vector2 source, Vector2 target, int priority) : base(priority){
+    public ApproachAction(Vector2 source, Vector2 target, int priority)
+        : base(priority) {
         this.target = target;
         path = AIController.GetPath(source, target);
     }
@@ -20,19 +22,20 @@ public class ApproachAction : Action {
 
         //Debug.Log("Executing approach action to " + target);
         IApproachable movingObj = (IApproachable)enemy;
-        
-        if( path.Count == 0) {
+
+        if (path.Count == 0) {
             done = true;
             return;
         }
 
         Vector2 nextNode = path[0].transform.position;
         movingObj.Approach(nextNode);
-		if(Vector2.Distance(enemy.transform.position, nextNode) < 0.2f) {
+        if (Vector2.Distance(enemy.transform.position, nextNode) < 0.6f) {
 
             //REMOVE NOTE: It conflicts with other part of code, i removed it. We might think something else if when it is needed.
-			//AIController.GetPath(enemy.transform.position, target);
-			path.RemoveAt(0);
-		}
+            //AIController.GetPath(enemy.transform.position, target);
+            path.RemoveAt(0);
+        }
+
     }
 }

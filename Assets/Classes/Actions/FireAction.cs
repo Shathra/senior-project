@@ -19,8 +19,6 @@ public class FireAction : Action
             ((Guardian)enemy).Fire(target.midPoint);
             fireTime = MLLevelStats.GetStat(LevelStat.GuardianWeaponFireRate);
         }
-        if (!((Guardian)enemy).vision.playerInVision) {
-            enemy.actionQueue.Remove();
-        }
+        done = PlayerGhost.instance.isActive;
     }
 }

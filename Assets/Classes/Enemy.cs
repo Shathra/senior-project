@@ -9,7 +9,6 @@ public class Enemy : MonoBehaviour {
     public ActionQueue actionQueue { get; set; }
     public State state;
 
-
     public void Awake()
     {
         actionQueue = new ActionQueue();
@@ -18,12 +17,15 @@ public class Enemy : MonoBehaviour {
 
     public virtual void Update()
     {
+        actionQueue.Display();
+        Debug.Log(gameObject.name);
         Action action = actionQueue.Peek();
-        if (action != null)
-        {
+        if (action != null) {
             action.Execute(this);
-            if (action.done)
+            if (action.done) {
+                //Debug.Log( action +" Removed");
                 actionQueue.Remove();
+            }
         }
     }
 

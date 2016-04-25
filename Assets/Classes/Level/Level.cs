@@ -53,7 +53,7 @@ public class Level : MonoBehaviour {
             Node prev = AIController.GetNearestNode(guards[i].transform.position);
             foreach (Node node in listPath[i]) {
 
-                enemyActions[i].Add(new ApproachAction(prev.transform.position, node.transform.position));
+                //enemyActions[i].Add(new ApproachAction(prev.transform.position, node.transform.position));
                 //guards[i].actionQueue.Insert(new ApproachAction(prev.transform.position, node.transform.position, am));
                 prev = node;
             }

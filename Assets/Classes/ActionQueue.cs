@@ -52,7 +52,13 @@ public class ActionQueue {
             }
         }
     }
-
+    public void Display() {
+        string str = "";
+        for (int i = 0; i < heap.Count; i++) {
+            str += i+"."+heap[i]+", ";
+        }
+        Debug.Log(str);
+    }
     /// <summary>
     /// Returns action which has highest priority
     /// </summary>
@@ -61,7 +67,6 @@ public class ActionQueue {
     {
         if( heap.Count != 0)
         {
-
             return heap[0];
         }
 
@@ -76,18 +81,28 @@ public class ActionQueue {
     {
         if( heap.Count != 0)
         {
-            Action result = heap[0];
+            Action result = heap[0]; 
             heap[0] = heap[heap.Count - 1];
             heap.RemoveAt(heap.Count - 1);
-
             Heapify(0);
-
             return result;
         }
 
         return null;
     }
+    public Action Remove(Action action) {
+        int index = heap.IndexOf(action);
+            
+        if (index >= 0) {
+            Action result = heap[index];
+            heap[index] = heap[heap.Count - 1];
+            heap.RemoveAt(heap.Count - 1);
+            Heapify(index);
+            return result;
+        }
 
+        return null;
+    }
     protected void Heapify( int index)
     {
         int leftIndex = (index + 1) * 2 - 1;
@@ -98,9 +113,9 @@ public class ActionQueue {
         int minIndex;
         if (rightIndex >= heap.Count)
             minIndex = leftIndex;
-        else
+        else 
             minIndex = heap[leftIndex].priority > heap[rightIndex].priority ? leftIndex : rightIndex;
-
+        
         if( heap[minIndex].priority > heap[index].priority)
         {
             Action temp = heap[index];

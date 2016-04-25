@@ -15,10 +15,10 @@ public class Vision : MonoBehaviour {
 			if (value)
 				AIController.lastKnownPosition = Player.instance.midPoint;
 			if (!value && playerInVision) {
-				PlayerGhost.instance.transform.position = Player.instance.midPoint;
-				PlayerGhost.instance.transform.GetChild(0).gameObject.SetActive(true);
+                PlayerGhost.instance.SetActive(true);
 				spotable.SpotOut();
-			} else if(value && !playerInVision){
+            } else if (value && !playerInVision) {
+                PlayerGhost.instance.SetActive(false);
                 spotable.Spot();
             }
 			_playerInVision = value;
