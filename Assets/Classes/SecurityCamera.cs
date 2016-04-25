@@ -11,6 +11,7 @@ public class SecurityCamera : MonoBehaviour, ISpotable {
 
     public float visionAngle { get; set; }
 	public Vision vision { get; set; }
+	public float rotationSpeed { get; set; }
 
 	private MeshFilter visionMesh;
 
@@ -27,12 +28,14 @@ public class SecurityCamera : MonoBehaviour, ISpotable {
         vision = GetComponentInChildren<Vision>();
 		vision.spotable = this;
         visionMesh = vision.gameObject.GetComponent<MeshFilter>();
-        //vision.GenerateVision(visionAngle, RANGE);
-    }
+		rotationSpeed = MLLevelStats.GetStat(LevelStat.CameraAngularSpeed);
+		vision.gameObject.GetComponent<FOV2DEyes>().fovMaxDistance = MLLevelStats.GetStat(LevelStat.CameraAwarenessRange);
+		//vision.GenerateVision(visionAngle, RANGE);
+	}
 
     void FixedUpdate() {
         transform.eulerAngles = new Vector3(0, 0,
-            Mathf.MoveTowards(transform.eulerAngles.z, direction ? 180 - ROTATION_AMOUNT : 180 + ROTATION_AMOUNT, Time.fixedDeltaTime * 40));
+            Mathf.MoveTowards(transform.eulerAngles.z, direction ? 180 - ROTATION_AMOUNT : 180 + ROTATION_AMOUNT, Time.fixedDeltaTime * rotationSpeed));
         if (Mathf.Abs(transform.eulerAngles.z - (180 - ROTATION_AMOUNT)) < 1)
             direction = false;
         else if (Mathf.Abs(transform.eulerAngles.z - (180 + ROTATION_AMOUNT)) < 1)

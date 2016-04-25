@@ -30,16 +30,16 @@ public class UISelectedSkıll : MonoBehaviour {
 			skillSet.selectedSkill = cursor;
 
 		if (Input.GetKeyDown(KeyCode.Alpha1))
-			skillSet.selectedSkill = 1;
+			skillSet.selectedSkill = 0;
 		else if (Input.GetKeyDown(KeyCode.Alpha2))
-			skillSet.selectedSkill = 2;
+			skillSet.selectedSkill = 1;
 		else if (Input.GetKeyDown(KeyCode.Alpha3))
-			skillSet.selectedSkill = 3;
+			skillSet.selectedSkill = 2;
 		else if (Input.GetKeyDown(KeyCode.Alpha4))
-			skillSet.selectedSkill = 4;
+			skillSet.selectedSkill = 3;
 		else if (Input.GetKeyDown(KeyCode.Alpha5))
-			skillSet.selectedSkill = 5;
+			skillSet.selectedSkill = 4;
 		else if (Input.GetKeyDown(KeyCode.Alpha6))
-			skillSet.selectedSkill = 6;
+			skillSet.selectedSkill = 5;
 	}
 }
