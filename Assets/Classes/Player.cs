@@ -9,11 +9,13 @@ public class Player : MonoBehaviour {
     public GameObject playerGhost;
 	public GameObject soundPrefab;
 
-    private Animator anim;
+	public SkillSet skillSet { get; set; }
+	public bool playerLock { get; set; }
+
+	private Animator anim;
 	private BoxCollider2D hitbox;
 	private Rigidbody2D body;
 	private bool _onLadder;
-	private bool takedownLock;
     private float runSoundInterval;
 
     public Vector2 lastPosition;       //MLLogger
@@ -32,14 +34,18 @@ public class Player : MonoBehaviour {
 		}
 	}
 
-	void Start() {
+	void Awake() {
 		Player.instance = this;
+		skillSet = new SkillSet();
+	}
+
+	void Start() {
         playerGhost = GameObject.Find("PlayerGhost");
         anim = GetComponent<Animator>();
 		hitbox = GetComponent<BoxCollider2D>();
 		body = GetComponent<Rigidbody2D>();
 		onLadder = false;
-		takedownLock = false;
+		playerLock = false;
         runSoundInterval = RUN_SOUND_DELAY;
         lastPosition = transform.position;
 	}
@@ -80,7 +86,7 @@ public class Player : MonoBehaviour {
         MLLogger.IncrementStat(PlayStat.PlayerTravelDistance, Vector2.Distance(transform.position, lastPosition));
 		//MLLogger Stuff End
 
-		if (takedownLock)
+		if (playerLock)
 			return;
         float crouching = anim.GetFloat("Crouching");
 		bool ground = false;
@@ -160,12 +166,8 @@ public class Player : MonoBehaviour {
 			Takedown();
 
 		if (Input.GetKeyDown(KeyCode.Mouse0)) {
-			Vector2 mousePos = UnityEngine.Camera.main.ScreenToWorldPoint(Input.mousePosition);
-			Vector2 direction = mousePos -
-				midPoint;
-			Rigidbody2D shuriken = ((GameObject)Instantiate(rockPrefab,
-				midPoint, Quaternion.identity)).GetComponent<Rigidbody2D>();
-			shuriken.AddForce(direction.normalized * 80);
+			Vector2 target = UnityEngine.Camera.main.ScreenToWorldPoint(Input.mousePosition);
+			skillSet.Cast(target);
 		}
 		anim.SetFloat("VerticalSpeed", body.velocity.y);
 		anim.SetBool("Ladder", onLadder);
@@ -183,7 +185,7 @@ public class Player : MonoBehaviour {
 		RaycastHit2D hit = Physics2D.Raycast(origin, direction, distance, LayerMask.GetMask("Guardian", "Obstacle"));
 		if (hit) {
 			if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Guardian")) {
-				takedownLock = true;
+				playerLock = true;
                 anim.SetTrigger("Takedown");
                 anim.SetFloat("Movement", 0.0f);
                 body.velocity = Vector2.zero;
@@ -193,6 +195,6 @@ public class Player : MonoBehaviour {
 	}
 
 	public void RemoveTakedownLock() {
-		takedownLock = false;
+		playerLock = false;
 	}
 }

@@ -12,7 +12,7 @@ GameObject:
   - 64: {fileID: 6491404}
   - 23: {fileID: 2321834}
   m_Layer: 12
-  m_Name: Quad
+  m_Name: Darkness
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -313,7 +313,7 @@ Transform:
   m_GameObject: {fileID: 103396}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0.5}
-  m_LocalScale: {x: 21.29, y: 10.26, z: 1}
+  m_LocalScale: {x: 20, y: 20, z: 1}
   m_Children: []
   m_Father: {fileID: 458130}
   m_RootOrder: 1
