@@ -122,7 +122,7 @@ public class MLCommunicator {
         }
     }
 
-    public static double predictDifficulty() {
+    public static float predictDifficulty() {
 
         if ( !communcationOn) {
 
@@ -157,6 +157,6 @@ public class MLCommunicator {
         Debug.Log("Echoed test = {0}" +
             Encoding.ASCII.GetString(bytes, 0, bytesRec));
 
-        return 0.0;
+        return 0.0f;
     }
 }
