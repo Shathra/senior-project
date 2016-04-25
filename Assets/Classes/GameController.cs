@@ -10,6 +10,7 @@ class GameController {
     public static bool gameOver;
     public static bool gameWon;
 
+    private static readonly int maxNumberOfTrial = 10;
     private static int numberOfTrial;
 
     //From functions
@@ -29,6 +30,13 @@ class GameController {
         MLLogger.SetStat(PlayStat.Result, gameWon ? 1 : 0);
         //MLLogger.SetStat(PlayStat.LevelNo, currentLevel.GetId());
         //MLCommunicator.writeMLTrainFile();
+
+        if( numberOfTrial == maxNumberOfTrial) {
+
+            MLController.AdjustDifficulty();
+            numberOfTrial = 0;
+            Application.LoadLevel(Application.loadedLevel);
+        }
     }
     
     public static void GameWon()
@@ -44,7 +52,7 @@ class GameController {
         gameWon = false;
         gameOver = true;
 
-        Application.LoadLevel(Application.loadedLevel);
+        
         Debug.Log("GAME LOST :(");
         Debug.Break();
         GameOver();
