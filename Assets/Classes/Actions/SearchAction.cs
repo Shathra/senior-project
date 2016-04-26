@@ -12,6 +12,11 @@ public class SearchAction : Action {
         : base(Action.PRIORITY_SEARCH) {
         suspectedPoint = AIController.GetNearestNode(player.transform.position);
     }
+    public SearchAction(Vector2 pos)
+        : base(Action.PRIORITY_SEARCH)
+    {
+        suspectedPoint = AIController.GetNearestNode(pos);
+    }
 
 
     public override void Execute(Enemy enemy) {
