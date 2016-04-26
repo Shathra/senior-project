@@ -167,11 +167,16 @@ public class Guardian : Enemy, ISpotable, IApproachable {
     }
 
     public override void Update() {
-        base.Update();
 		unconsciousText.text = unconsciousTime > 0 ? "" + Mathf.Round(unconsciousTime) : "";
 		unconsciousImage.fillAmount = unconsciousTime / totalUnconsciousTime;
-		if (vision.playerInVision)
-        {
+        if (unconsciousTime > 0) {
+            unconsciousTime -= Time.deltaTime;
+            return;
+        }
+        else
+            anim.SetBool("Unconscious", false);
+        base.Update();
+        if (vision.playerInVision) {
             angle = Mathf.Atan((Player.instance.transform.position.y - transform.position.y) / (Player.instance.transform.position.x - transform.position.x));
             eye.transform.eulerAngles = new Vector3(0, 0, angle * 180 / Mathf.PI);
             gun.transform.eulerAngles = new Vector3(0, 0, angle * 180 / Mathf.PI);
@@ -188,11 +193,6 @@ public class Guardian : Enemy, ISpotable, IApproachable {
             head.transform.eulerAngles = new Vector3(0, 0, 0);
             gun.transform.eulerAngles = new Vector3(0, 0, 0);
         }
-        if (unconsciousTime > 0) {
-            unconsciousTime -= Time.deltaTime;
-            return;
-        } else
-            anim.SetBool("Unconscious", false);
         if (anim.GetCurrentAnimatorStateInfo(0).IsName("Unconscious") ||
             anim.GetCurrentAnimatorStateInfo(0).IsName("WakingUp")) {
             return;
