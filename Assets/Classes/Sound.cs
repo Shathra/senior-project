@@ -28,7 +28,10 @@ public class Sound : MonoBehaviour {
     void OnTriggerEnter2D(Collider2D col) {
         guard = col.gameObject.GetComponent<Guardian>();
         if (guard != null) {
-            //guard.actionQueue.Insert(new ApproachAction(guard.transform.position, transform.position, Action.PRIORITY_SEARCH_APPROACH));
+            if (guard.actionQueue.Peek() != null && guard.actionQueue.Peek().priority < 2)
+            {
+                guard.actionQueue.Insert(new SearchAction(transform.position));
+            }
         }
     }
 

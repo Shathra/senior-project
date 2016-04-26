@@ -17,7 +17,7 @@ public class Shuriken : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D col) {
         if(col.gameObject.layer == LayerMask.NameToLayer("Obstacle")) {
-			Sound.GenerateSound(transform.position, 2);
+			Sound.GenerateSound(transform.position, 9);
 			Destroy(gameObject);
 		}
     }

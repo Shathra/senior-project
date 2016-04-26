@@ -36,6 +36,9 @@ public class EventManager {
         Debug.Log("SpotIn");
         actionToReturn = null;
         if (gameEvent.Source.GetType() == typeof(Guardian)) {
+            while (gameEvent.Source.actionQueue.Peek() != null && gameEvent.Source.actionQueue.Peek().priority >= 2) {
+                gameEvent.Source.actionQueue.Remove();
+            }
             actionToReturn = new FireAction(AIController.GetPlayer());
         } else if (gameEvent.Source.GetType() == typeof(Turret)) {
             actionToReturn = new FireAction(AIController.GetPlayer());
