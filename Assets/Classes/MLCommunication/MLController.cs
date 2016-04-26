@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using UnityEngine;
 
 class MLController {
 
@@ -16,6 +17,8 @@ class MLController {
 
         currentDifficulty = MLCommunicator.predictDifficulty();
 
+        Debug.LogWarning(currentDifficulty);
+
         SetLevelStats(currentDifficulty);
     }
 
@@ -27,6 +30,8 @@ class MLController {
         stat = new List<LevelStat>(Enum.GetValues(typeof(LevelStat)).Cast<LevelStat>());
         statMin = new List<LevetStatMin>(Enum.GetValues(typeof(LevetStatMin)).Cast<LevetStatMin>());
         statMax = new List<LevelStatMax>(Enum.GetValues(typeof(LevelStatMax)).Cast<LevelStatMax>());
+
+        currentDifficulty = 100 - currentDifficulty;
         for( int i = 0; i < stat.Count; i++) {
             float previous = MLLevelStats.GetStat(stat[i]);
             float min = MLLevelStats.GetMinStat(statMin[i]);

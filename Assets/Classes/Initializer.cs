@@ -12,23 +12,36 @@ using UnityEngine;
 /// </summary>
 class Initializer : MonoBehaviour {
     string strCmdText;
+
+    private static bool mlInitialized = false;
     public void Awake() {
 
-        GameController.Init();
-        MLLogger.Init();
-        MLLevelStats.Init();
-        MLController.SetLevelStats(MLConfig.DefaultDifficulty);
-        
-        strCmdText = "/C cd DifficultyEstimator & python estimator.py";
-        Process.Start("CMD.exe", strCmdText);
+        if (!mlInitialized) {
+            GameController.Init();
+            MLLogger.Init();
+            MLLevelStats.Init();
+            MLController.SetLevelStats(MLConfig.DefaultDifficulty);
 
-        MLCommunicator.Init();
+            strCmdText = "/C cd DifficultyEstimator & python estimator.py";
+            Process.Start("CMD.exe", strCmdText);
 
-        MLCommunicator.predictDifficulty();
+            MLCommunicator.Init();
+            mlInitialized = true;
+
+            MLController.AdjustDifficulty();
+            MLController.AdjustDifficulty();
+        }
+        //MLCommunicator.predictDifficulty();
     }
 
     public void OnApplicationQuit() {
 
         MLCommunicator.Close();
+    }
+
+    void Update() {
+        if (Input.GetKeyDown(KeyCode.J)) {
+             MLController.AdjustDifficulty();
+        }
     }
 }

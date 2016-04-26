@@ -33,6 +33,14 @@ public class MLLogger {
         }
     }
 
+    public static void ClearPlayStats() {
+
+        playStats = new Dictionary<PlayStat, float>();
+        foreach (PlayStat val in Enum.GetValues(typeof(PlayStat))) {
+            playStats.Add(val, 0);
+        }
+    }
+
     /// <summary>
     /// Note:Make sure stat value is set before increment or decrement
     /// </summary>

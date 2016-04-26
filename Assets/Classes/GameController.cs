@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 class GameController {
 
@@ -10,7 +11,7 @@ class GameController {
     public static bool gameOver;
     public static bool gameWon;
 
-    private static readonly int maxNumberOfTrial = 10;
+    private static readonly int maxNumberOfTrial = 1;
     private static int numberOfTrial;
 
     //From functions
@@ -28,15 +29,23 @@ class GameController {
         levelTime = (float)currentLevel.GetElapsedTime();
         MLLogger.SetStat(PlayStat.LevelTime, levelTime);
         MLLogger.SetStat(PlayStat.Result, gameWon ? 1 : 0);
+        MLLogger.SetStat(PlayStat.NumberOfTrials, numberOfTrial);
         //MLLogger.SetStat(PlayStat.LevelNo, currentLevel.GetId());
         //MLCommunicator.writeMLTrainFile();
 
-        if( numberOfTrial == maxNumberOfTrial) {
+        if ( numberOfTrial == maxNumberOfTrial) {
 
+            numberOfTrial = 10;
+            MLLogger.SetStat(PlayStat.Result, 1);
+            MLLogger.SetStat(PlayStat.NumberOfTrials, numberOfTrial);
+            MLLogger.SetStat(PlayStat.PlayerTravelDistance, 100);
+            MLLogger.SetStat(PlayStat.LevelTime, 300);
             MLController.AdjustDifficulty();
             numberOfTrial = 0;
-            Application.LoadLevel(Application.loadedLevel);
+            MLLogger.ClearPlayStats();
         }
+
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
     
     public static void GameWon()
@@ -44,7 +53,7 @@ class GameController {
         gameWon = true;
         gameOver = true;
         Debug.Log("GAME WON :D");
-        Debug.Break();
+        //Debug.Break();
         GameOver();
     }
     public static void GameLost()
@@ -52,9 +61,10 @@ class GameController {
         gameWon = false;
         gameOver = true;
 
+        numberOfTrial++;
         
         Debug.Log("GAME LOST :(");
-        Debug.Break();
+        //Debug.Break();
         GameOver();
     }
 

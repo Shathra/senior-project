@@ -126,7 +126,7 @@ public class MLCommunicator {
 
         if ( !communcationOn) {
 
-            Debug.Log("Warning: Predictor script not found, default difficulty returned");
+            Debug.LogWarning("Warning: Predictor script not found, default difficulty returned");
             return MLConfig.DefaultDifficulty;
         }
         String strMsg = "";
@@ -139,6 +139,8 @@ public class MLCommunicator {
         foreach (KeyValuePair<PlayStat, float> entry in MLLogger.GetPlayStats()) {
 
             strMsg += entry.Value.ToString() + " ";
+            Debug.LogWarning(entry.Key + "" + entry.Value.ToString());
+
         }
 
         strMsg.Substring(0, strMsg.Length - 1);
@@ -157,6 +159,7 @@ public class MLCommunicator {
         Debug.Log("Echoed test = {0}" +
             Encoding.ASCII.GetString(bytes, 0, bytesRec));
 
-        return 0.0f;
+        string difStr = Encoding.ASCII.GetString(bytes, 0, bytesRec);
+        return float.Parse(difStr);
     }
 }

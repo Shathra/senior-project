@@ -5,7 +5,7 @@ using System.Text;
 
 class Constants {
 
-    public static readonly float INVALID_STAT = -1.0f;
+    public static readonly float INVALID_STAT = 0.0f;
     public static readonly int INVALID_LEVEL = -1;
 
     //LEVEL IDS
