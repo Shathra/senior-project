@@ -11,7 +11,7 @@ class GameController {
     public static bool gameOver;
     public static bool gameWon;
 
-    private static readonly int maxNumberOfTrial = 1;
+    private static readonly int maxNumberOfTrial = 4;
     private static int numberOfTrial;
 
     //From functions
@@ -21,7 +21,7 @@ class GameController {
         gameOver = false;
         currentLevel = GameObject.FindGameObjectWithTag("Level").GetComponent<Level>();
 
-        numberOfTrial = 0;
+        numberOfTrial = 1;
     }
 
     public static void GameOver() {
@@ -30,18 +30,20 @@ class GameController {
         MLLogger.SetStat(PlayStat.LevelTime, levelTime);
         MLLogger.SetStat(PlayStat.Result, gameWon ? 1 : 0);
         MLLogger.SetStat(PlayStat.NumberOfTrials, numberOfTrial);
+        MLLogger.SetStat(PlayStat.PlayerTravelDistance, 5);
         //MLLogger.SetStat(PlayStat.LevelNo, currentLevel.GetId());
         //MLCommunicator.writeMLTrainFile();
 
-        if ( numberOfTrial == maxNumberOfTrial) {
+        if ( numberOfTrial == maxNumberOfTrial || gameWon) {
 
-            numberOfTrial = 10;
-            MLLogger.SetStat(PlayStat.Result, 1);
+            //numberOfTrial = 10;
+            
+            MLLogger.SetStat(PlayStat.Result, gameWon ? 1 : 0);
             MLLogger.SetStat(PlayStat.NumberOfTrials, numberOfTrial);
             MLLogger.SetStat(PlayStat.PlayerTravelDistance, 100);
             MLLogger.SetStat(PlayStat.LevelTime, 300);
             MLController.AdjustDifficulty();
-            numberOfTrial = 0;
+            numberOfTrial = 1;
             MLLogger.ClearPlayStats();
         }
 
@@ -53,18 +55,17 @@ class GameController {
         gameWon = true;
         gameOver = true;
         Debug.Log("GAME WON :D");
-        //Debug.Break();
         GameOver();
     }
     public static void GameLost()
     {
+        
         gameWon = false;
         gameOver = true;
 
         numberOfTrial++;
         
         Debug.Log("GAME LOST :(");
-        //Debug.Break();
         GameOver();
     }
 

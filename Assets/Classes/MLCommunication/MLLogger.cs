@@ -35,10 +35,11 @@ public class MLLogger {
 
     public static void ClearPlayStats() {
 
-        playStats = new Dictionary<PlayStat, float>();
         foreach (PlayStat val in Enum.GetValues(typeof(PlayStat))) {
-            playStats.Add(val, 0);
+            playStats[val] = 0;
         }
+
+        playStats[PlayStat.NumberOfTrials] = 1;
     }
 
     /// <summary>

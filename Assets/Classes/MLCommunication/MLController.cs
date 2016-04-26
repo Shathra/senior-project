@@ -17,12 +17,11 @@ class MLController {
 
         currentDifficulty = MLCommunicator.predictDifficulty();
 
-        Debug.LogWarning(currentDifficulty);
+        SetLevelStats( previousDifficulty, currentDifficulty);
 
-        SetLevelStats(currentDifficulty);
     }
 
-    public static void SetLevelStats( float currentDifficulty) {
+    public static void SetLevelStats( float previousDifficulty, float currentDifficulty) {
 
         List<LevelStat> stat;
         List<LevetStatMin> statMin;
@@ -31,15 +30,31 @@ class MLController {
         statMin = new List<LevetStatMin>(Enum.GetValues(typeof(LevetStatMin)).Cast<LevetStatMin>());
         statMax = new List<LevelStatMax>(Enum.GetValues(typeof(LevelStatMax)).Cast<LevelStatMax>());
 
+        float scale = (previousDifficulty - 50) / 50;
+        currentDifficulty = currentDifficulty + (currentDifficulty * scale);
+        Debug.LogWarning(Difficulty + "," + currentDifficulty);
+        Difficulty = currentDifficulty;
         currentDifficulty = 100 - currentDifficulty;
-        for( int i = 0; i < stat.Count; i++) {
-            float previous = MLLevelStats.GetStat(stat[i]);
-            float min = MLLevelStats.GetMinStat(statMin[i]);
-            float max = MLLevelStats.GetMaxStat(statMax[i]);
 
-            float value = ((max - min) / 100) * currentDifficulty;
+        float previous, min, max, value;
+        for ( int i = 0; i < stat.Count; i++) {
+            previous = MLLevelStats.GetStat(stat[i]);
+            min = MLLevelStats.GetMinStat(statMin[i]);
+            max = MLLevelStats.GetMaxStat(statMax[i]);
+
+            
+            value = ((max - min) / 100) * currentDifficulty;
+
             value += min;
             MLLevelStats.SetStat(stat[i], value);
         }
+
+        previous = MLLevelStats.GetStat(LevelStat.ShurikenLimit);
+        min = MLLevelStats.GetMinStat(LevetStatMin.ShurikenLimit);
+        max = MLLevelStats.GetMaxStat(LevelStatMax.ShurikenLimit);
+        value = ((max - min) / 100) * (100 - currentDifficulty);
+        value += min;
+
+        MLLevelStats.SetStat( LevelStat.ShurikenLimit, value);
     }
 }

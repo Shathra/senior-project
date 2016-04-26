@@ -139,7 +139,7 @@ public class MLCommunicator {
         foreach (KeyValuePair<PlayStat, float> entry in MLLogger.GetPlayStats()) {
 
             strMsg += entry.Value.ToString() + " ";
-            Debug.LogWarning(entry.Key + "" + entry.Value.ToString());
+            //Debug.LogWarning(entry.Key + "" + entry.Value.ToString());
 
         }
 
@@ -156,8 +156,6 @@ public class MLCommunicator {
 
         // Receive the response from the remote device.
         int bytesRec = socket.Receive(bytes);
-        Debug.Log("Echoed test = {0}" +
-            Encoding.ASCII.GetString(bytes, 0, bytesRec));
 
         string difStr = Encoding.ASCII.GetString(bytes, 0, bytesRec);
         return float.Parse(difStr);

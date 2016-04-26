@@ -20,7 +20,7 @@ class Initializer : MonoBehaviour {
             GameController.Init();
             MLLogger.Init();
             MLLevelStats.Init();
-            MLController.SetLevelStats(MLConfig.DefaultDifficulty);
+            //MLController.SetLevelStats( 50, MLConfig.DefaultDifficulty);
 
             strCmdText = "/C cd DifficultyEstimator & python estimator.py";
             Process.Start("CMD.exe", strCmdText);
@@ -28,7 +28,6 @@ class Initializer : MonoBehaviour {
             MLCommunicator.Init();
             mlInitialized = true;
 
-            MLController.AdjustDifficulty();
             MLController.AdjustDifficulty();
         }
         //MLCommunicator.predictDifficulty();

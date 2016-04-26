@@ -91,23 +91,23 @@ public class MLLevelStats {
             maxLevelStats.Add(val, Constants.INVALID_STAT);
         }
 
-        levelStats[LevelStat.GuardianSpeed] = 1.0f;
-        levelStats[LevelStat.GuardianMissileSpeed] = 1.0f;
-        levelStats[LevelStat.GuardianWeaponFireRate] = 2.0f;
-        levelStats[LevelStat.GuardianAwarenessRange] = 1.0f;
-        levelStats[LevelStat.GuardianReactionTime] = 1.0f;
-        levelStats[LevelStat.GuardianUnconciousTime] = 1.0f;
+        levelStats[LevelStat.GuardianSpeed] = 1.15f;
+        levelStats[LevelStat.GuardianMissileSpeed] = 0.67f;
+        levelStats[LevelStat.GuardianWeaponFireRate] = 2.5f;
+        levelStats[LevelStat.GuardianAwarenessRange] = 5.5f;
+        levelStats[LevelStat.GuardianReactionTime] = 0.5f;
+        levelStats[LevelStat.GuardianUnconciousTime] = 6.0f;
 
-        levelStats[LevelStat.TurretAngularSpeed] = 1.0f;
-        levelStats[LevelStat.TurretMissileSpeed] = 1.0f;
+        levelStats[LevelStat.TurretAngularSpeed] = 40.0f;
+        levelStats[LevelStat.TurretMissileSpeed] = 0.67f;
         levelStats[LevelStat.TurretFireRate] = 1.0f;
-        levelStats[LevelStat.TurretFireDelay] = 1.0f;
+        levelStats[LevelStat.TurretFireDelay] = 0.5f;
+        levelStats[LevelStat.CameraAngularSpeed] = 40.0f;
+        levelStats[LevelStat.CameraAwarenessRange] = 5.5f;
 
-        levelStats[LevelStat.HackingTime] = 1.0f;
-        levelStats[LevelStat.ShurikenLimit] = 1.0f;
+        levelStats[LevelStat.HackingTime] = 3.0f;
+        levelStats[LevelStat.ShurikenLimit] = 5.0f;
 
-        levelStats[LevelStat.CameraAngularSpeed] = 1.0f;
-        levelStats[LevelStat.CameraAwarenessRange] = 1.0f;
 
         minLevelStats[LevetStatMin.GuardianSpeed] = 0.8f;
         minLevelStats[LevetStatMin.GuardianMissileSpeed] = 0.33f;
