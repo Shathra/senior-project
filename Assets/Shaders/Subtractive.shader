@@ -4,7 +4,7 @@
          Pass
           {
               Blend Zero One
-               Lighting On
+              Lighting On
               ZWrite On
               Material
               {

@@ -212,7 +212,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 118562}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.88, y: 1.54, z: -0.50390625}
+  m_LocalPosition: {x: -3.75, y: 9.25, z: -0.50390625}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 425362}
@@ -402,7 +402,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: 0.033803463, y: -0.008450985}
   serializedVersion: 2
-  m_Size: {x: 1.0332501, y: 1.7422647}
+  m_Size: {x: 0.22, y: 1.7422647}
 --- !u!95 &9583268
 Animator:
   serializedVersion: 3
@@ -498,7 +498,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   raysGizmosEnabled: 0
-  quality: 2
+  quality: 1
   fovAngle: 30
   fovMaxDistance: 5
   cullingMask:

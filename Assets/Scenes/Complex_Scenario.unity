@@ -993,10 +993,6 @@ Prefab:
       propertyPath: m_Name
       value: Guardian (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 11406842, guid: b9a465a6690b21e4191aeb31346eaa74, type: 2}
-      propertyPath: patrolType
-      value: 2
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b9a465a6690b21e4191aeb31346eaa74, type: 2}
   m_IsPrefabParent: 0
