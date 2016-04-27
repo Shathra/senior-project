@@ -21,7 +21,7 @@ public class SearchAction : Action {
 
     public override void Execute(Enemy enemy) {
         enemy.actionQueue.Insert(new ApproachAction(enemy.transform.position, suspectedPoint.transform.position, Action.PRIORITY_SEARCH_APPROACH));
-        enemy.actionQueue.Insert(new TurnAroundAction(0.5f,2,Action.PRIORITY_SEARCH));
+        enemy.actionQueue.Insert(new TurnAroundAction(1f,2,Action.PRIORITY_SEARCH));
         enemy.actionQueue.Remove(this);
         
     }

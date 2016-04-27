@@ -13,9 +13,9 @@ class TurnAroundAction : Action
     float numberOfPeriods;
     float timeLeft;
     bool isInfinite;
+
     public TurnAroundAction(float period)
-        : base(PRIORITY_IDLE)
-    {
+        : base(PRIORITY_IDLE) {
         this.period = period;
         timeLeft = period;
         isInfinite = true;
@@ -34,7 +34,14 @@ class TurnAroundAction : Action
         if (timeLeft > 0)
         {
             timeLeft -= Time.deltaTime;
-        }else{
+        }
+        else if (((Guardian)enemy).angle < 30  )
+        {
+            ((Guardian)enemy).angle = Mathf.Lerp(((Guardian)enemy).angle, 40, Time.deltaTime);
+            ((Guardian)enemy).TurnHead();
+        } else {
+            ((Guardian)enemy).angle = 0;
+            ((Guardian)enemy).TurnHead();
             ((Guardian)enemy).direction = !((Guardian)enemy).direction;
             timeLeft = period;
             if (!isInfinite) {

@@ -20,7 +20,7 @@ public class Guardian : Enemy, ISpotable, IApproachable {
     private bool _onLadder;
     private Vector2 prevPos;
     private float unconsciousTime;
-    private float angle;
+    public float angle { get; set; }
 	private Text unconsciousText;
 	private Image unconsciousImage;
 	private float bulletSpeed;
@@ -178,14 +178,7 @@ public class Guardian : Enemy, ISpotable, IApproachable {
         base.Update();
         if (vision.playerInVision) {
             angle = Mathf.Atan((Player.instance.transform.position.y - transform.position.y) / (Player.instance.transform.position.x - transform.position.x));
-            eye.transform.eulerAngles = new Vector3(0, 0, angle * 180 / Mathf.PI);
-            gun.transform.eulerAngles = new Vector3(0, 0, angle * 180 / Mathf.PI);
-            head.transform.eulerAngles = new Vector3(0, 0, -angle * 180 / Mathf.PI);
-            if (direction)
-            {
-                head.transform.eulerAngles = new Vector3(0, 0, angle * 180 / Mathf.PI);
-                gun.transform.eulerAngles = new Vector3(0, 0, -angle * 180 / Mathf.PI);
-            }
+            TurnHead();
         }
         else
         {
@@ -202,7 +195,17 @@ public class Guardian : Enemy, ISpotable, IApproachable {
         anim.SetFloat("Speed", movement > 0.01f ? 1.0f : 0.0f);
         prevPos = transform.position;
     }
-
+    public void TurnHead()
+    {
+        eye.transform.eulerAngles = new Vector3(0, 0, angle * 180 / Mathf.PI);
+        gun.transform.eulerAngles = new Vector3(0, 0, angle * 180 / Mathf.PI);
+        head.transform.eulerAngles = new Vector3(0, 0, -angle * 180 / Mathf.PI);
+        if (direction)
+        {
+            head.transform.eulerAngles = new Vector3(0, 0, angle * 180 / Mathf.PI);
+            gun.transform.eulerAngles = new Vector3(0, 0, -angle * 180 / Mathf.PI);
+        }
+    }
     void Idle(int patrolType) {
 
         if (patrolType == 2) {
