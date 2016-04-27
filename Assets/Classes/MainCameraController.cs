@@ -21,7 +21,7 @@ public class MainCameraController : MonoBehaviour
             - transform.parent.position;
         mouseRelativeToPlayer = new Vector3(mouseRelativeToPlayer.x, mouseRelativeToPlayer.y, transform.position.z);
         targetPos = Vector3.Lerp(new Vector3(0, 0, transform.position.z), mouseRelativeToPlayer,
-            Input.GetKey(KeyCode.LeftShift) ? 0.5f : 0.25f);
+            Input.GetKey(KeyCode.Mouse1) ? 0.5f : 0.25f);
         transform.localPosition = Vector3.Lerp(transform.localPosition, targetPos, 0.3f);
 	}
 

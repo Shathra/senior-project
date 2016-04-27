@@ -50,6 +50,7 @@ class TurnAroundAction : Action
                     done = true;
                     if (priority == PRIORITY_SEARCH) {
                         PlayerGhost.instance.SetActive(false);
+                        ((Guardian)enemy).fov2D.fovMaxDistance = 5;
                     }
                     return;
                 }

@@ -6,7 +6,7 @@ public class Guardian : Enemy, ISpotable, IApproachable {
     public Vision vision { get; set; }
     public HeadSprite head { get; set; }
     public Eye eye { get; set; }
-
+    public FOV2DEyes fov2D { get; set; }
     public Gun gun { get; set; }
 
     public float totalUnconsciousTime { get; set; }
@@ -83,7 +83,8 @@ public class Guardian : Enemy, ISpotable, IApproachable {
         Idle(patrolType);
         vision = GetComponentInChildren<Vision>();
         vision.spotable = this;
-		vision.gameObject.GetComponent<FOV2DEyes>().fovMaxDistance = MLLevelStats.GetStat(LevelStat.GuardianAwarenessRange); ;
+		vision.gameObject.GetComponent<FOV2DEyes>().fovMaxDistance = MLLevelStats.GetStat(LevelStat.GuardianAwarenessRange);
+        fov2D = vision.gameObject.GetComponent<FOV2DEyes>();
         prevPos = transform.position;
         anim = GetComponent<Animator>();
         unconsciousTime = 0;
