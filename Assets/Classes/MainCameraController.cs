@@ -28,7 +28,7 @@ public class MainCameraController : MonoBehaviour
         transform.localPosition = Vector3.Lerp(transform.localPosition, targetPos, 0.3f);
 	}
 
-    void FixedUpdate()
+    void LateUpdate()
     {
 		lastPosition = transform.position;
     }
