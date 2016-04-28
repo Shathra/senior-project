@@ -7,6 +7,7 @@ public class MainCameraController : MonoBehaviour
     Vector3 mouseRelativeToPlayer;
     Vector3 targetPos;
     public Vector2 lastPosition { get; set; }
+
     void Awake()
     {
         MainCameraController.instance = this;
@@ -15,6 +16,8 @@ public class MainCameraController : MonoBehaviour
     {
         lastPosition = transform.position;
     }
+
+
 
     void Update () {
         mouseRelativeToPlayer = Camera.main.ScreenToWorldPoint(Input.mousePosition)
@@ -25,8 +28,8 @@ public class MainCameraController : MonoBehaviour
         transform.localPosition = Vector3.Lerp(transform.localPosition, targetPos, 0.3f);
 	}
 
-    void LateUpdate()
+    void FixedUpdate()
     {
-        lastPosition = transform.position;
+		lastPosition = transform.position;
     }
 }

@@ -12,6 +12,7 @@ public class ParallaxScript : MonoBehaviour {
 	void LateUpdate () {
         displacement = MainCameraController.instance.lastPosition.x - MainCameraController.instance.transform.position.x;
         yDisplacement = MainCameraController.instance.lastPosition.y - MainCameraController.instance.transform.position.y;
-        transform.Translate(new Vector3(displacement/(parallaxCoefficent*10), yDisplacement, 0));
+		transform.Translate(new Vector3(displacement/(parallaxCoefficent*0.05f), yDisplacement, 0));
+
     }
 }
