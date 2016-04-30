@@ -39,7 +39,8 @@ public class EventManager {
             while (gameEvent.Source.actionQueue.Peek() != null && gameEvent.Source.actionQueue.Peek().priority >= 2) {
                 gameEvent.Source.actionQueue.Remove();
             }
-            ((Guardian)gameEvent.Source).fov2D.fovMaxDistance = 8;
+            ((Guardian)gameEvent.Source).vision.GetComponent<MeshRenderer>().material.SetColor("_EmissionColor", Color.red); //Red
+            ((Guardian)gameEvent.Source).fov2D.fovMaxDistance = 8;      //Max Distance
             actionToReturn = new FireAction(AIController.GetPlayer());
         } else if (gameEvent.Source.GetType() == typeof(Turret)) {
             actionToReturn = new FireAction(AIController.GetPlayer());

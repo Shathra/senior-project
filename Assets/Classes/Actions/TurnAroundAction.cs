@@ -51,6 +51,8 @@ class TurnAroundAction : Action
                     if (priority == PRIORITY_SEARCH) {
                         PlayerGhost.instance.SetActive(false);
                         ((Guardian)enemy).fov2D.fovMaxDistance = 5;
+                        ((Guardian)enemy).vision.GetComponent<MeshRenderer>().material.SetColor("_EmissionColor", Color.yellow); //Yellow
+                  
                     }
                     return;
                 }

@@ -17,6 +17,8 @@ public class SecurityCamera : MonoBehaviour, ISpotable {
 
     private bool direction;
 
+    private bool inSpot;
+    private float angle;
     //From functions
     List<Guardian> guards;
     Guardian guard;
@@ -34,8 +36,19 @@ public class SecurityCamera : MonoBehaviour, ISpotable {
 	}
 
     void FixedUpdate() {
-        transform.eulerAngles = new Vector3(0, 0,
-            Mathf.MoveTowards(transform.eulerAngles.z, direction ? 180 - ROTATION_AMOUNT : 180 + ROTATION_AMOUNT, Time.fixedDeltaTime * rotationSpeed));
+        if (inSpot)
+        {
+            angle =Mathf.Atan((Player.instance.transform.position.y - transform.position.y) / (Player.instance.transform.position.x - transform.position.x));
+            if(angle > 0)
+            {
+                angle += Mathf.PI;
+            }
+            transform.eulerAngles = new Vector3(0, 0, (angle * 180 / Mathf.PI)-90);
+        }
+        else {
+            transform.eulerAngles = new Vector3(0, 0,
+                Mathf.MoveTowards(transform.eulerAngles.z, direction ? 180 - ROTATION_AMOUNT : 180 + ROTATION_AMOUNT, Time.fixedDeltaTime * rotationSpeed));
+        }
         if (Mathf.Abs(transform.eulerAngles.z - (180 - ROTATION_AMOUNT)) < 1)
             direction = false;
         else if (Mathf.Abs(transform.eulerAngles.z - (180 + ROTATION_AMOUNT)) < 1)
@@ -59,16 +72,22 @@ public class SecurityCamera : MonoBehaviour, ISpotable {
     }
 
 	public void Spot() {
+        inSpot = true;
 		nearestGuard = NearestGuard();
         if (nearestGuard.actionQueue.Peek().GetType() != typeof(FireAction)) {
             while (nearestGuard.actionQueue.Peek().priority == Action.PRIORITY_SEARCH || nearestGuard.actionQueue.Peek().priority == Action.PRIORITY_SEARCH_APPROACH){
                     nearestGuard.actionQueue.Remove();
             }
+            vision.GetComponent<MeshRenderer>().material.SetColor("_EmissionColor", new Color(0.95f, 0.45f, 0f)); //Orange
+            nearestGuard.vision.GetComponent<MeshRenderer>().material.SetColor("_EmissionColor", new Color(0.95f, 0.45f, 0f)); //Orange
             nearestGuard.actionQueue.Insert(new SearchAction(Player.instance));
         }
 	}
 
-	public void SpotOut() {
-		
-	}
+	public void SpotOut()
+    {
+        inSpot = false;
+        vision.GetComponent<MeshRenderer>().material.SetColor("_EmissionColor", new Color(0.95f, 0.95f, 0f)); //Yellow
+        direction = true;
+    }
 }
