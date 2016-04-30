@@ -20,5 +20,11 @@ public class Shuriken : MonoBehaviour {
 			Sound.GenerateSound(transform.position, 9);
 			Destroy(gameObject);
 		}
+        else if (col.gameObject.layer == LayerMask.NameToLayer("Bullet")) {
+            Bullet bullet = (Bullet)col.gameObject.GetComponent<Bullet>();
+            bullet.InstantiateBlast();
+            Sound.GenerateSound(transform.position, 9);
+            Destroy(gameObject);
+        }
     }
 }

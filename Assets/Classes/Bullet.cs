@@ -23,5 +23,10 @@ public class Bullet : MonoBehaviour {
             GameController.GameLost();
 		}
 	}
+    public void InstantiateBlast()
+    {
+        Instantiate(blastPrefab, transform.position, Quaternion.FromToRotation(Vector3.down, Vector3.Normalize(body.velocity)));
+        Destroy(gameObject);
+    }
 
 }
