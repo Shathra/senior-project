@@ -11,7 +11,8 @@ public class SkillSet {
 		player = Player.instance;
 		skills = new Skill[6];
         skills[0] = new ShurikenSkill();
-		selectedSkill = 0;
+        skills[1] = new SpiderCamSkill();
+        selectedSkill = 0;
 	}
 
 	public void Cast(Vector2 target) {

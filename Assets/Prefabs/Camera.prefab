@@ -8,7 +8,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 490878}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29,7 +29,7 @@ GameObject:
   - 114: {fileID: 11411536}
   - 114: {fileID: 11495972}
   - 114: {fileID: 11432660}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Vision
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -45,7 +45,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 431514}
   - 212: {fileID: 21214952}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Station
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -62,7 +62,7 @@ GameObject:
   - 4: {fileID: 495894}
   - 120: {fileID: 12033188}
   - 114: {fileID: 11458996}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: piv
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -78,7 +78,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 437800}
   - 212: {fileID: 21224646}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -128,8 +128,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 166758}
   m_LocalRotation: {x: 0, y: 0, z: 1, w: -0.00000016292068}
-  m_LocalPosition: {x: -6.3, y: 15.9, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 125.011086, y: -64.746376, z: 0}
+  m_LocalScale: {x: 3.3951952, y: 3.3951952, z: 3.3951952}
   m_Children:
   - {fileID: 495894}
   - {fileID: 431514}

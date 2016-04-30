@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 435820}
   - 120: {fileID: 12040812}
   - 114: {fileID: 11426804}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: piv
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25,7 +25,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 428886}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Turret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41,7 +41,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 406466}
   - 212: {fileID: 21241642}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -57,7 +57,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 495126}
   - 212: {fileID: 21293454}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -83,8 +83,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 147486}
   m_LocalRotation: {x: 0, y: 0, z: 1, w: -0.00000016292068}
-  m_LocalPosition: {x: -3.88, y: 3.59, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 3.3951952, y: -4.07423, z: 0}
+  m_LocalScale: {x: 3.3951952, y: 3.3951952, z: 3.3951952}
   m_Children:
   - {fileID: 435820}
   - {fileID: 406466}
@@ -127,8 +127,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 195508, guid: 16998795b75807744ac896a4fb690498, type: 2}
-  fireRate: 1
-  delay: 0.5
 --- !u!120 &12040812
 LineRenderer:
   m_ObjectHideFlags: 1
