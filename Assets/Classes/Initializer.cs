@@ -23,7 +23,6 @@ class Initializer : MonoBehaviour {
             //MLController.SetLevelStats( 50, MLConfig.DefaultDifficulty);
 
             strCmdText = "/C cd DifficultyEstimator & python estimator.py";
-            Process.Start("CMD.exe", strCmdText);
 
             MLCommunicator.Init();
             mlInitialized = true;

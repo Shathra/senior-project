@@ -1,8 +1,17 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class UIController : MonoBehaviour {
+	public static UIController canvas { get; private set; }
+
 	public GameObject skillWheel;
+	public GameObject gameOver;
+	public Image dim;
+
+	void Awake() {
+		canvas = this;
+	}
 
 	void Start() {
 		skillWheel.SetActive(false);
