@@ -23,10 +23,14 @@ public class UIController : MonoBehaviour {
 			Player.instance.playerLock = true;
 			Time.timeScale = 0;
 		}
-		if (Input.GetKeyUp(KeyCode.Tab)) {
-			skillWheel.SetActive(false);
-			Player.instance.playerLock = false;
-			Time.timeScale = 1;
-		}
 	}
+    void LateUpdate()
+    {
+        if (Input.GetKeyUp(KeyCode.Tab))
+        {
+            skillWheel.SetActive(false);
+            Player.instance.playerLock = false;
+            Time.timeScale = 1;
+        }
+    }
 }
