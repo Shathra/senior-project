@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using System.Collections;
 
 public class NightVision : MonoBehaviour {
-	private const float MAX_DURATION = 5;
+	private const float MAX_DURATION = 10;
 
 	private float duration;
 	private Image image;
