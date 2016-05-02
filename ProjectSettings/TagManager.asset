@@ -52,6 +52,9 @@ TagManager:
   - name: Background
     uniqueID: 1511193781
     locked: 0
+  - name: backmost decor
+    uniqueID: 3306428719
+    locked: 0
   - name: Backdecor
     uniqueID: 1525447927
     locked: 0

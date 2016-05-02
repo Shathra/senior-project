@@ -7,22 +7,22 @@ public class NightVision : MonoBehaviour {
 
 	private float duration;
 	private Image image;
+	private Image fill;
 
 	void Start() {
 		duration = MAX_DURATION;
 		image = GetComponent<Image>();
+		fill = transform.GetChild(0).GetComponent<Image>();
 	}
 
 	void Update() {
-		Color color = Player.instance.darkness.material.GetColor("_TintColor");
-        image.color = new Color(image.color.r, image.color.g, image.color.b,
-			duration / MAX_DURATION);
+        fill.fillAmount = duration / MAX_DURATION;
 		if(duration <= 0) {
-			Player.instance.darkness.material.SetColor("_TintColor", new Color(color.r, color.g, color.b, 1f));
+			Player.instance.darkness.material.SetColor("_TintColor", new Color(0, 0, 0, 1f));
 			Destroy(gameObject);
 			return;
 		}
 		duration -= Time.deltaTime;
-		Player.instance.darkness.material.SetColor("_TintColor", new Color(color.r, color.g, color.b, 0.3f));
+		Player.instance.darkness.material.SetColor("_TintColor", new Color(0, 1, 0, 0.3f));
 	}
 }

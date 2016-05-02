@@ -245,6 +245,7 @@ public class Player : MonoBehaviour {
 
 	public void Die() {
 		anim.SetTrigger("Die");
+		body.velocity = Vector2.zero;
 		playerLock = true;
 	}
 }
