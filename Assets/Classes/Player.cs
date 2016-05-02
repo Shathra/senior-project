@@ -184,9 +184,10 @@ public class Player : MonoBehaviour {
 
     public void Takedown()
     {
-        Vector2 origin = new Vector2((transform.localScale.x > 0 ? hitbox.bounds.max.x + 0.001f : hitbox.bounds.min.x - 0.001f), (hitbox.bounds.min.y + hitbox.bounds.max.y) / 2);
+		bool dir = transform.GetChild(0).transform.localScale.x > 0;
+        Vector2 origin = new Vector2((dir ? hitbox.bounds.max.x + 0.001f : hitbox.bounds.min.x - 0.001f), (hitbox.bounds.min.y + hitbox.bounds.max.y) / 2);
         float distance = 0.5f;
-        Vector2 direction = transform.localScale.x > 0 ? Vector2.right : -Vector2.right;
+        Vector2 direction = dir ? Vector2.right : -Vector2.right;
         RaycastHit2D hit = Physics2D.Raycast(origin, direction, distance, LayerMask.GetMask("Guardian", "Obstacle"));
         if (hit)
         {
@@ -237,7 +238,7 @@ public class Player : MonoBehaviour {
 	}
     void OnCollisionEnter2D(Collision2D col) {
 
-        if (col.gameObject.layer == LayerMask.NameToLayer("Ground")) {
+        if (col.gameObject.layer == LayerMask.NameToLayer("Obstacle")) {
             Debug.Log("Sound!");
             Sound.GenerateSound(bottomPoint, body.velocity.y/2);
         }
