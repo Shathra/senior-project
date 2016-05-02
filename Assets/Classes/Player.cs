@@ -237,7 +237,7 @@ public class Player : MonoBehaviour {
 	}
     void OnCollisionEnter2D(Collision2D col) {
 
-        if (col.gameObject.layer == LayerMask.NameToLayer("Ground")) {
+        if (col.gameObject.layer == LayerMask.NameToLayer("Obstacle")) {
             Debug.Log("Sound!");
             Sound.GenerateSound(bottomPoint, body.velocity.y/2);
         }
