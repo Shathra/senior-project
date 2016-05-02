@@ -20,13 +20,13 @@ public class UISelectedSkıll : MonoBehaviour {
 			angle = 360 - angle;
 		cursor = Mathf.RoundToInt(angle) / 60;
 		transform.rotation = Quaternion.Lerp(transform.rotation,
-			Quaternion.Euler(0, 0, 360 - (60 * cursor)),
-			0.2f);
+			Quaternion.Euler(0, 0, 360 - (60*cursor)),
+			0.5f);
 		description.text = "";
 		if (skillSet.skills.Length > cursor && skillSet.skills[cursor] != null)
 			description.text = skillSet.skills[cursor].description;
 
-		if (Input.GetKeyDown(KeyCode.Mouse0))
+		if (Input.GetKeyUp(KeyCode.Tab))
 			skillSet.selectedSkill = cursor;
 
 		if (Input.GetKeyDown(KeyCode.Alpha1))

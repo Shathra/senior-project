@@ -27,7 +27,7 @@ GameObject:
   - 4: {fileID: 438342}
   - 212: {fileID: 21223902}
   - 60: {fileID: 6031222}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: air vent closed (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -172,8 +172,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 114208}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -21.07, y: 49.52, z: 0}
-  m_LocalScale: {x: 0.11839366, y: 0.089353986, z: 0.1787075}
+  m_LocalPosition: {x: -11.11, y: 28.32, z: 0}
+  m_LocalScale: {x: 0.31549296, y: 0.22430114, z: 0.1787075}
   m_Children:
   - {fileID: 494704}
   - {fileID: 452626}

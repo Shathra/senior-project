@@ -129,7 +129,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 131752}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.126, y: 2.807, z: 0}
+  m_LocalPosition: {x: -2.6, y: 2.807, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 434522}
@@ -198,7 +198,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!58 &5839574
 CircleCollider2D:
   m_ObjectHideFlags: 1
@@ -212,7 +212,7 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.15
+  m_Radius: 0.39366508
 --- !u!95 &9560560
 Animator:
   serializedVersion: 3
@@ -222,7 +222,7 @@ Animator:
   m_GameObject: {fileID: 131752}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 01ccf5ae8f48abc438f0c3dc8731d047, type: 2}
+  m_Controller: {fileID: 9100000, guid: c9d4dcf2613da4f4ca24b8ff1fd29d98, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
