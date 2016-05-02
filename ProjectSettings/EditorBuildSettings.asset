@@ -9,3 +9,7 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
   - enabled: 1
     path: Assets/Scenes/Demo_Scene.unity
+  - enabled: 1
+    path: Assets/Scenes/Demo_Scene 2.unity
+  - enabled: 1
+    path: Assets/Scenes/Demo_Scene 3.unity
