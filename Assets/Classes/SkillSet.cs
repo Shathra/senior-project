@@ -12,6 +12,7 @@ public class SkillSet {
 		skills = new Skill[6];
         skills[0] = new ShurikenSkill();
         skills[1] = new SpiderCamSkill();
+		skills[2] = new NightVisionSkill();
         selectedSkill = 0;
 	}
 

@@ -68,7 +68,7 @@ class GameController {
         Debug.Log("GAME LOST :(");
 
 		Player.instance.Die();
-		GameObject.FindGameObjectWithTag("Canvas").GetComponent<UIController>().gameOver.SetActive(true);
+		UIController.canvas.gameOver.SetActive(true);
     }
 
 	

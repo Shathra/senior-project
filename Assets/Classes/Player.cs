@@ -8,6 +8,7 @@ public class Player : MonoBehaviour {
 	public GameObject rockPrefab;
     public GameObject playerGhost;
 	public GameObject soundPrefab;
+	public Renderer darkness;
 
 	public SkillSet skillSet { get; set; }
 	public bool playerLock { get; set; }
