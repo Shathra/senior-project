@@ -11,6 +11,8 @@ public class UISkill : MonoBehaviour {
 	void Start() {
 		skillSet = Player.instance.skillSet;
 		skillNameText = GetComponentInChildren<Text>();
+		if (skillSet.skills[skillNo] == null)
+			return;
 		GetComponentInChildren<Image>().sprite = Resources.Load<Sprite>
 			("Icons/" + skillSet.skills[skillNo].name + "_icon");
 		skillNameText.text = skillSet.skills[skillNo].name + " x" + skillSet.skills[skillNo].charges;

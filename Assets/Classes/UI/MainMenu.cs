@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class MainMenu : MonoBehaviour {
@@ -23,5 +24,17 @@ public class MainMenu : MonoBehaviour {
 			time -= 4;
 		back.sprite = frames[(int)(time * 24) % FRAME_AMOUNT];
 		time += Time.deltaTime;
+	}
+	
+	public void LoadDemoLevel() {
+		SceneManager.LoadScene("Demo_Scene");
+	}
+
+	public void LoadTutorial() {
+
+	}
+
+	public void Exit() {
+		Application.Quit();
 	}
 }

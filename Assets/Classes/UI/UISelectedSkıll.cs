@@ -23,7 +23,7 @@ public class UISelectedSkıll : MonoBehaviour {
 			Quaternion.Euler(0, 0, 360 - (60 * cursor)),
 			0.2f);
 		description.text = "";
-		if (skillSet.skills.Length > cursor)
+		if (skillSet.skills.Length > cursor && skillSet.skills[cursor] != null)
 			description.text = skillSet.skills[cursor].description;
 
 		if (Input.GetKeyDown(KeyCode.Mouse0))
