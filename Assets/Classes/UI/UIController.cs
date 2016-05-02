@@ -3,6 +3,7 @@ using System.Collections;
 
 public class UIController : MonoBehaviour {
 	public GameObject skillWheel;
+	public GameObject gameOver;
 
 	void Start() {
 		skillWheel.SetActive(false);

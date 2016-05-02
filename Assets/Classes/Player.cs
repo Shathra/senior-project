@@ -112,7 +112,7 @@ public class Player : MonoBehaviour {
             anim.SetFloat("Movement", 0);
         }
 
-        if (Input.GetKeyDown(KeyCode.Space)/* && ground*/)
+        if (Input.GetKeyDown(KeyCode.Space) && ground)
             body.velocity += new Vector2(0, 7 - crouching * 1);
         if (!ground && !Input.GetKey(KeyCode.Space) && body.velocity.y > 0)
             body.velocity = new Vector2(body.velocity.x, 0);
@@ -241,4 +241,9 @@ public class Player : MonoBehaviour {
             Sound.GenerateSound(bottomPoint, body.velocity.y/2);
         }
     }
+
+	public void Die() {
+		anim.SetTrigger("Die");
+		playerLock = true;
+	}
 }
