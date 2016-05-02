@@ -12,7 +12,7 @@ public class Door : MonoBehaviour {
         player = col.gameObject.GetComponent<Player>();
         if (player != null)
         {
-            if(player.carriesTarget)
+			if(player.carriesTarget && isLevelEnd)
             {
                 GameController.GameWon();
             }

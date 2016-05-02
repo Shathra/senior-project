@@ -18,7 +18,6 @@ public class Enemy : MonoBehaviour {
     public virtual void Update()
     {
         actionQueue.Display();
-        Debug.Log(gameObject.name);
         action = actionQueue.Peek();
         if (action != null) {
             action.Execute(this);

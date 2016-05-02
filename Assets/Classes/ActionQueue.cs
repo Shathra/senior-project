@@ -66,7 +66,6 @@ public class ActionQueue {
         for (int i = 0; i < heap.Count; i++) {
             str += i+"."+heap[i]+", ";
         }
-        Debug.Log(str);
     }
     /// <summary>
     /// Returns action which has highest priority
