@@ -33,7 +33,7 @@ public class IntroController : MonoBehaviour {
 			}
 		}
 
-		if (Input.GetKeyDown(KeyCode.Return))
+		if (Input.GetKeyDown(KeyCode.Return) || ((XInputTestCS.prevState.Buttons.A != 0)&&(XInputTestCS.state.Buttons.A == 0)))
 			movie.Stop();
 	}
 }

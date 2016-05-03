@@ -5,7 +5,9 @@ public class Player : MonoBehaviour {
 	public static Player instance { get; private set; }
     private static float RUN_SOUND_DELAY = 0.3f;
 
-	public GameObject rockPrefab;
+    public bool gamePadActive { get; set; }
+    
+    public GameObject rockPrefab;
     public GameObject playerGhost;
 	public GameObject soundPrefab;
 	public Renderer darkness;
@@ -85,9 +87,11 @@ public class Player : MonoBehaviour {
             ground = true;
         anim.SetBool("Ground", ground);
 
-        if (Input.GetKeyDown(KeyCode.A) ^ Input.GetKeyDown(KeyCode.D))
+        if ((Input.GetKeyDown(KeyCode.A) ^ Input.GetKeyDown(KeyCode.D))
+            || (( XInputTestCS.prevState.ThumbSticks.Left.X > -0.01 && XInputTestCS.state.ThumbSticks.Left.X < -0.01) ^ (XInputTestCS.prevState.ThumbSticks.Left.X < 0.01 && XInputTestCS.state.ThumbSticks.Left.X > 0.01)))
             runSoundInterval = 0;
-        if (Input.GetKey(KeyCode.A) ^ Input.GetKey(KeyCode.D))
+        if (Input.GetKey(KeyCode.A) ^ Input.GetKey(KeyCode.D) 
+            || ( (XInputTestCS.state.ThumbSticks.Left.X < -0.01) ^ (XInputTestCS.state.ThumbSticks.Left.X > 0.01)))
         {
             if (ground && !onLadder && crouching < 0.5f)
             {
@@ -99,7 +103,7 @@ public class Player : MonoBehaviour {
                 }
             }
             direction = true;
-            if (Input.GetKey(KeyCode.A))
+            if (Input.GetKey(KeyCode.A) || (XInputTestCS.state.ThumbSticks.Left.X < -0.01))
                 direction = false;
             speed = (5 - crouching * 2.5f) * (direction ? 1 : -1) * (onLadder ? 0.5f : 1.0f);
             transform.GetChild(0).transform.localScale = new Vector3((direction ? 1 : -1) * Mathf.Abs(transform.GetChild(0).transform.localScale.x), transform.GetChild(0).transform.localScale.y, transform.GetChild(0).localScale.z);
@@ -113,16 +117,16 @@ public class Player : MonoBehaviour {
             anim.SetFloat("Movement", 0);
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) && ground)
+        if ((Input.GetKeyDown(KeyCode.Space) || ( XInputTestCS.prevState.Buttons.A != 0 && XInputTestCS.state.Buttons.A == 0)) && ground)
             body.velocity += new Vector2(0, 7 - crouching * 1);
-        if (!ground && !Input.GetKey(KeyCode.Space) && body.velocity.y > 0)
+        if (!ground && !(Input.GetKey(KeyCode.Space) || XInputTestCS.state.Buttons.A == 0 ) && body.velocity.y > 0)
             body.velocity = new Vector2(body.velocity.x, 0);
 
         height = 1f;
         crouchHeight = 0.8f;
         crouchSpeed = 2.5f;
 
-        if (Input.GetKeyDown(KeyCode.C))
+        if (Input.GetKeyDown(KeyCode.C) || (XInputTestCS.prevState.Buttons.B != 0 && XInputTestCS.state.Buttons.B == 0))
         {
             if (anim.GetFloat("Crouching") > 0)
             {
@@ -149,13 +153,13 @@ public class Player : MonoBehaviour {
             if (!Physics2D.Raycast(topPoint, -Vector2.up, 0.01f, LayerMask.GetMask("Ladder")))
                 onLadder = false;
         }
-        if (Input.GetKey(KeyCode.W) ^ Input.GetKey(KeyCode.S))
+        if ((Input.GetKey(KeyCode.W) || (XInputTestCS.state.ThumbSticks.Left.Y > 0.01 ))^ (Input.GetKey(KeyCode.S) || (XInputTestCS.state.ThumbSticks.Left.Y < -0.01)))
         {
             if (Physics2D.Raycast(topPoint, -Vector2.up, 0.01f, LayerMask.GetMask("Ladder")))
             {
                 prev = transform.position;
                 climbSpeed = 2 * Time.deltaTime;
-                transform.position += climbSpeed * Vector3.up * ((Input.GetKey(KeyCode.W)) ? 1 : -1);
+                transform.position += climbSpeed * Vector3.up * ((Input.GetKey(KeyCode.W) || (XInputTestCS.state.ThumbSticks.Left.Y > 0.01)) ? 1 : -1);
                 anim.SetFloat("Crouching", 0.0f);
                 onLadder = true;
                 if (!Physics2D.Raycast(topPoint, -Vector2.up, 0.01f, LayerMask.GetMask("Ladder")))
@@ -164,12 +168,19 @@ public class Player : MonoBehaviour {
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.F) && ground && !onLadder)
+        if ((Input.GetKeyDown(KeyCode.F) || ((XInputTestCS.prevState.Buttons.X != 0 )&&(XInputTestCS.state.Buttons.X == 0))) && ground && !onLadder)
             Takedown();
 
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        if (Input.GetKeyDown(KeyCode.Mouse0) || ((XInputTestCS.prevState.Triggers.Right < 0.1) && (XInputTestCS.state.Triggers.Right > 0.1)))
         {
-            Vector2 target = UnityEngine.Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector2 target;
+            if (!gamePadActive) {
+                 target = UnityEngine.Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            }
+            else
+            {
+                target = new Vector2(XInputTestCS.state.ThumbSticks.Right.X * 720, XInputTestCS.state.ThumbSticks.Right.Y * 540);
+            }
             skillSet.Cast(target);
         }
         anim.SetFloat("VerticalSpeed", body.velocity.y);
@@ -239,7 +250,7 @@ public class Player : MonoBehaviour {
     void OnCollisionEnter2D(Collision2D col) {
 
         if (col.gameObject.layer == LayerMask.NameToLayer("Obstacle")) {
-            Debug.Log("Sound!");
+            //Debug.Log("Sound!");
             Sound.GenerateSound(bottomPoint, body.velocity.y/2);
         }
     }

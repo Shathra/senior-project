@@ -33,7 +33,7 @@ public class EventManager {
 
     public static Action Spot(SpotEvent gameEvent) {
 
-        Debug.Log("SpotIn");
+        //Debug.Log("SpotIn");
         actionToReturn = null;
         if (gameEvent.Source.GetType() == typeof(Guardian)) {
             while (gameEvent.Source.actionQueue.Peek() != null && gameEvent.Source.actionQueue.Peek().priority >= 2) {
@@ -45,7 +45,7 @@ public class EventManager {
         } else if (gameEvent.Source.GetType() == typeof(Turret)) {
             actionToReturn = new FireAction(AIController.GetPlayer());
         } else {
-            Debug.Log("Null in Spot");
+            //Debug.Log("Null in Spot");
         }
 
         return actionToReturn;
@@ -53,7 +53,7 @@ public class EventManager {
 
     public static Action SpotOut(SpotOutEvent gameEvent) {
 
-        Debug.Log("SpotOut");
+        //Debug.Log("SpotOut");
         if (gameEvent.Source.GetType() == typeof(Guardian)) {
 
             guardian = (Guardian)(gameEvent.Source);

@@ -18,7 +18,7 @@ public class UIController : MonoBehaviour {
 	}
 
 	void Update() {
-		if (Input.GetKeyDown(KeyCode.Tab)) {
+		if (Input.GetKeyDown(KeyCode.Tab) || (XInputTestCS.prevState.Triggers.Left < 0.1 &&  XInputTestCS.state.Triggers.Left > 0.1)) {
 			skillWheel.SetActive(true);
 			Player.instance.playerLock = true;
 			Time.timeScale = 0;
@@ -26,7 +26,7 @@ public class UIController : MonoBehaviour {
 	}
     void LateUpdate()
     {
-        if (Input.GetKeyUp(KeyCode.Tab))
+        if (Input.GetKeyUp(KeyCode.Tab) || (XInputTestCS.prevState.Triggers.Left > 0.1 && XInputTestCS.state.Triggers.Left < 0.1))
         {
             skillWheel.SetActive(false);
             Player.instance.playerLock = false;
