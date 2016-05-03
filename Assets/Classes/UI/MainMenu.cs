@@ -4,6 +4,8 @@ using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class MainMenu : MonoBehaviour {
+	public GameObject levelSelect;
+
 	private const int FRAME_AMOUNT = 47;
 
 	private Sprite[] frames;
@@ -25,16 +27,20 @@ public class MainMenu : MonoBehaviour {
 		back.sprite = frames[(int)(time * 24) % FRAME_AMOUNT];
 		time += Time.deltaTime;
 	}
-	
-	public void LoadDemoLevel() {
-		SceneManager.LoadScene("Demo_Scene");
-	}
-
-	public void LoadTutorial() {
-
-	}
 
 	public void Exit() {
 		Application.Quit();
+	}
+
+	public void ShowLevelSelect() {
+		levelSelect.SetActive(true);
+	}
+
+	public void HideLevelSelect() {
+		levelSelect.SetActive(false);
+	}
+
+	public void LoadLevel(string name) {
+		SceneManager.LoadScene(name);
 	}
 }

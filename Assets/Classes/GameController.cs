@@ -55,7 +55,7 @@ class GameController {
         gameWon = true;
         gameOver = true;
         Debug.Log("GAME WON :D");
-        GameOver();
+		SceneManager.LoadScene("MainMenu");
     }
     public static void GameLost()
     {

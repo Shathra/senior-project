@@ -15,7 +15,7 @@ class Initializer : MonoBehaviour {
 
     private static bool mlInitialized = false;
     public void Awake() {
-
+		GameObject.FindGameObjectWithTag("Canvas").SetActive(true);
         if (!mlInitialized) {
             GameController.Init();
             MLLogger.Init();
