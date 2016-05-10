@@ -5,16 +5,18 @@ using System;
 public class NightVisionSkill : Skill {
 	private GameObject nightVisionPrefab;
 
+	private NightVision activeSkill;
+
 	public NightVisionSkill() : base() {
-		charges = 1;
+		charges = 5000;
 		name = "NightVision";
 		description = "Reveals places not currently visible to the player.";
 		nightVisionPrefab = Resources.Load<GameObject>("NightVision");
+		activeSkill = GameObject.Instantiate(nightVisionPrefab).GetComponent<NightVision>();
+		activeSkill.skill = this;
 	}
 
 	public override void Cast(Vector2 target) {
-		GameObject nightVision = GameObject.Instantiate(nightVisionPrefab);
-		nightVision.transform.parent = UIController.canvas.transform;
-		nightVision.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
+		activeSkill.running = !activeSkill.running;
 	}
 }
