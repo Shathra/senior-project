@@ -1945,10 +1945,6 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 11462584, guid: ab7c408f960ab8a42a0e1762cc82d446, type: 2}
-      propertyPath: pauseMenu
-      value: 
-      objectReference: {fileID: 1157555576}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ab7c408f960ab8a42a0e1762cc82d446, type: 2}
   m_IsPrefabParent: 0
@@ -2467,14 +2463,6 @@ Prefab:
     - target: {fileID: 462844, guid: d7b0752a283d6914192cbc47169cdc5d, type: 2}
       propertyPath: m_RootOrder
       value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 124366, guid: d7b0752a283d6914192cbc47169cdc5d, type: 2}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 134614, guid: d7b0752a283d6914192cbc47169cdc5d, type: 2}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d7b0752a283d6914192cbc47169cdc5d, type: 2}
@@ -7917,10 +7905,6 @@ SpriteRenderer:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
---- !u!1 &1157555576 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 184914, guid: ab7c408f960ab8a42a0e1762cc82d446, type: 2}
-  m_PrefabInternal: {fileID: 194133853}
 --- !u!1 &1163167639
 GameObject:
   m_ObjectHideFlags: 0
