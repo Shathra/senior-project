@@ -23,5 +23,6 @@ public class ShurikenSkill : Skill {
 		shuriken = ((GameObject)MonoBehaviour.Instantiate(shurikenPrefab,
 			player.midPoint, Quaternion.identity)).GetComponent<Rigidbody2D>();
 		shuriken.AddForce(direction.normalized * 80);
+        charges++; //Unlimited for demo
 	}
 }

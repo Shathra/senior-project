@@ -72,12 +72,22 @@ public class Turret : Enemy {
 		line.SetPosition(0, tip);
 		line.SetPosition(1, transform.parent.position + transform.rotation * Vector3.up * RANGE);
 		obs = Physics2D.Raycast(tip, transform.rotation * Vector3.up, RANGE, LayerMask.GetMask("Obstacle"));
-		if (obs.collider != null)
-			line.SetPosition(1, obs.point);
 		hit = Physics2D.Raycast(tip, transform.rotation * Vector3.up,
 			obs.collider != null ? Vector3.Distance(tip, obs.point) : RANGE, LayerMask.GetMask("Player"));
-		tracingObject = hit.collider != null ? hit.collider.gameObject : null;
-		color = tracingObject ? Color.red : Color.green;
-		line.SetColors(color, new Color(color.r, color.g, color.b, 0.5f));
-	}
+        
+        tracingObject = hit.collider != null ? hit.collider.gameObject : null;
+        if (tracingObject != null)
+            line.SetPosition(1, Player.instance.midPoint);
+        else if (obs.collider != null)
+            line.SetPosition(1, obs.point);
+
+        color = tracingObject ? Color.red : Color.green;
+        
+        line.SetColors(color, new Color(color.r, color.g, color.b, 0.5f));
+        /*
+        if (tracingObject.layer == LayerMask.GetMask("Player"))
+        {
+            line.SetPosition(1, Player.instance.midPoint);
+        }*/
+    }
 }

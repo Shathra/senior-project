@@ -256,6 +256,7 @@ public class Player : MonoBehaviour {
     }
 
 	public void Die() {
+        gameObject.layer = LayerMask.GetMask("Default");
 		anim.SetTrigger("Die");
 		body.velocity = Vector2.zero;
         onLadder = false;
