@@ -9,5 +9,6 @@ public class GameOver : MonoBehaviour {
 
 	public void Retry() {
 		GameController.GameOver();
+		Time.timeScale = 1;
 	}
 }
