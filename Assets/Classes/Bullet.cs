@@ -16,7 +16,7 @@ public class Bullet : MonoBehaviour {
 			Sound.GenerateSound(transform.position, 5);
             Instantiate(blastPrefab, transform.position, Quaternion.FromToRotation(Vector3.down, Vector3.Normalize(body.velocity)));
 			Destroy(gameObject);
-		} else if (col.gameObject.layer == LayerMask.NameToLayer("Player")) {
+		} else if (col.gameObject.layer == LayerMask.NameToLayer("Player") || col.gameObject.layer == LayerMask.NameToLayer("Invisible")) {
             Instantiate(blastPrefab, transform.position, Quaternion.FromToRotation(Vector3.down, Vector3.Normalize(body.velocity)));
             Destroy(gameObject);
 			//Destroy(col.gameObject);
