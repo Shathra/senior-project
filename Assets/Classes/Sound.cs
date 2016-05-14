@@ -36,7 +36,8 @@ public class Sound : MonoBehaviour {
     }
 
     public static void GenerateSound(Vector2 loc, float radius) {
-        ((GameObject)Instantiate(Player.instance.soundPrefab, (Vector3)loc, Quaternion.identity))
+        Vector3 pos = new Vector3(loc.x, loc.y, 0);
+        ((GameObject)Instantiate(Player.instance.soundPrefab, pos, Quaternion.identity))
             .transform.localScale = new Vector3(radius, radius, radius);
     }
 }

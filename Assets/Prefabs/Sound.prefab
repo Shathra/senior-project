@@ -12,7 +12,7 @@ GameObject:
   - 199: {fileID: 19952606}
   - 58: {fileID: 5892680}
   - 114: {fileID: 11424362}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: Sound
   m_TagString: Untagged
   m_Icon: {fileID: 0}
