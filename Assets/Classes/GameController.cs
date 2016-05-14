@@ -69,6 +69,7 @@ class GameController {
 
 		Player.instance.Die();
 		UIController.canvas.gameOver.SetActive(true);
+        UIController.canvas.pauseMenuActive = true;
     }
 
 	
