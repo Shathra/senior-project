@@ -7431,6 +7431,14 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 11458400, guid: ca8d37bc5c180a8439e153f3cd52f618, type: 2}
+      propertyPath: closedDoor
+      value: 
+      objectReference: {fileID: 1409878012}
+    - target: {fileID: 11458400, guid: ca8d37bc5c180a8439e153f3cd52f618, type: 2}
+      propertyPath: activatesClosedDoor
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ca8d37bc5c180a8439e153f3cd52f618, type: 2}
   m_IsPrefabParent: 0
@@ -10960,6 +10968,7 @@ GameObject:
   - 4: {fileID: 1409878011}
   - 212: {fileID: 1409878010}
   - 61: {fileID: 1409878009}
+  - 114: {fileID: 1409878012}
   m_Layer: 0
   m_Name: door (closed)
   m_TagString: Untagged
@@ -11023,6 +11032,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1163167640}
   m_RootOrder: 174
+--- !u!114 &1409878012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1409878008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e101d50cbd5c75b4186acd8707d5a01e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  open: {fileID: 21300000, guid: b72209204f2fe434d85ec350c99a9ca5, type: 3}
 --- !u!1 &1413333900
 GameObject:
   m_ObjectHideFlags: 0

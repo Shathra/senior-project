@@ -8,6 +8,9 @@ public class Target : MonoBehaviour {
 	public Sprite sprite1;
 	public Sprite sprite2;
 
+    public ClosedDoor closedDoor;
+    public bool activatesClosedDoor;
+
 	private Text timerText;
 	private Image timerImage;
 	private float timer;
@@ -21,6 +24,10 @@ public class Target : MonoBehaviour {
 			if (_taken == false && value == true) {
 				Player.instance.carriesTarget = true;
 				gameObject.GetComponent<SpriteRenderer>().sprite = sprite2;
+                if (activatesClosedDoor)
+                {
+                    closedDoor.Activate();
+                }
 			}
 			_taken = value;
 		}
